@@ -16,7 +16,12 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <link href="~/Stylesheets/MasterPage.css" rel="stylesheet" />
-
+    <style>
+        /* Remove the navbar's default rounded borders */
+        .navbar {
+        border-radius: 0;
+        }
+    </style>
 </head>
 <body>
     <form runat="server">
@@ -41,7 +46,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-sm">
+        <nav class="navbar navbar-expand-sm navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -61,12 +66,11 @@
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
+            <hr/>
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - Designed by ZAPCamping</p>
             </footer>
         </div>
-
     </form>
 </body>
 </html>
