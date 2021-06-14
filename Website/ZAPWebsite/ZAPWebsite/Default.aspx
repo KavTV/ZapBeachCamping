@@ -34,6 +34,7 @@
             height: 450px
         }
     </style>
+
     <div class="container-fluid text-center">    
         <div class="row content">
              <div class="col-sm-2 sidenav text-left">

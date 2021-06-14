@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - ZAP Beach Camping</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -15,6 +15,13 @@
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
+    <link href="~/Stylesheets/MasterPage.css" rel="stylesheet" />
+    <style>
+        /* Remove the navbar's default rounded borders */
+        .navbar {
+        border-radius: 0;
+        }
+    </style>
 </head>
 <body>
     <form runat="server">
@@ -35,38 +42,35 @@
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Site Scripts--%>
+
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-expand-sm navbar navbar-inverse">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
-                </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Hjem</a></li>
-                        <li><a runat="server" href="~/Booking">Booking</a></li>
                         <li><a runat="server" href="~/About">Om os</a></li>
                         <li><a runat="server" href="~/Contact">Kontakt</a></li>
                     </ul>
+                    <a class="btn btn-danger navbar-btn" href="Booking">Booking</a>
                 </div>
             </div>
-        </div>
+        </nav>
+
+
+        
+
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
+            <hr/>
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - Designed by ZAPCamping</p>
             </footer>
         </div>
-
     </form>
 </body>
 </html>
