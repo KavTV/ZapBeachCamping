@@ -42,12 +42,12 @@
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Site Scripts--%>
-
             </Scripts>
         </asp:ScriptManager>
 
         <nav class="navbar navbar-expand-sm navbar navbar-inverse">
             <div class="container">
+                <a class="navbar-brand" runat="server" href="~/" style="color:grey">ZAP Camping</a>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Hjem</a></li>
@@ -58,10 +58,6 @@
                 </div>
             </div>
         </nav>
-
-
-        
-
 
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
