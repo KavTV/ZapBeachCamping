@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZapLibrary
 {
-    class AdditionSeason
+    public class AdditionSeason
     {
         public string Seasonname { get => seasonname;}
         public double Price { get => price;}

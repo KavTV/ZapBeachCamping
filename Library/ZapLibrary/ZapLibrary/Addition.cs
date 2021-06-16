@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZapLibrary
 {
-    class Addition
+    public class Addition
     {
         public string Name { get => name; set => name = value; }
 

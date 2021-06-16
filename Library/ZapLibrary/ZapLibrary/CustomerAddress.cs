@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZapLibrary
 {
-    class CustomerAddress
+    public class CustomerAddress
     {
         public int Postal { get => postal; }
         public string City { get => city; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZapLibrary
 {
-    class Reservation
+    public class Reservation
     {
         //public
         public int Ordernumber { get => ordernumber;}
