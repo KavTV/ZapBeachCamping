@@ -14,8 +14,8 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
     <link href="~/Stylesheets/MasterPage.css" rel="stylesheet" />
+
     <style>
         /* Remove the navbar's default rounded borders */
         .navbar {
