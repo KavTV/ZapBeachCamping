@@ -65,5 +65,9 @@ namespace ZapLibrary
         {
             return dal.GetReservation(ordernumber);
         }
-    }
+        public List<CampingType> GetCampingTypes()
+        {
+            return dal.GetCampingTypes();
+        }
+        }
 }
