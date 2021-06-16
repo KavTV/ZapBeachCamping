@@ -76,7 +76,7 @@ namespace ZapLibrary
         public bool DeleteReservation(string ordernumber)
         {
             return DbExec("EXEC dbo.CreateCustomer @ordernumber", ordernumber);
-            
+
         }
         #endregion
 
@@ -85,31 +85,24 @@ namespace ZapLibrary
         {
             List<CampingSite> campingSites = new List<CampingSite>();
             List<CampingAddition> additions = new List<CampingAddition>();
-            //return GetDB(c => c.Query<List<CampingSite>>("SELECT * FROM [dbo].[GetAvaliableSites]('@startdate','@enddate','@typename')",new { startDate, endDate, typename})).ToList();
-            using (IDbConnection db = new SqlConnection(connectionString))
-            {
 
-                var jens = db.Query<CampingSite>("SELECT * FROM [dbo].[GetAvaliableSites]('@startdate','@enddate','@typename')", new { startDate, endDate, typename }).ToList();
-                return jens;
-            }
-            
             SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetAvaliableSites]('@startdate','@enddate','@typename')", con);
-            cmd.Parameters.AddWithValue("startdate", startDate);
-            cmd.Parameters.AddWithValue("enddate", endDate);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetAvaliableSites](@startdate,@enddate,@typename)", con);
+            cmd.Parameters.Add("startdate", SqlDbType.Date).Value = startDate;
+            cmd.Parameters.Add("enddate", SqlDbType.Date).Value = endDate;
             cmd.Parameters.AddWithValue("typename", typename);
 
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();
 
-            
+
 
             // Reads table
             while (reader.Read())
             {
-                
-                string campingAdditions = reader.GetString(2);
-                if (campingAdditions != "NULL")
+
+                string campingAdditions = reader[2].ToString();
+                if (campingAdditions != "")
                 {
                     string[] campingAdditionSplit = campingAdditions.Split(',');
                     foreach (var name in campingAdditionSplit)
@@ -117,7 +110,7 @@ namespace ZapLibrary
                         additions.Add(new CampingAddition(name));
                     }
                 }
-                CampingSite camp = new CampingSite(reader.GetInt32(0), true, reader.GetDouble(1), new List<string>(), additions);
+                CampingSite camp = new CampingSite(reader.GetString(0), true, ((double)reader.GetDecimal(1)), new List<string>(), additions);
 
                 campingSites.Add(camp);
             }

@@ -16,16 +16,18 @@ namespace ZapConsole
             List<ReservationAddition> reservationAddition = new List<ReservationAddition>();
             reservationAddition.Add(new ReservationAddition("Voksne", new AdditionSeason("Højsæson", 82), 3));
             reservationAddition.Add(new ReservationAddition("Børn", new AdditionSeason("Højsæson", 42), 1));
-            Reservation reservation = new Reservation("dennyemail@gmail.com",102, "Lille campingplads",new DateTime(2021,06,16),new DateTime(2021,06,21), reservationAddition);
+            Reservation reservation = new Reservation("dennyemail@gmail.com","102", "Lille campingplads",new DateTime(2021,06,16),new DateTime(2021,06,21), reservationAddition);
             //manager.CreateCustomer(customer);
             //manager.UpdateCustomer("Detteerenmail@gmail.com",customer);
             //manager.CreateReservation(reservation);
-            var sites = manager.GetAvailableSites(new DateTime(2021, 06, 15), new DateTime(2021, 06, 15), "Lille campingplads");
+            var sites = manager.GetAvailableSites(new DateTime(2021, 06, 16), new DateTime(2021, 06, 20), "Lille campingplads");
             Console.WriteLine("sejt");
             foreach (var item in sites)
             {
+                Console.WriteLine("_____NEW_____");
                 Console.WriteLine(item.Id);
                 Console.WriteLine(item.Price);
+                Console.WriteLine(item.CampingAdditions);
             }
             Console.ReadLine();
         }

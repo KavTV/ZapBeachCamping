@@ -48,7 +48,7 @@ namespace ZapLibrary
             this.reservationAdditions = reservationAdditions;
         }
 
-        public Reservation(string email, int campingSiteId, string typeName, DateTime startDate, DateTime endDate, List<ReservationAddition> reservationAdditions)
+        public Reservation(string email, string campingSiteId, string typeName, DateTime startDate, DateTime endDate, List<ReservationAddition> reservationAdditions)
         {
             this.customer = new Customer(email);
             this.campingSite = new CampingSite(campingSiteId);
