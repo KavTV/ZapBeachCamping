@@ -11,6 +11,16 @@
 
    <div class="container-fluid webForm col-sm-8">
 
+       <asp:DataList ID="DataList1" runat="server" RepeatDirection="Horizontal" CellSpacing="3" RepeatColumns="3">
+           <ItemTemplate>
+           <tr>
+               <td>
+                   <label>Room: <%# Eval("Name") %></label>
+               </td>
+           </tr>
+               </ItemTemplate>
+       </asp:DataList>
+
        <h3>Registration:</h3>
        
        <div class="reservation row content">
@@ -51,10 +61,9 @@
             </div>
 
            <!--Printer ledige pladser-->
-           <asp:Literal ID="getData" runat="server"></asp:Literal>
+           <%--<asp:datalist ID="getData" runat="server"></asp:datalist>--%>
         </div>
-
-
+       
        <div class="user-details">
            <div class="input-box">
                <span class="details">Email:</span>
