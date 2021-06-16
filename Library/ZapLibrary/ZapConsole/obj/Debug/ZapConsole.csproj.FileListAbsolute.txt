@@ -8,6 +8,4 @@ C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapConsole
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapConsole\obj\Debug\ZapConsole.csproj.CopyComplete
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapConsole\obj\Debug\ZapConsole.exe
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapConsole\obj\Debug\ZapConsole.pdb
-C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapConsole\bin\Debug\Dapper.dll
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapConsole\bin\Debug\ZapLibrary.dll.config
-C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapConsole\bin\Debug\Dapper.xml

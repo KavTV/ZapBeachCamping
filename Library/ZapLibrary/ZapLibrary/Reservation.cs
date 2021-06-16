@@ -16,9 +16,9 @@ namespace ZapLibrary
         public double TotalPrice { get => totalPrice; }
         public bool Checkin { get => checkin;  }
         public bool Checkout { get => checkout;  }
-        internal Customer Customer { get => customer; }
-        internal CampingSite CampingSite { get => campingSite; }
-        internal List<ReservationAddition> ReservationAdditions { get => reservationAdditions; }
+        public Customer Customer { get => customer; }
+        public CampingSite CampingSite { get => campingSite; }
+        public List<ReservationAddition> ReservationAdditions { get => reservationAdditions; }
 
         //privates
         private int ordernumber;
@@ -56,6 +56,7 @@ namespace ZapLibrary
             this.startDate = startDate;
             this.endDate = endDate;
             this.reservationAdditions = reservationAdditions;
+            
         }
 
 

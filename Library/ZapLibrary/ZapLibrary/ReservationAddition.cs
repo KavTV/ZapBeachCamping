@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZapLibrary
 {
-    public class ReservationAddition : Addition
+    public class ReservationAddition
     {
         public int Amount { get => amount; }
         internal AdditionSeason AdditionSeason { get => additionSeason; }
@@ -14,9 +14,8 @@ namespace ZapLibrary
         private AdditionSeason additionSeason;
         private int amount;
 
-        public ReservationAddition (string name, AdditionSeason additionSeason, int amount)
+        public ReservationAddition (AdditionSeason additionSeason, int amount)
         {
-            this.Name = name;
             this.additionSeason = additionSeason;
             this.amount = amount;
         }

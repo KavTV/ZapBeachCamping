@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.2.0.90\lib\net461\Dapper.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SqlClient, Version=4.6.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -51,6 +48,7 @@
     <Compile Include="AdditionSeason.cs" />
     <Compile Include="CampingAddition.cs" />
     <Compile Include="CampingSite.cs" />
+    <Compile Include="CampingType.cs" />
     <Compile Include="CustomerAddress.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Dal.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-using Dapper;
+using System.Globalization;
 
 namespace ZapLibrary
 {
@@ -19,30 +19,53 @@ namespace ZapLibrary
         }
 
         #region Stored procedures
-
+        /// <summary>
+        /// Creates a customer in the database
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns>True if successful</returns>
         public bool CreateCustomer(Customer customer)
         {
-            //return GetDB(c => c.Query<bool>("EXEC dbo.CreateCustomer @email,@postal,@phone,@address,@name", customer).FirstOrDefault());
-            return DbExec("EXEC dbo.CreateCustomer @email, @postal, @phone, @address, @name", customer);
+
+            SqlCommand cmd = new SqlCommand("EXEC dbo.CreateCustomer @email,@postal,@phone,@address,@name");
+            cmd.Parameters.AddWithValue("email", customer.Email);
+            cmd.Parameters.AddWithValue("postal", customer.Postal);
+            cmd.Parameters.AddWithValue("phone", customer.Phone);
+            cmd.Parameters.AddWithValue("address", customer.Address);
+            cmd.Parameters.AddWithValue("name", customer.Name);
+
+            return ExecuteNonQuery(cmd);
+
         }
 
 
-
+        /// <summary>
+        /// Updates the customer information with the new customer object
+        /// </summary>
+        /// <param name="oldemail"></param>
+        /// <param name="customer"></param>
+        /// <returns>true if successful</returns>
         public bool UpdateCustomer(string oldemail, Customer customer)
         {
+            SqlCommand cmd = new SqlCommand("EXEC dbo.UpdateCustomer @oldemail,@email,@postal,@phone,@name,@address");
+            cmd.Parameters.AddWithValue("oldemail", oldemail);
+            cmd.Parameters.AddWithValue("email", customer.Email);
+            cmd.Parameters.AddWithValue("postal", customer.Postal);
+            cmd.Parameters.AddWithValue("phone", customer.Phone);
+            cmd.Parameters.AddWithValue("address", customer.Address);
+            cmd.Parameters.AddWithValue("name", customer.Name);
 
-            return DbExec("EXEC dbo.UpdateCustomer @oldemail,@email,@postal,@phone,@name,@address", new
-            {
-                oldemail = oldemail,
-                email = customer.Email,
-                postal = customer.Postal,
-                phone = customer.Phone,
-                name = customer.Name,
-                address = customer.Address
-            });
+            return ExecuteNonQuery(cmd);
+
         }
-        public string CreateReservation(Reservation reservation)
+        /// <summary>
+        /// Creates a reservation
+        /// </summary>
+        /// <param name="reservation"></param>
+        /// <returns>Ordernumber of the created reservation</returns>
+        public int CreateReservation(Reservation reservation)
         {
+            //Convert additions into a long string with all additions, for the procedure.
             string additionAndAmount = "";
             int count = 1;
             if (reservation.ReservationAdditions != null)
@@ -52,39 +75,57 @@ namespace ZapLibrary
                 {
                     if (count == reservation.ReservationAdditions.Count)
                     {
-                        additionAndAmount += item.Name + "." + item.Amount;
+                        additionAndAmount += item.AdditionSeason.Name + "." + item.Amount;
                     }
                     else
                     {
-                        additionAndAmount += item.Name + "." + item.Amount + ",";
+                        additionAndAmount += item.AdditionSeason.Name + "." + item.Amount + ",";
                     }
                     count++;
                 }
             }
-            return GetDB(c => c.Query<string>("DECLARE @ID INT;EXECUTE dbo.CreateReservation @email, @campingid, @typename, @startdate, @enddate, @additionsandamount, @ReservationID = @ID OUTPUT;SELECT @ID as ordernumber"
-                , new
-                {
-                    reservation.Customer.Email,
-                    campingid = reservation.CampingSite.Id,
-                    reservation.TypeName,
-                    reservation.StartDate,
-                    reservation.EndDate,
-                    additionsandamount = additionAndAmount
-                }).FirstOrDefault());
 
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("DECLARE @ID INT;EXECUTE dbo.CreateReservation @email, @campingid, @typename, @startdate, @enddate, @additionsandamount, @ReservationID = @ID OUTPUT;SELECT @ID as ordernumber",con);
+            cmd.Parameters.AddWithValue("email", reservation.Customer.Email);
+            cmd.Parameters.AddWithValue("campingid", reservation.CampingSite.Id);
+            cmd.Parameters.AddWithValue("typename", reservation.TypeName);
+            cmd.Parameters.AddWithValue("startdate", reservation.StartDate);
+            cmd.Parameters.AddWithValue("enddate", reservation.EndDate);
+            cmd.Parameters.AddWithValue("additionsandamount", additionAndAmount);
+
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            reader.Read();
+
+            int order = reader.GetInt32(0);
+
+            con.Close();
+
+            return order;
         }
         public bool DeleteReservation(string ordernumber)
         {
-            return DbExec("EXEC dbo.CreateCustomer @ordernumber", ordernumber);
+            SqlCommand cmd = new SqlCommand("EXEC [dbo].[DeleteReservation] @ordernumber");
+            cmd.Parameters.AddWithValue("ordernumber", ordernumber);
 
+            return ExecuteNonQuery(cmd);
         }
         #endregion
 
         #region FUNCTIONS
+        /// <summary>
+        /// Returns all available sites for the specified period and campingtype.
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="typename"></param>
+        /// <returns>List of campingSites</returns>
         public List<CampingSite> GetAvailableSites(DateTime startDate, DateTime endDate, string typename)
         {
             List<CampingSite> campingSites = new List<CampingSite>();
-            List<CampingAddition> additions = new List<CampingAddition>();
+
 
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetAvaliableSites](@startdate,@enddate,@typename)", con);
@@ -100,7 +141,7 @@ namespace ZapLibrary
             // Reads table
             while (reader.Read())
             {
-
+                List<CampingAddition> additions = new List<CampingAddition>();
                 string campingAdditions = reader[2].ToString();
                 if (campingAdditions != "")
                 {
@@ -119,29 +160,102 @@ namespace ZapLibrary
             con.Close();
             return campingSites;
         }
-
-        #endregion
-
-        private bool DbExec(string command, object obj)
+        /// <summary>
+        /// Gets the additions for this season
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public List<AdditionSeason> GetAdditions(DateTime startDate, DateTime endDate)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            List<AdditionSeason> additionSeasons = new List<AdditionSeason>();
+
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetAdditions] (@startdate,@enddate)", con);
+            cmd.Parameters.Add("startdate", SqlDbType.Date).Value = startDate;
+            cmd.Parameters.Add("enddate", SqlDbType.Date).Value = endDate;
+
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            // Reads table
+            while (reader.Read())
             {
-                int rowsAffected = db.Execute(command, obj);
-                if (rowsAffected > 0)
+                additionSeasons.Add(new AdditionSeason(reader.GetString(0), reader.GetString(1), (double)reader.GetDecimal(2)));
+
+            }
+
+
+            con.Close();
+            return additionSeasons;
+        }
+        /// <summary>
+        /// Finds the specific reservation
+        /// </summary>
+        /// <param name="ordernumber"></param>
+        /// <returns></returns>
+        public Reservation GetReservation(string ordernumber)
+        {
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetReservation](@ordernumber)", con);
+            cmd.Parameters.AddWithValue("ordernumber", ordernumber);
+
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            // Reads table
+            reader.Read();
+
+            List<ReservationAddition> reservationAdditions = new List<ReservationAddition>();
+            string additions = reader[7].ToString();
+            if (additions != "")
+            {
+                string[] additionSplit = additions.Split(',');
+                foreach (var addition in additionSplit)
                 {
-                    return true;
+                    string[] additionNameSplit = addition.Split(':');
+                    reservationAdditions.Add(new ReservationAddition(new AdditionSeason(additionNameSplit[1],
+                        "", double.Parse(additionNameSplit[2], CultureInfo.InvariantCulture)), int.Parse(additionNameSplit[0])));
                 }
             }
-            return false;
-        }
 
-        private T GetDB<T>(Func<IDbConnection, T> func)
-        {
-            using (IDbConnection c = new SqlConnection(connectionString))
-            {
-                return func(c);
-            }
+            Reservation reservation = new Reservation(reader.GetInt32(0), new Customer(reader.GetString(1)),
+            new CampingSite(reader.GetString(2)), reader.GetString(3), reader.GetDateTime(4),
+            reader.GetDateTime(5), (double)reader.GetDecimal(6), false, false, reservationAdditions);
+
+
+
+            con.Close();
+            return reservation;
         }
+        /// <summary>
+        /// Returns all campingTypes
+        /// </summary>
+        /// <returns></returns>
+        public List<CampingType> GetCampingTypes()
+        {
+            //Create list with campingtypes
+            List<CampingType> campingTypes = new List<CampingType>();
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.GetCampingTypes() ORDER BY [name] ASC", con);
+
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            //Add the name to the list
+            while (reader.Read())
+            {
+                campingTypes.Add(new CampingType(reader.GetString(0)));
+            }
+
+            return campingTypes;
+        }
+        #endregion
+
+        
         private bool ExecuteNonQuery(SqlCommand cmd)
         {
             // Creates connection
