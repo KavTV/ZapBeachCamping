@@ -12,9 +12,9 @@
     <div class="container-fluid webForm col-sm-8">
 
         <h3>Registration:</h3>
-       
+        
+        <!--Booking details-->
         <div class="reservation row content">
-
             <span class="details">Camping type:</span>
             <asp:DropDownList ID="DropDownTypes" runat="server">
                 <asp:ListItem>
@@ -58,67 +58,62 @@
         
 
 
-
-        <div class="person-entity">
+        <!--Camping enheder (personer)-->
+        <%--<div class="camping-entities">
             <div>
                 <span class="details">Voksne:</span>
-                <input type="number" id="voksne" min="1" max="5">
+                <input type="number" id="voksne" min="1" max="10">
             </div>
             <div>
                 <span class="details">Børn:</span>
-                <input type="number" id="børn" min="1" max="5">
+                <input type="number" id="børn" min="0" max="10">
             </div>
             <div>
                 <span class="details">Hund:</span>
-                <input type="number" id="hund" min="1" max="5">
+                <input type="number" id="hund" min="0" max="10">
             </div>
-        </div>
+        </div>--%>
 
 
 
-
-
-
-        <div class="additions">
+        <!--Tilføjelser-->
+        <%--<div class="additions">
             <div>
                 <span class="details">Sengelinned</span>
-                <input type="number" id="addition1" min="1" max="5">
+                <input type="number" id="addition1" min="0">
             </div>
             <div>
                 <span class="details">Morgenkomplet (voksen)</span>
-                <input type="number" id="addition2" min="1" max="5">
+                <input type="number" id="addition2" min="0">
             </div>
             <div>
                 <span class="details">Morgenkomplet (børn)</span>
-                <input type="number" id="addition3" min="1" max="5">
+                <input type="number" id="addition3" min="0">
             </div>
             <div>
                 <span class="details">Cykelleje (pr. dag)</span>
-                <input type="number" id="addition4" min="1" max="5">
-            </div>
-            <div>
-                <span class="details">Ekstra god udsigt (pr. dag)</span>
-                <input type="number" id="addition5" min="1" max="5">
+                <input type="number" id="addition4" min="0">
             </div>
             <div>
                 <span class="details">Adgang til badeland (voksen)</span>
-                <input type="number" id="addition6" min="1" max="5">
+                <input type="number" id="addition6" min="0">
             </div>
             <div>
                 <span class="details">Adgang til badeland (børn)</span>
-                <input type="number" id="addition7" min="1" max="5">
+                <input type="number" id="addition7" min="0">
             </div>
+
+            <!--Slut rengøring skal kun vises frem til hytter-->
             <div>
+                <span class="details">Slut rengøring (Hytte)</span>
                 <input type="checkbox" id="addition8" value="Slut rengøring(hytter)">
             </div>
-        </div>
+        </div>--%>
         
 
 
-
-
-
-        <div class="user-details">
+        <!--Bruger-->
+        <%--<div class="user-details">
             <div class="input-box">
                 <span class="details">Email:</span>
                 <input type="text" placeholder="Indtast email"  />
@@ -145,7 +140,8 @@
                 <span class="details">Post nr:</span>
                 <input type="text" placeholder="Indtast post nr." />
             </div>
-        </div>
+        </div>--%>
+
 
 
 
