@@ -13,9 +13,9 @@ namespace ZAPWebsite
         protected void Page_Load(object sender, EventArgs e)
         {
             ZapManager sqlmanager = new ZapManager("");
-            DropDownTypes.DataSource = sqlmanager.GetCampingTypes();
-            DropDownTypes.DataValueField = "Name";
-            DropDownTypes.DataBind();             
+            //DropDownTypes.DataSource = sqlmanager.GetCampingTypes();
+            //DropDownTypes.DataValueField = "Name";
+            //DropDownTypes.DataBind();             
 
 
             //List<CampingObject> campingtypes = new List<CampingObject>();

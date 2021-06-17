@@ -11,18 +11,18 @@
 
     <div class="container-fluid webForm col-sm-8">
 
-        <h3>Registration:</h3>
+        <%--<h3>Registration:</h3>--%>
         
         <!--Booking details-->
-        <div class="reservation row content">
+        <%--<div class="reservation row content">
             <span class="details">Camping type:</span>
             <asp:DropDownList ID="DropDownTypes" runat="server">
                 <asp:ListItem>
                 </asp:ListItem>
-            </asp:DropDownList>
+            </asp:DropDownList>--%>
             
             <!--Skal gemmes væk hvis sæson plads er valgt-->
-            <div>
+            <%--<div>
                 <div class="input-box">
                     <span class="details">Start dato:</span>
                     <input type="date" id="resStart" />
@@ -34,16 +34,15 @@
                 <div>
                     <input type="checkbox" id="view" value="Ekstra god udsigt (pr. døgn)">
                 </div>
-            </div>
+            </div>--%>
 
             <!--Printer ledige pladser-->
             <asp:DataList ID="DataListCamping" runat="server" RepeatDirection="Horizontal" CellSpacing="3" RepeatColumns="3">
                 <ItemTemplate>
                     <tr>
                         <td>
-                            <asp:DataList ID="DataListTypes" runat="server">
-                            </asp:DataList>
-                        <label>Room: <%# Eval("CampingAdditions") %></label>
+                            <label>Rum: <%# Eval("Id") %></label>
+                            <label>Pris: <%# Eval("Price") %></label>
                         </td>
                     </tr>
 
