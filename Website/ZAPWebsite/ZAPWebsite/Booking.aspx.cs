@@ -15,15 +15,18 @@ namespace ZAPWebsite
             ZapManager sqlmanager = new ZapManager("");
             DropDownTypes.DataSource = sqlmanager.GetCampingTypes();
             DropDownTypes.DataValueField = "Name";
-            DropDownTypes.DataBind();
+            DropDownTypes.DataBind();             
 
 
             //List<CampingObject> campingtypes = new List<CampingObject>();
             //campingtypes.Add(new CampingObject("Teltplads"));
 
             //DataListCamping.DataSource = campingtypes;
+
+            List<CampingSite> campingSites = new List<CampingSite>(sqlmanager.GetAvailableSites(DateTime.Today, DateTime.Today.AddDays(10), "Teltplads"));
+
+
             DataListCamping.DataSource = sqlmanager.GetAvailableSites(DateTime.Today, DateTime.Today.AddDays(10), "Teltplads");
-  
             DataListCamping.DataBind();
             DataListCamping.Visible = true;
 

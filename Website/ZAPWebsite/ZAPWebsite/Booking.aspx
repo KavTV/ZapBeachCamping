@@ -31,6 +31,9 @@
                     <span class="details">Slut dato:</span>
                     <input type="date" id="resEnd"/>
                 </div>
+                <div>
+                    <input type="checkbox" id="view" value="Ekstra god udsigt (pr. døgn)">
+                </div>
             </div>
 
             <!--Printer ledige pladser-->
@@ -38,19 +41,83 @@
                 <ItemTemplate>
                     <tr>
                         <td>
-                            <label>Room: <%# Eval("typename") %></label>
+                            <asp:DataList ID="DataListTypes" runat="server">
+                            </asp:DataList>
+                        <label>Room: <%# Eval("CampingAdditions") %></label>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-<%--                            <asp:LinkButton ID="bookhere" runat="server" OnClick="bookhere_Click" CommandName="CheckForBook" CommandArgument='<%#Eval("roomid") %>' Text="Book her" /> --%>
+<%--                        <asp:LinkButton ID="bookhere" runat="server" OnClick="bookhere_Click" CommandName="CheckForBook" CommandArgument='<%#Eval("roomid") %>' Text="Book her" /> --%>
                         </td>
                     </tr>
                 </ItemTemplate>
             </asp:DataList>
         </div>
-       
+        
+
+
+
+        <div class="person-entity">
+            <div>
+                <span class="details">Voksne:</span>
+                <input type="number" id="voksne" min="1" max="5">
+            </div>
+            <div>
+                <span class="details">Børn:</span>
+                <input type="number" id="børn" min="1" max="5">
+            </div>
+            <div>
+                <span class="details">Hund:</span>
+                <input type="number" id="hund" min="1" max="5">
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="additions">
+            <div>
+                <span class="details">Sengelinned</span>
+                <input type="number" id="addition1" min="1" max="5">
+            </div>
+            <div>
+                <span class="details">Morgenkomplet (voksen)</span>
+                <input type="number" id="addition2" min="1" max="5">
+            </div>
+            <div>
+                <span class="details">Morgenkomplet (børn)</span>
+                <input type="number" id="addition3" min="1" max="5">
+            </div>
+            <div>
+                <span class="details">Cykelleje (pr. dag)</span>
+                <input type="number" id="addition4" min="1" max="5">
+            </div>
+            <div>
+                <span class="details">Ekstra god udsigt (pr. dag)</span>
+                <input type="number" id="addition5" min="1" max="5">
+            </div>
+            <div>
+                <span class="details">Adgang til badeland (voksen)</span>
+                <input type="number" id="addition6" min="1" max="5">
+            </div>
+            <div>
+                <span class="details">Adgang til badeland (børn)</span>
+                <input type="number" id="addition7" min="1" max="5">
+            </div>
+            <div>
+                <input type="checkbox" id="addition8" value="Slut rengøring(hytter)">
+            </div>
+        </div>
+        
+
+
+
+
+
         <div class="user-details">
             <div class="input-box">
                 <span class="details">Email:</span>
@@ -59,26 +126,28 @@
 
             <!--Gemmes væk hvis bruger eksistere-->
             <div class="input-box">
-                <span class="details">Fornavn</span>
+                <span class="details">Fornavn:</span>
                 <input type="text" placeholder="Indtast fornavn" />
             </div>
             <div class="input-box"> 
-                <span class="details">Efternavn</span>
+                <span class="details">Efternavn:</span>
                 <input type="text" placeholder="Indtast efternavn" />
             </div>
             <div class="input-box">
-                <span class="details">Telefon</span>
+                <span class="details">Telefon:</span>
                 <input type="text" placeholder="Indtast tlf.nr." />
             </div>
             <div class="input-box">
-                <span class="details">Addresse</span>
+                <span class="details">Addresse:</span>
                 <input type="text" placeholder="Indtast addresse" />
             </div>
             <div class="input-box">
-                <span class="details">Post nr.</span>
+                <span class="details">Post nr:</span>
                 <input type="text" placeholder="Indtast post nr." />
             </div>
         </div>
+
+
 
         <!--Tjekker først om bruger eksistere, hvis ikke skal bruger oprettes (evt notificere brugeren om dette). Ellers send information til database om reservationen-->
         <div class="button">
