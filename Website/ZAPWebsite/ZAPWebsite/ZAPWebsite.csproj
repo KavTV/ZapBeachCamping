@@ -111,6 +111,7 @@
     <Content Include="About.aspx" />
     <Content Include="Booking.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Stylesheets\Booking.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -131,6 +132,7 @@
     <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\BookingPage.js" />
+    <Content Include="Scripts\BookingSliding.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

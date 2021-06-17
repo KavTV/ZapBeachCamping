@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Booking.aspx.cs" Inherits="ZAPWebsite.Booking" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
-        .webForm{
+        .webForm {
             display: flex;
             height: 100vh;
             background-color: #f1f1f1;
@@ -10,52 +11,54 @@
     </style>
 
     <div class="container-fluid webForm col-sm-8">
+        <a class="l1">1</a><a class="l2">2</a><a class="l3">3</a>
+        <div class="left-right">
+            <%--<h3>Registration:</h3>--%>
 
-        <%--<h3>Registration:</h3>--%>
-        
-        <!--Booking details-->
-        <%--<div class="reservation row content">
-            <span class="details">Camping type:</span>
-            <asp:DropDownList ID="DropDownTypes" runat="server">
-                <asp:ListItem>
-                </asp:ListItem>
-            </asp:DropDownList>--%>
-            
-            <!--Skal gemmes væk hvis sæson plads er valgt-->
-            <%--<div>
-                <div class="input-box">
-                    <span class="details">Start dato:</span>
-                    <input type="date" id="resStart" />
-                </div>
-                <div class="input-box">
-                    <span class="details">Slut dato:</span>
-                    <input type="date" id="resEnd"/>
-                </div>
-                <div>
-                    <input type="checkbox" id="view" value="Ekstra god udsigt (pr. døgn)">
-                </div>
-            </div>--%>
+            <!--Booking details-->
+            <div class="reservation row content">
+                <div class="l1">
+                    <span class="details">Camping type:</span>
+                    <asp:DropDownList ID="DropDownTypes" runat="server">
+                        <asp:ListItem>
+                        </asp:ListItem>
+                    </asp:DropDownList>
 
-            <!--Printer ledige pladser-->
-            <asp:DataList ID="DataListCamping" runat="server" RepeatDirection="Horizontal" CellSpacing="3" RepeatColumns="3">
-                <ItemTemplate>
-                    <tr>
-                        <td>
-                            <label>Rum: <%# Eval("Id") %></label>
-                            <label>Pris: <%# Eval("Price") %></label>
-                        </td>
-                    </tr>
+                    <!--Skal gemmes væk hvis sæson plads er valgt-->
+                    <div>
+                        <div class="input-box">
+                            <span class="details">Start dato:</span>
+                            <input type="date" id="resStart" />
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Slut dato:</span>
+                            <input type="date" id="resEnd" />
+                        </div>
+                        <div>
+                            <input type="checkbox" id="view" value="Ekstra god udsigt (pr. døgn)">
+                        </div>
+                    </div>
+                </div>
+                <!--Printer ledige pladser-->
+                <asp:DataList ID="DataListCamping" runat="server" RepeatDirection="Horizontal" CellSpacing="3" RepeatColumns="3">
+                    <ItemTemplate>
+                        <tr>
+                            <td>
+                                <label>Rum: <%# Eval("Id") %></label>
+                                <label>Pris: <%# Eval("Price") %></label>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-<%--                        <asp:LinkButton ID="bookhere" runat="server" OnClick="bookhere_Click" CommandName="CheckForBook" CommandArgument='<%#Eval("roomid") %>' Text="Book her" /> --%>
-                        </td>
-                    </tr>
-                </ItemTemplate>
-            </asp:DataList>
+                        <tr>
+                            <td>
+                                <%--<asp:LinkButton ID="bookhere" runat="server" OnClick="bookhere_Click" CommandName="CheckForBook" CommandArgument='<%#Eval("roomid") %>' Text="Book her" /> --%>
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                </asp:DataList>
+            </div>
+
         </div>
-        
-
 
         <!--Camping enheder (personer)-->
         <%--<div class="camping-entities">
@@ -108,7 +111,7 @@
                 <input type="checkbox" id="addition8" value="Slut rengøring(hytter)">
             </div>
         </div>--%>
-        
+
 
 
         <!--Bruger-->
@@ -149,4 +152,5 @@
             <input type="submit" value="Bestil" />
         </div>
     </div>
+    <script src="Scripts/BookingSliding.js"></script>
 </asp:Content>
