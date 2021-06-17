@@ -12,26 +12,30 @@ namespace ZAPWebsite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            List<testobj> campingtypes = new List<testobj>();
-            campingtypes.Add(new testobj("Teltplads"));
             ZapManager sqlmanager = new ZapManager("");
-            DataList1.DataSource = campingtypes;
-            //DataList1.DataSource = sqlmanager.GetAvailableSites(DateTime.Today, DateTime.Today.AddDays(10), "Teltplads");
-            DataList1.DataBind();
-            DataList1.Visible = true;
+            DropDownTypes.DataSource = sqlmanager.GetCampingTypes();
+            DropDownTypes.DataValueField = "Name";
+            DropDownTypes.DataBind();
+
+
+            //List<CampingObject> campingtypes = new List<CampingObject>();
+            //campingtypes.Add(new CampingObject("Teltplads"));
+
+            //DataListCamping.DataSource = campingtypes;
+            DataListCamping.DataSource = sqlmanager.GetAvailableSites(DateTime.Today, DateTime.Today.AddDays(10), "Teltplads");
+  
+            DataListCamping.DataBind();
+            DataListCamping.Visible = true;
 
         }
     }
-    public class testobj
+    public class CampingObject
     {
-        string name;
+        public string Name { get; set; }
 
-        public testobj(string name)
+        public CampingObject(string name)
         {
             this.Name = name;
         }
-
-        public string Name { get => name; set => name = value; }
     }
 }   
