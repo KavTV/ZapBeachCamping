@@ -14,12 +14,9 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-<<<<<<< Updated upstream
     <link href="~/Stylesheets/MasterPage.css" rel="stylesheet" />
     <link href="Stylesheets/Booking.css" rel="stylesheet" />
-=======
     <link href="~/Stylesheets/Style.css" rel="stylesheet" />
->>>>>>> Stashed changes
 
     <style>
         /* Removes navbar default rounded borders */

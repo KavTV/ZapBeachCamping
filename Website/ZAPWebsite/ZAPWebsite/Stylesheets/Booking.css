@@ -1,19 +1,17 @@
 ﻿body {
 }
 .left-right {
-    overflow: hidden;
-    height: 200px;
-    width: 200px;
+    overflow: auto;
+    height: 60vh;
     position: relative;
-    background-color: #333;
+    /*background-color: #333;*/
     clear: left;
 }
 div.l1, div.l2, div.l3 {
-    width: 200px;
-    height: 200px;
+    width: 100%;
     position: absolute;
     top: 0;
-    color: #fff;
+    
 }
 a.l1, a.l2, a.l3 {
     display: block;
@@ -28,17 +26,3 @@ a:hover {
     opacity: 1
 }
 
-.l1 {
-    color: red;
-    background-color: red;
-}
-
-.l2 {
-    color: green;
-    background-color: green;
-}
-
-.l3 {
-    color: blue;
-    background-color: blue;
-}
