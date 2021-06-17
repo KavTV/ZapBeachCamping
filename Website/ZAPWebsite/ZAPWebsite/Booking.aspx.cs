@@ -25,7 +25,6 @@ namespace ZAPWebsite
 
             List<CampingSite> campingSites = new List<CampingSite>(sqlmanager.GetAvailableSites(DateTime.Today, DateTime.Today.AddDays(10), "Teltplads"));
 
-
             DataListCamping.DataSource = sqlmanager.GetAvailableSites(DateTime.Today, DateTime.Today.AddDays(10), "Teltplads");
             DataListCamping.DataBind();
             DataListCamping.Visible = true;

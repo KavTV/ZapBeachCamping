@@ -3,13 +3,120 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
+<<<<<<< Updated upstream
         .webForm {
             display: flex;
             height: 100vh;
+=======
+        .webForm
+        {
+            height: auto;
+>>>>>>> Stashed changes
             background-color: #f1f1f1;
         }
+
+        *
+        {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        h5
+        {
+            margin:0px;
+            font-size:1.4em;
+            font-weight:700;
+        }
+
+        p
+        {
+            font-size:12px;
+        }
+
+        .center
+        {
+            height:100vh;
+            width:100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+/* End Non-Essential  */
+
+        .property-card
+        {
+            height:18em;
+            width:14em;
+            display:-webkit-box;
+            display:-ms-flexbox;
+            display:flex;
+            -webkit-box-orient:vertical;
+            -webkit-box-direction:normal;
+            -ms-flex-direction:column;
+            flex-direction:column;
+            position:relative;
+            -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            border-radius:16px;
+            overflow:hidden;
+            -webkit-box-shadow:  15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+            box-shadow:  15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+        }
+/* ^-- The margin bottom is necessary for the drop shadow otherwise it gets clipped in certain cases. */
+
+/* Top Half of card, image. */
+
+        .property-image
+        {
+            height:6em;
+            width:14em;
+            padding:1em 2em;
+            position:Absolute;
+            top:0px;
+            -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            background-image:url('https://gdkfiles.visitdenmark.com/files/452/165391_GD_Klassetur-41.jpg?width=610&height=343&mode=crop');
+            background-size:cover;
+            background-repeat:no-repeat;
+        }
+
+/* Bottom Card Section */
+
+        .property-description
+        {
+            background-color: #FAFAFC;
+            height:12em;
+            width:14em;
+            position:absolute;
+            bottom:0em;
+            -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            padding: 0.5em 1em;
+            text-align:center;
+        }
+
+/* Social Icons */
+
+        .property-social-icons
+        {
+            width:1em;
+            height:1em;
+            background-color:black;
+            position:absolute;
+            bottom:1em;
+            left:1em;
+            -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
     </style>
 
+<<<<<<< Updated upstream
     <div class="container-fluid webForm col-sm-8">
         <a class="l1">1</a><a class="l2">2</a><a class="l3">3</a>
         <div class="left-right">
@@ -57,6 +164,73 @@
                     </ItemTemplate>
                 </asp:DataList>
             </div>
+=======
+    <div class="container-fluid webForm col-lg-12">
+
+        <%--<h3>Registration:</h3>--%>
+        
+        <!--Booking details-->
+        <%--<div class="reservation row content">
+            <span class="details">Camping type:</span>
+            <asp:DropDownList ID="DropDownTypes" runat="server">
+                <asp:ListItem>
+                </asp:ListItem>
+            </asp:DropDownList>--%>
+            
+            <!--Skal gemmes væk hvis sæson plads er valgt-->
+            <%--<div>
+                <div class="input-box">
+                    <span class="details">Start dato:</span>
+                    <input type="date" id="resStart" />
+                </div>
+                <div class="input-box">
+                    <span class="details">Slut dato:</span>
+                    <input type="date" id="resEnd"/>
+                </div>
+                <div>
+                    <input type="checkbox" id="view" value="Ekstra god udsigt (pr. døgn)">
+                </div>
+            </div>--%>
+
+            <!--Printer ledige pladser-->
+            <asp:DataList ID="DataListCamping" runat="server" RepeatDirection="Horizontal" CellSpacing="2" CellPadding="5" RepeatColumns="4">
+                <ItemTemplate>
+                    <tr>
+                        <td>
+                            <div class="center">
+                                <div class="property-card">
+                                    <a href="#">
+                                        <div class="property-image">
+                                            <div class="property-image-title">
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="property-description">
+                                        <h5>
+                                            <label>Rum: <%# Eval("Id") %></label>
+                                        </h5>
+                                        <label>Pris: <%# Eval("Price") %></label>
+                                    </div>
+                                        <a href="#">
+                                            <div class="property-social-icons">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+<%--                        <asp:LinkButton ID="bookhere" runat="server" OnClick="bookhere_Click" CommandName="CheckForBook" CommandArgument='<%#Eval("roomid") %>' Text="Book her" /> --%>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:DataList>
+        </div>
+        
+>>>>>>> Stashed changes
 
         </div>
 
