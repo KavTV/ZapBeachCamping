@@ -1,0 +1,10 @@
+﻿body {
+}
+
+.divflexbox {
+    display: flex;
+    background-color:green;
+    margin: 10px;
+    color:aqua;
+    
+}

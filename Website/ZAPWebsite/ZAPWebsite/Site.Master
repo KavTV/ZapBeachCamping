@@ -17,6 +17,8 @@
     <link href="~/Stylesheets/MasterPage.css" rel="stylesheet" />
     <link href="Stylesheets/Booking.css" rel="stylesheet" />
     <link href="~/Stylesheets/Style.css" rel="stylesheet" />
+    <link href="~/Stylesheets/OrderPage.css" rel="stylesheet" />
+
 
     <style>
         /* Removes navbar default rounded borders */
