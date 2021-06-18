@@ -2,10 +2,15 @@
 }
 .left-right {
     overflow: auto;
+    overflow-x: hidden;
     height: 60vh;
     position: relative;
     /*background-color: #333;*/
     clear: left;
+
+}
+.hidescroll::-webkit-scrollbar {
+    display: none;
 }
 div.l1, div.l2, div.l3 {
     width: 100%;

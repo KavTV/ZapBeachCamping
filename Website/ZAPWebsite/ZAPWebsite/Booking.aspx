@@ -88,10 +88,12 @@
 
         /* Social Icons */
 
-        .property-social-icons {
-            width: 1em;
-            height: 1em;
-            background-color: black;
+        .property-bottom {
+            width: 12em;
+            height: 2em;
+            text-align:center;
+            border-radius: 30px;
+            background-color: #d9534f;
             position: absolute;
             bottom: 1em;
             left: 1em;
@@ -99,10 +101,14 @@
             -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
             transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
+        .property-bottom p{
+            color: white;
+            font-size:19px;
+        }
     </style>
 
     <div class="container-fluid webForm col-lg-12">
-        <div id="leftrightdiv" class="left-right">
+        <div id="leftrightdiv" class="left-right hidescroll">
             <%--<h3>Registration:</h3>--%>
 
             <!--Booking details-->
@@ -116,6 +122,7 @@
 
                     <!--Skal gemmes væk hvis sæson plads er valgt-->
                     <div>
+                        
                         <div class="input-box">
                             <span class="details">Start dato:</span>
                             <input type="date" id="resStart" />
@@ -128,12 +135,13 @@
                             <input type="checkbox" id="view" value="Ekstra god udsigt (pr. døgn)">
                         </div>
                     </div>
-                    <a class="l2">Find pladser</a>
+                    
+                    <a class="l2" onclick="AddParams()">Find pladser</a>
                 </div>
 
                 <!--Printer ledige pladser-->
                 <div class="l2">
-                    <asp:DataList ID="DataListCamping" runat="server" RepeatDirection="Horizontal" CellSpacing="2" CellPadding="5" RepeatColumns="4">
+                    <asp:DataList ID="DataListCamping" runat="server" RepeatDirection="Horizontal" CellSpacing="2" CellPadding="5" RepeatColumns="5" Visible="true">
                         <ItemTemplate>
 
                             <div class="">
@@ -149,20 +157,21 @@
                                             <label>Rum: <%# Eval("Id") %></label>
                                         </h5>
                                         <label>Pris: <%# Eval("Price") %></label>
+                                        <%--<a href="Order.aspx?Site=<%#Eval("Id") %>&startDate=<%Request.QueryString["startDate"].ToString();%>&endDate=<%Request.QueryString["endDate"].ToString(); %>&typeName=<%Request.QueryString["typeName"].ToString(); %>"> Vælg</a>--%>
                                     </div>
-                                    <a href="#">
-                                        <div class="property-social-icons">
+                                    <a href="Order.aspx?Site=<%#Eval("Id") %>&startDate=<%Response.Write(Request.QueryString["startDate"].ToString());%>&endDate=<%Response.Write(Request.QueryString["endDate"].ToString()); %>&typeName=<%Response.Write(Request.QueryString["typeName"].ToString()); %>">
+                                        <div class="property-bottom">
+                                            <p>Vælg</p>
                                         </div>
+                                        
                                     </a>
                                 </div>
                             </div>
 
-
-
-                            <%--                        <asp:LinkButton ID="bookhere" runat="server" OnClick="bookhere_Click" CommandName="CheckForBook" CommandArgument='<%#Eval("roomid") %>' Text="Book her" /> --%>
+                            <%--<asp:LinkButton ID="bookhere" runat="server" OnClick="bookhere_Click" CommandName="CheckForBook" CommandArgument='<%#Eval("roomid") %>' Text="Book her" />--%>
                         </ItemTemplate>
                     </asp:DataList>
-                    <a class="l3 btn-primary">Til bestilling</a>
+                    <a class="l3">Til bestilling</a>
                 </div>
             </div>
         </div>
@@ -170,7 +179,7 @@
     </div>
 
     <!--Camping enheder (personer)-->
-    <%--<div class="camping-entities">
+    <div class="camping-entities">
             <div>
                 <span class="details">Voksne:</span>
                 <input type="number" id="voksne" min="1" max="10">
@@ -183,12 +192,12 @@
                 <span class="details">Hund:</span>
                 <input type="number" id="hund" min="0" max="10">
             </div>
-        </div>--%>
+        </div>
 
 
 
     <!--Tilføjelser-->
-    <%--<div class="additions">
+    <div class="additions">
             <div>
                 <span class="details">Sengelinned</span>
                 <input type="number" id="addition1" min="0">
@@ -219,12 +228,12 @@
                 <span class="details">Slut rengøring (Hytte)</span>
                 <input type="checkbox" id="addition8" value="Slut rengøring(hytter)">
             </div>
-        </div>--%>
+        </div>
 
 
 
     <!--Bruger-->
-    <%--<div class="user-details">
+    <div class="user-details">
             <div class="input-box">
                 <span class="details">Email:</span>
                 <input type="text" placeholder="Indtast email"  />
@@ -251,7 +260,7 @@
                 <span class="details">Post nr:</span>
                 <input type="text" placeholder="Indtast post nr." />
             </div>
-        </div>--%>
+        </div>
 
 
 
