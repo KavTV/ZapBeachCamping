@@ -84,7 +84,7 @@ function CheckParams() {
 }
 
 function AddParams() {
-    var url = new URL("https://localhost:44348/Booking.aspx?startDate=1&endDate=2%typeName=none");
+    var url = new URL("https://172.16.21.107/Booking.aspx?startDate=1&endDate=2%typeName=none");
 
     var startDate = new Date(document.getElementById("resStart").value).toDateString();
     var endDate = new Date(document.getElementById("resEnd").value).toDateString();
