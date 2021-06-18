@@ -284,7 +284,6 @@ C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bi
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\System.Web.Optimization.dll
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\WebGrease.dll
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\ZapLibrary.dll
-C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\Dapper.dll
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\System.Web.Optimization.xml
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\Newtonsoft.Json.xml
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\Antlr3.Runtime.pdb
@@ -292,7 +291,6 @@ C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bi
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\ZapLibrary.pdb
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\ZapLibrary.dll.config
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\Dapper.xml
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Debug\ZAPWebsite.csproj.CoreCompileInputs.cache
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Debug\ZAPWebsite.csproj.CopyComplete
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Debug\ZAPWebsite.dll
@@ -377,3 +375,4 @@ C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Debug\ZAPWebsite.csproj.CopyComplete
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Debug\ZAPWebsite.dll
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Debug\ZAPWebsite.pdb
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Debug\ZAPWebsite.csproj.AssemblyReference.cache
