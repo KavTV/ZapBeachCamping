@@ -111,6 +111,7 @@
     <Content Include="About.aspx" />
     <Content Include="Booking.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="OrderPage.aspx" />
     <Content Include="Stylesheets\Booking.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -201,6 +202,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPage.aspx.cs">
+      <DependentUpon>OrderPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPage.aspx.designer.cs">
+      <DependentUpon>OrderPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
