@@ -1,6 +1,6 @@
 ﻿//Hide the other elements in the slide
 
-
+//Hide or show the divs hidden in the slider.
 if (CheckParams()) {
     $('div.l1').hide();
     $('div.l2').show();
@@ -22,7 +22,7 @@ $(document).ready(function () {
         $('div.l2'),
         $('div.l3'),
     ];
-
+    //Get the width of the div and save
     var viewsWidth = document.getElementById("leftrightdiv").offsetWidth
     console.log(document.getElementById("leftrightdiv").offsetWidth);
     var showPage = function (index) {
@@ -46,7 +46,7 @@ $(document).ready(function () {
         currentPageI = index;
 
     }
-    // show default page
+    // show default page if params exists then show the second page
     if (CheckParams()) {
         showPage(2)
     }
