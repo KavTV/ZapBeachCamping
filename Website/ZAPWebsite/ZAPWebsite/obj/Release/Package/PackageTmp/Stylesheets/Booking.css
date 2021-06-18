@@ -1,0 +1,33 @@
+﻿body {
+}
+.left-right {
+    overflow: auto;
+    overflow-x: hidden;
+    height: 60vh;
+    position: relative;
+    /*background-color: #333;*/
+    clear: left;
+
+}
+.hidescroll::-webkit-scrollbar {
+    display: none;
+}
+div.l1, div.l2, div.l3 {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    
+}
+a.l1, a.l2, a.l3 {
+    display: block;
+    width: 50px;
+    height: 50px;
+    float: left;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+a:hover {
+    opacity: 1
+}
+

@@ -111,6 +111,13 @@
     <Content Include="About.aspx" />
     <Content Include="Booking.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Images\Cards\CardPic.jpg" />
+    <Content Include="Images\DefaultSlideShow\Pic1.jpg" />
+    <Content Include="Images\DefaultSlideShow\Pic2.jpg" />
+    <Content Include="Images\DefaultSlideShow\Pic3.jpg" />
+    <Content Include="Images\DefaultSlideShow\Pic4.jpg" />
+    <Content Include="Images\DefaultSlideShow\Pic5.jpg" />
+    <Content Include="Images\Logo.png" />
     <Content Include="Stylesheets\Booking.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

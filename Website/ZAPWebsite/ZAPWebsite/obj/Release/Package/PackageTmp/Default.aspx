@@ -104,7 +104,7 @@
                         <p>Camping i hytte</p>
                     </div>
                     
-                    <a class="btn btn-danger navbar-btn" href="Booking">Booking</a>
+                    <a class="btn btn-danger" href="Booking">Booking</a>
                 </div>
             </div>
         </div>

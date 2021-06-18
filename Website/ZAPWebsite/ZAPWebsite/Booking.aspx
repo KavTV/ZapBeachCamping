@@ -66,7 +66,7 @@
             -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
             -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
             transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-            background-image: url('https://gdkfiles.visitdenmark.com/files/452/165391_GD_Klassetur-41.jpg?width=610&height=343&mode=crop');
+            background-image: url('Images/Cards/CardPic.jpg');
             background-size: cover;
             background-repeat: no-repeat;
         }
