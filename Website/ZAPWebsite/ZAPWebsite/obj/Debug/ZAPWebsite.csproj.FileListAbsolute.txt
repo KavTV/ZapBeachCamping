@@ -376,3 +376,6 @@ C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\ob
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Debug\ZAPWebsite.dll
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Debug\ZAPWebsite.pdb
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Debug\ZAPWebsite.csproj.AssemblyReference.cache
+C:\Programming\CSharp\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\ZapLibrary.dll
+C:\Programming\CSharp\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\ZapLibrary.pdb
+C:\Programming\CSharp\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\ZapLibrary.dll.config
