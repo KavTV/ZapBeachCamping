@@ -41,10 +41,15 @@
                         <li data-target="#campingSlide" data-slide-to="2"></li>
                         <li data-target="#campingSlide" data-slide-to="3"></li>
                         <li data-target="#campingSlide" data-slide-to="4"></li>
+                        <li data-target="#campingSlide" data-slide-to="5"></li>
                     </ol>
 
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
+                            <img src="/Images/DefaultSlideShow/Pic0.png" alt="Pic0" style="width:100%; height:450px">
+                        </div>
+
+                        <div class="item">
                             <img src="/Images/DefaultSlideShow/Pic1.jpg" alt="Pic1" style="width:100%; height:450px">
                         </div>
 
@@ -81,7 +86,7 @@
             <div class="col-sm-2 sidenav">
                 <div>
                     <h4>Bestil nu:</h4>
-    
+                    
                     <div class="">
                         <p>Camping i telt</p>
                         <p>Camping i vogn</p>
