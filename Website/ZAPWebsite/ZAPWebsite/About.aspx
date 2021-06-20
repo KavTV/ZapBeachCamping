@@ -14,7 +14,7 @@
 
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
         .row.content {
-            height: 450px
+            height: 200px
         }
 
         .floatRight{
