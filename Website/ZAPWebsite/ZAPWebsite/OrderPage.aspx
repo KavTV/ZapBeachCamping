@@ -1,13 +1,106 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OrderPage.aspx.cs" Inherits="ZAPWebsite.OrderPage" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="divflexbox" id="LeftDiv">
-        <p>Hva så</p>
-    </div>
-    <div id="CenterDiv" class="divflexbox">
-        <p >Hej</p>
-    </div>
-    <div class="divflexbox" id="RightDiv">
-        <p>Hej igen</p>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div id="OP_content">
+        <div id="LeftDiv" class="OPgridview">
+            <%-- the additions and amount--%>
+            <asp:DataList ID="additionDatalist" runat="server" RepeatDirection="Vertical" CellSpacing="2" RepeatColumns="1" Visible="true">
+                <ItemTemplate>
+                    <div class="additiongroup">
+                        <asp:TextBox ID="additionamount" runat="server" TextMode="Number" CssClass="additioninput" OnTextChanged="additionamount_TextChanged" AutoPostBack="True" CausesValidation="true" ValidationGroup="additionvalidation"></asp:TextBox>
+                        <asp:Label ID="additionname" runat="server" CssClass="addition-name" Text='<%# Eval("Name") %>'></asp:Label>
+                        <asp:CompareValidator ErrorMessage="Ugyldigt tal" ControlToValidate="additionamount" Operator="GreaterThanEqual" ValueToCompare="0" runat="server" ValidationGroup="additionvalidation" CssClass="additionvalidation"/>
+                        <asp:Label class="addition-price" runat="server"> Kr</asp:Label>
+                        <asp:Label ID="additionprice" CssClass="addition-price" runat="server" Text='<%# Eval("Price") %>'/>
+                    </div>
+                </ItemTemplate>
+            </asp:DataList>
+        </div>
+        <%-- Customer  --%>
+        <div id="CenterDiv" class="OPgridview">
+            <div class="customergroup">
+                <asp:Label ID="email_la" runat="server" Text="Email" CssClass="customerlabel"></asp:Label>
+                <asp:TextBox ID="email_tb" runat="server" CssClass="customerinput" TextMode="Email"></asp:TextBox>
+                <asp:RequiredFieldValidator ErrorMessage="Skriv din email!" ControlToValidate="email_tb" runat="server" CssClass="customervalidator" />
+            </div>
+            <asp:Button ID="findCustomer" Text="Søg/Opret" runat="server" OnClick="CreateOrSelectCustomer_Click" />
+            <%-- If customer email not exist then create the customer --%>
+            <div id="create_cust_div" runat="server" visible="false">
+                <div class="customergroup">
+                    <asp:Label Text="Navn" runat="server" CssClass="customerlabel" />
+                    <asp:TextBox ID="name" runat="server" CssClass="customerinput"></asp:TextBox>
+                    <asp:RequiredFieldValidator ErrorMessage="Skriv dit navn!" ControlToValidate="name" runat="server" CssClass="customervalidator" />
+                </div>
+                <div class="customergroup">
+                    <asp:Label Text="mobil nr." runat="server" CssClass="customerlabel" />
+                    <asp:TextBox ID="phone" runat="server" CssClass="customerinput" TextMode="Phone"></asp:TextBox>
+                    <asp:RequiredFieldValidator ErrorMessage="Skriv dit mobil nr.!" ControlToValidate="phone" runat="server" CssClass="customervalidator" />
+                </div>
+                <div class="customergroup">
+                    <asp:Label Text="post nr." runat="server" CssClass="customerlabel" />
+                    <asp:TextBox ID="postal" runat="server" CssClass="customerinput"></asp:TextBox>
+                    <asp:RequiredFieldValidator ErrorMessage="Skriv dit post nr.!" ControlToValidate="postal" runat="server" CssClass="customervalidator" />
+                </div>
+                <div class="customergroup">
+                    <asp:Label Text="adresse" runat="server" CssClass="customerlabel" />
+                    <asp:TextBox ID="address" runat="server" CssClass="customerinput"></asp:TextBox>
+                    <asp:RequiredFieldValidator ErrorMessage="Skriv din adresse!" ControlToValidate="address" runat="server" CssClass="customervalidator" />
+                </div>
+                <asp:Button ID="createcustomer" Text="Opret" runat="server" OnClick="Createcustomer_Click" />
+            </div>
+        </div>
+        <%-- The details of periode and site--%>
+        <div id="RightDiv" class="OPgridview">
+            <div id="otherdetails_div">
+                <h3>
+                    <asp:Label ID="periode_la" Text="Periode" runat="server" />
+                </h3>
+                <asp:Label CssClass="periode" ID="date_la" runat="server"><%=Convert.ToDateTime(Request.QueryString["startDate"]).ToString("d")%></asp:Label>
+                <asp:Label CssClass="periode" runat="server"> - </asp:Label>
+                <asp:Label CssClass="periode" ID="Label5" runat="server"><%=Convert.ToDateTime(Request.QueryString["endDate"]).ToString("d")%></asp:Label>
+
+
+            </div>
+            <div id="site_div">
+                <h3>
+                    <asp:Label ID="siteheader" Text="Plads" runat="server" />
+                </h3>
+                <asp:DataList ID="sitelist" runat="server">
+                    <ItemTemplate>
+                        <div class="">
+                            <div class="property-card">
+                                <div class="property-image">
+                                    <h3>
+                                        <asp:Label ID="siteheader" Text='<%# Request.QueryString["typename"]%>' runat="server" />
+
+                                    </h3>
+                                </div>
+                                <div class="property-description">
+                                    <h5>
+                                        <asp:Label ID="siteId" runat="server" Text='<%# Eval("Id") %>' />
+                                    </h5>
+                                    <asp:Label ID="siteprice" Text='<%# Eval("Price") %>' runat="server" />
+                                    <asp:Label runat="server"> Kr</asp:Label>
+                                    <h6 class="OP-h6">
+                                        <asp:Label Text="Tilføjelser:" runat="server" />
+                                    </h6>
+                                    <asp:DataList ID="siteadditions" runat="server">
+                                        <ItemTemplate>
+                                            <label class="OP-addition-la"><%# Eval("Name") %>,</label>
+                                        </ItemTemplate>
+                                    </asp:DataList>
+                                </div>
+
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:DataList>
+            </div>
+            <div id="totalpricediv">
+                <asp:Label ID="totalpricetext" CssClass="TotalPriceText" Text="Total pris: " runat="server" />
+                <asp:Label ID="totalprice_la" CssClass="TotalPriceText" Text="999" runat="server" />
+            </div>
+            <asp:Button ID="book_button" Text="Reserver" runat="server" Visible="false" OnClick="book_button_Click" />
+        </div>
     </div>
 </asp:Content>
