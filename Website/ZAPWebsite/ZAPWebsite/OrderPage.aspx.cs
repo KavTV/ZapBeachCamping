@@ -16,12 +16,19 @@ namespace ZAPWebsite
         //conection to our library
         private static ZapManager connection = new ZapManager("");
 
+        private static string saleparameter = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //if its not a postback then do...
             if (!IsPostBack)
             {
-                
+                if (!string.IsNullOrEmpty(Request.Params["Sale"]))
+                {
+                    LeftDiv.Visible = false;
+                    saleparameter = Request.Params["Sale"];
+
+                }
                 if (string.IsNullOrEmpty(Request.Params["Site"]))
                 {
                     //For testing 
@@ -40,27 +47,11 @@ namespace ZAPWebsite
                 else
                 {
                     //databound the additions in datalist
-                    //this line is for testing 
-                    additionDatalist.DataSource = connection.GetAdditions(Convert.ToDateTime("2021-06-21"), Convert.ToDateTime("2021-06-28"));
                     additionDatalist.DataSource = connection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
                     additionDatalist.DataBind();
                 }
-
-                #region TEST DATA
-                List<CampingSite> mylist = new List<CampingSite>();
-
-                CampingSite testCSite = new CampingSite("id", false, 10, new List<string>()
-                {
-                    "Lille campingplads"
-                }, new List<CampingAddition>()
-                {
-                    new CampingAddition("god udsigt")
-                });
-
-                mylist.Add(testCSite);
-
-                #endregion
-                sitelist.DataSource = mylist; //should be changes to a method from library
+                List<CampingSite> campingSites = connection.GetCampingSite(Request.QueryString["Site"], Request.QueryString["typeName"], Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
+                sitelist.DataSource = campingSites;
                 sitelist.DataBind();
 
                 foreach (DataListItem item in sitelist.Items)
@@ -70,30 +61,33 @@ namespace ZAPWebsite
                     //find the datalist inside the datalist
                     DataList additionsDatalist = (DataList)item.FindControl("siteadditions");
                     //use linq to get camping sites from the specific site and set as datasource
-                    additionsDatalist.DataSource = ((CampingSite)mylist.Where(ca => ca.Id == siteid).FirstOrDefault()).CampingAdditions;
+                    additionsDatalist.DataSource = (campingSites.Where(ca => ca.Id == siteid).FirstOrDefault()).CampingAdditions;
                     additionsDatalist.DataBind();
                 }
                 //after bindings then calculate the totalprice 
                 CalculateTotalPrice();
 
-                PrintReservation("");
             }
 
         }
 
         protected void CreateOrSelectCustomer_Click(object sender, EventArgs e)
         {
-            if (false) //if email match then show book button
+            if (connection.IsCustomerCreated(email_tb.Text)) //if email match then show book button
             {
                 //Show book now button
                 book_button.Visible = true;
+                //hidde error label, and create customer div. show book button and make email_textbox readonly
+                CustomerError_la.Visible = false;
+                book_button.Visible = true;
+                create_cust_div.Visible = false;
+                email_tb.ReadOnly = true;
             }
             else
             {
                 //hide search or create button and show the create button
                 findCustomer.Visible = false;
                 create_cust_div.Visible = true;
-
             }
         }
 
@@ -101,9 +95,9 @@ namespace ZAPWebsite
         {
             if (Page.IsValid)
             {
-                bool iscustomercreated = connection.CreateCustomer(new Customer(email_tb.Text, Convert.ToInt32(phone.Text), name.Text, Convert.ToInt32(postal.Text), address.Text));
+                bool customercreatedsuccesfuly = connection.CreateCustomer(new Customer(email_tb.Text, Convert.ToInt32(phone.Text), name.Text, Convert.ToInt32(postal.Text), address.Text));
                 //if customer not created then show error and do not continue
-                if (!iscustomercreated)
+                if (!customercreatedsuccesfuly)
                 {
                     CustomerError_la.Visible = true;
                 }
@@ -122,21 +116,29 @@ namespace ZAPWebsite
         {
             //Get additions
             List<ReservationAddition> resAdditions = new List<ReservationAddition>();
-            foreach (DataListItem item in additionDatalist.Items)
+            if (saleparameter != null)
             {
-                //only add to list if amount is bigger then 0 and the input amount is parse 
-                if (int.TryParse(((TextBox)item.FindControl("additionamount")).Text, out int amount) && amount > 0)
+                resAdditions.Add(new ReservationAddition(new AdditionSeason(saleparameter, null, 0), 1));
+            }
+            else
+            {
+                foreach (DataListItem item in additionDatalist.Items)
                 {
-                    //name of addition 
-                    string name = ((TextBox)item.FindControl("additionname")).Text;
-                    resAdditions.Add(new ReservationAddition(new AdditionSeason(name, null, 0), amount));
+                    //only add to list if amount is bigger then 0 and the input amount is parse 
+                    if (int.TryParse(((TextBox)item.FindControl("additionamount")).Text, out int amount) && amount > 0)
+                    {
+                        //name of addition 
+                        string name = ((TextBox)item.FindControl("additionname")).Text;
+                        resAdditions.Add(new ReservationAddition(new AdditionSeason(name, null, 0), amount));
+                    }
                 }
             }
+            
             //make connection to our library and execute create reservation method
             int reservationid = connection.CreateReservation(
                 new Reservation(email_tb.Text, Request.QueryString["Site"], Request.QueryString["typeName"],
                     Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]), resAdditions));
-
+            PrintReservation(reservationid.ToString());
         }
 
         protected void additionamount_TextChanged(object sender, EventArgs e)
@@ -173,20 +175,31 @@ namespace ZAPWebsite
             LeftDiv.Visible = false;
             RightDiv.Visible = false;
             //Create the returning reservation as object
-            Reservation reservation = connection.GetReservation("105174");
+            Reservation reservation = connection.GetReservation(ordernumber);
 
             //Set all labels text to the reservation fields
             OrderNumber.Text = reservation.Ordernumber.ToString();
             res_email.Text = reservation.Customer.Email;
             res_campingid.Text = reservation.CampingSite.Id;
             res_typename.Text = reservation.TypeName;
-            res_startdate.Text = reservation.StartDate.ToString();
-            res_enddate.Text = reservation.EndDate.ToString();
-            res_TotalPrice.Text = reservation.TotalPrice.ToString();
+            res_startdate.Text = reservation.StartDate.ToString("d");
+            res_enddate.Text = reservation.EndDate.ToString("d");
+            res_TotalPrice.Text = reservation.TotalPrice.ToString() + " Kr.";
+
+            //show price comment
+            if ((reservation.EndDate - reservation.StartDate).TotalDays > 3)
+            {
+                pricecomment_la.Visible = true;
+            }
 
             //Set all datalist to the reservation fields
-            res_siteadditions.DataSource = reservation.CampingSite.CampingAdditions;
-            res_siteadditions.DataBind();
+            if (reservation.CampingSite.CampingAdditions != null)
+            {
+                res_siteadditions.DataSource = reservation.CampingSite.CampingAdditions;
+                res_siteadditions.DataBind();
+                res_sa_div.Visible = true;
+
+            }
             res_additions.DataSource = reservation.ReservationAdditions;
             res_additions.DataBind();
         }

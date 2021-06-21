@@ -240,15 +240,6 @@ namespace ZAPWebsite
         protected global::System.Web.UI.WebControls.Label res_campingid;
 
         /// <summary>
-        /// res_siteadditions control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList res_siteadditions;
-
-        /// <summary>
         /// res_typename control.
         /// </summary>
         /// <remarks>
@@ -256,6 +247,24 @@ namespace ZAPWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label res_typename;
+
+        /// <summary>
+        /// res_sa_div control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl res_sa_div;
+
+        /// <summary>
+        /// res_siteadditions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList res_siteadditions;
 
         /// <summary>
         /// res_startdate control.
@@ -292,5 +301,14 @@ namespace ZAPWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label res_TotalPrice;
+
+        /// <summary>
+        /// pricecomment_la control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label pricecomment_la;
     }
 }

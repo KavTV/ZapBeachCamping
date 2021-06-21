@@ -108,12 +108,25 @@
             </div>
             <asp:Button ID="book_button" Text="Reserver" runat="server" Visible="false" OnClick="book_button_Click" />
         </div>
-        <div id="confirm_div" runat="server">
+        <div id="confirm_div" runat="server" visible="false">
             <div class="confirmdatalist_div">
-                <div>
+                <div class="res_fieldgroup">
+                    <asp:Label Text="Order nummer: " runat="server" CssClass="reservationfieldname_la" />
                     <asp:Label ID="OrderNumber" Text="Text" runat="server" CssClass="reservation_la" />
+                </div>
+                <div class="res_fieldgroup">
+                    <asp:Label Text="Din email: " runat="server" CssClass="reservationfieldname_la" />
                     <asp:Label ID="res_email" Text="Text" runat="server" CssClass="reservation_la" />
+                </div>
+                <div class="res_fieldgroup">
+                    <asp:Label Text="Plads nummeret: " runat="server" CssClass="reservationfieldname_la" />
                     <asp:Label ID="res_campingid" Text="Text" runat="server" CssClass="reservation_la" />
+                </div>
+                <div class="res_fieldgroup">
+                    <asp:Label Text="Typenavn: " runat="server" CssClass="reservationfieldname_la" />
+                    <asp:Label ID="res_typename" Text="Text" runat="server" CssClass="reservation_la" />
+                </div>
+                <div id="res_sa_div" class="res_fieldgroup" runat="server" visible="false">
                     <h5>
                         <asp:Label Text="Plads tilføjelser:" runat="server" />
                     </h5>
@@ -122,23 +135,32 @@
                             <asp:Label ID="res_sa_name" Text='<%# Eval("Name") %>' runat="server" CssClass="reservation_la" />
                         </ItemTemplate>
                     </asp:DataList>
-                    <asp:Label ID="res_typename" Text="Text" runat="server" CssClass="reservation_la" />
+                </div>
+                <div class="res_fieldgroup">
+                    <asp:Label Text="Periode:" runat="server" CssClass="reservationfieldname_la" />
+                    <br />
                     <asp:Label ID="res_startdate" Text="Text" runat="server" CssClass="reservation_la" />
+                    <asp:Label Text=" - " runat="server" CssClass="reservation_la" />
                     <asp:Label ID="res_enddate" Text="Text" runat="server" CssClass="reservation_la" />
+                </div>
+                <div class="res_fieldgroup">
                     <h5>
                         <asp:Label Text="Tilføjelser:" runat="server" />
                     </h5>
                     <asp:DataList ID="res_additions" runat="server">
                         <ItemTemplate>
-                            <asp:Label ID="res_addition_name" Text='<%# Eval("AdditionSeason.Name") %>' runat="server" CssClass="reservation_la" />
-
+                            <div id="res_addition_div" runat="server">
+                                <asp:Label ID="res_addition_amount" Text='<%# Eval("Amount") %>' runat="server" CssClass="reservation_la" />
+                                <asp:Label ID="res_addition_name" Text='<%# Eval("AdditionSeason.Name") %>' runat="server" CssClass="reservation_la" />
+                            </div>  
                         </ItemTemplate>
                     </asp:DataList>
+                </div>
+                <div class="res_fieldgroup">
+                    <asp:Label Text="Totalpris: " runat="server" CssClass="reservationfieldname_la" />
                     <asp:Label ID="res_TotalPrice" Text="Text" runat="server" CssClass="reservation_la" />
-
-
-
-
+                    <br />
+                    <asp:Label Visible="false" id="pricecomment_la" Text="for camping pladser og telte får man hver 4 dag, pladsgebyret gratis" runat="server" />
                 </div>
             </div>
         </div>
