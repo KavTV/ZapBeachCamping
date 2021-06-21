@@ -130,7 +130,7 @@ p {
     transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-    .property-bottom p {
-        color: white;
-        font-size: 19px;
-    }
+.property-bottom p {
+    color: white;
+    font-size: 19px;
+}

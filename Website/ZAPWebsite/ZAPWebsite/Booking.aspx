@@ -1,6 +1,27 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Booking.aspx.cs" Inherits="ZAPWebsite.Booking" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        .input-box{
+            width: 25%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            background-color: #8d3c3c;
+        }
+        input[type=date], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        .details{
+            
+        }
+
+    </style>
 
     <div class="container-fluid webForm col-lg-12">
         <div id="leftrightdiv" class="left-right hidescroll">
@@ -37,8 +58,7 @@
                 <div class="l2">
                     <asp:DataList ID="DataListCamping" runat="server" RepeatDirection="Horizontal" CellSpacing="2" CellPadding="5" RepeatColumns="5" Visible="true">
                         <ItemTemplate>
-
-                            <div class="">
+                            <div>
                                 <div class="property-card">
                                     <a href="#">
                                         <div class="property-image">
@@ -70,100 +90,6 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-    <!--Camping enheder (personer)-->
-    <div class="camping-entities">
-        <div>
-            <span class="details">Voksne:</span>
-            <input type="number" id="voksne" min="1" max="10">
-        </div>
-        <div>
-            <span class="details">Børn:</span>
-            <input type="number" id="børn" min="0" max="10">
-        </div>
-        <div>
-            <span class="details">Hund:</span>
-            <input type="number" id="hund" min="0" max="10">
-        </div>
-    </div>
-
-
-
-    <!--Tilføjelser-->
-    <div class="additions">
-        <div>
-            <span class="details">Sengelinned</span>
-            <input type="number" id="addition1" min="0">
-        </div>
-        <div>
-            <span class="details">Morgenkomplet (voksen)</span>
-            <input type="number" id="addition2" min="0">
-        </div>
-        <div>
-            <span class="details">Morgenkomplet (børn)</span>
-            <input type="number" id="addition3" min="0">
-        </div>
-        <div>
-            <span class="details">Cykelleje (pr. dag)</span>
-            <input type="number" id="addition4" min="0">
-        </div>
-        <div>
-            <span class="details">Adgang til badeland (voksen)</span>
-            <input type="number" id="addition6" min="0">
-        </div>
-        <div>
-            <span class="details">Adgang til badeland (børn)</span>
-            <input type="number" id="addition7" min="0">
-        </div>
-
-        <!--Slut rengøring skal kun vises frem til hytter-->
-        <div>
-            <span class="details">Slut rengøring (Hytte)</span>
-            <input type="checkbox" id="addition8" value="Slut rengøring(hytter)">
-        </div>
-    </div>
-
-
-
-    <!--Bruger-->
-    <div class="user-details">
-        <div class="input-box">
-            <span class="details">Email:</span>
-            <input type="text" placeholder="Indtast email" />
-        </div>
-
-        <!--Gemmes væk hvis bruger eksistere-->
-        <div class="input-box">
-            <span class="details">Fornavn:</span>
-            <input type="text" placeholder="Indtast fornavn" />
-        </div>
-        <div class="input-box">
-            <span class="details">Efternavn:</span>
-            <input type="text" placeholder="Indtast efternavn" />
-        </div>
-        <div class="input-box">
-            <span class="details">Telefon:</span>
-            <input type="text" placeholder="Indtast tlf.nr." />
-        </div>
-        <div class="input-box">
-            <span class="details">Addresse:</span>
-            <input type="text" placeholder="Indtast addresse" />
-        </div>
-        <div class="input-box">
-            <span class="details">Post nr:</span>
-            <input type="text" placeholder="Indtast post nr." />
-        </div>
-    </div>
-
-
-
-
-    <!--Tjekker først om bruger eksistere, hvis ikke skal bruger oprettes (evt notificere brugeren om dette). Ellers send information til database om reservationen-->
-    <div class="button">
-        <input type="submit" value="Bestil" />
-    </div>
-
     <script src="Scripts/BookingSliding.js"></script>
 </asp:Content>
