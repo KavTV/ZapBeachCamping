@@ -25,14 +25,14 @@ namespace ZAPWebsite
                 if (string.IsNullOrEmpty(Request.Params["Site"]))
                 {
                     //For testing 
-                    Response.Redirect("OrderPage.aspx?Site=70&startDate=Mon%20Jun%2021%202021&endDate=Sun%20Jun%2027%202021&typeName=Lille%20campingplads");
+                    //Response.Redirect("OrderPage.aspx?Site=70&startDate=Mon%20Jun%2021%202021&endDate=Sun%20Jun%2027%202021&typeName=Lille%20campingplads");
 
                     //redirect to booking if no parameters in url 
-                    //Response.Redirect("Booking.aspx");
+                    Response.Redirect("Booking.aspx");
                 }
 
                 //if its a reservation with a special discount then sale parameter is set 
-                if (!string.IsNullOrEmpty(Request.Params["Sale"]))
+                if (!string.IsNullOrEmpty(Request.Params["Sale"]) && Request.Params["Sale"] != "false")
                 {
                     LeftDiv.Visible = false;
                     saleparameter = Request.Params["Sale"];
@@ -92,8 +92,7 @@ namespace ZAPWebsite
         {
             if (Page.IsValid)
             {
-                //bool customercreatedsuccesfully = connection.CreateCustomer(new Customer(email_tb.Text, Convert.ToInt32(phone.Text), name.Text, Convert.ToInt32(postal.Text), address.Text));
-                bool customercreatedsuccesfully = true;
+                bool customercreatedsuccesfully = connection.CreateCustomer(new Customer(email_tb.Text, Convert.ToInt32(phone.Text), name.Text, Convert.ToInt32(postal.Text), address.Text));
                 Debug.WriteLine("Create customer");
                 //if customer not created then show error and do not continue
                 if (!customercreatedsuccesfully)
@@ -138,10 +137,9 @@ namespace ZAPWebsite
             }
 
             //make connection to our library and execute create reservation method
-            //int reservationid = connection.CreateReservation(new 
-            //    Reservation(email_tb.Text, Request.QueryString["Site"], Request.QueryString["typeName"],
-            //    Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]), resAdditions));
-            int reservationid = 0;
+            int reservationid = connection.CreateReservation(new
+                Reservation(email_tb.Text, Request.QueryString["Site"], Request.QueryString["typeName"],
+                Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]), resAdditions));
             Debug.WriteLine("Create reservation");
 
             PrintReservation(reservationid.ToString());
@@ -186,8 +184,8 @@ namespace ZAPWebsite
             Confirm_div.Visible = true;
 
             //Create the returning reservation as object
-            //Reservation reservation = connection.GetReservation(ordernumber);
-            Reservation reservation = connection.GetReservation("108210");
+            Reservation reservation = connection.GetReservation(ordernumber);
+            //Reservation reservation = connection.GetReservation("108210");
 
             //Set all labels text to the reservation fields
             OrderNumber.Text = reservation.Ordernumber.ToString();
