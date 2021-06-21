@@ -13,9 +13,13 @@ namespace ZapLibrary
 
         private Dal dal;
 
-        public ZapManager(string connectionstring)
+        public ZapManager()
         {
             dal = new Dal(@"Server=172.16.21.107;Database=Zap_Base;User Id=sa;Password=Passw0rd;");
+        }
+        public ZapManager(string connectionstring)
+        {
+            dal = new Dal(connectionstring);
         }
 
         /// <summary>

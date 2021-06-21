@@ -51,9 +51,10 @@
                                             <label>Rum: <%# Eval("Id") %></label>
                                         </h5>
                                         <label>Pris: <%# Eval("Price") %></label>
+                                        <label>Pris: <%# Eval("GetCampingAdditions") %></label>
                                         <%--<a href="Order.aspx?Site=<%#Eval("Id") %>&startDate=<%Request.QueryString["startDate"].ToString();%>&endDate=<%Request.QueryString["endDate"].ToString(); %>&typeName=<%Request.QueryString["typeName"].ToString(); %>"> Vælg</a>--%>
                                     </div>
-                                    <a href="OrderPage.aspx?Site=<%#Eval("Id") %>&startDate=<%Response.Write(Request.QueryString["startDate"].ToString());%>&endDate=<%Response.Write(Request.QueryString["endDate"].ToString()); %>&typeName=<%Response.Write(Request.QueryString["typeName"].ToString()); %>">
+                                    <a href="OrderPage.aspx?Site=<%#Eval("Id") %>&startDate=<%Response.Write(Request.QueryString["startDate"].ToString());%>&endDate=<%Response.Write(Request.QueryString["endDate"].ToString()); %>&typeName=<%Response.Write(Request.QueryString["typeName"].ToString()); %>&sale=<%Response.Write(Request.QueryString["sale"].ToString()); %>">
                                         <div class="property-bottom">
                                             <p>Vælg</p>
                                         </div>

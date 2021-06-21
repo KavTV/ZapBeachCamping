@@ -15,7 +15,7 @@
 div.l1, div.l2, div.l3 {
     width: 100%;
     text-align:center;
-    font-size:25px; 
+    font-size:90%; 
     position: absolute;
     top: 0;
     
