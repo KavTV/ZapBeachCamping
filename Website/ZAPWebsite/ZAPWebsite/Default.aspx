@@ -30,7 +30,7 @@
                  <p><a href="#">Hygge</a></p>
                  <p><a href="#">Gode udsigter</a></p>
                  <p><a href="#">Diverse</a></p>
-                 <p><a href="Booking.aspx?sale=true">TILBUD! 1 uges plads inkl 4 personer 
+                 <p><a href="Booking.aspx?sale=1 uges plads inkl 4 personer 6 x morgenmad og billetter til badeland hele ugen">TILBUD! 1 uges plads inkl 4 personer 
                      6 x morgenmad og billetter til badeland hele ugen</a></p>
              </div>
 
