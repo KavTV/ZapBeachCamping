@@ -1,17 +1,16 @@
-﻿//Hide the other elements in the slide
+﻿const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
 
 //Hide or show the divs hidden in the slider.
 if (CheckParams()) {
     $('div.l1').hide();
     $('div.l2').show();
     $('div.l3').hide();
-    console.log("yaay");
 }
 else {
     $('div.l2').show();
     $('div.l2').hide();
     $('div.l3').hide();
-    console.log("woow");
 }
 console.log(CheckParams());
 
@@ -69,9 +68,6 @@ $(document).ready(function () {
 
 });
 function CheckParams() {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
     var startDate = urlParams.get("startDate");
     var endDate = urlParams.get("endDate");
     var typeName = urlParams.get("typeName");
@@ -82,9 +78,24 @@ function CheckParams() {
         return false;
     }
 }
+function CheckSale() {
+    var sale = urlParams.get("sale");
+    if (sale == "true") {
+        return true;
+        console.log("true");
+    }
+    else {
+        return false;
+        console.log("false");
+    }
+}
+
 
 function AddParams() {
-    var url = new URL("https://172.16.21.107/Booking.aspx?startDate=1&endDate=2%typeName=none");
+    var startURL = window.location;
+    startURL += "?startDate=1&endDate=2%typeName=none&sale=false";
+    console.log(startURL);
+    var url = new URL(startURL);
 
     var startDate = new Date(document.getElementById("resStart").value).toDateString();
     var endDate = new Date(document.getElementById("resEnd").value).toDateString();
@@ -93,5 +104,14 @@ function AddParams() {
     url.searchParams.set('startDate', startDate);
     url.searchParams.set('endDate', endDate);
     url.searchParams.set('typeName', typeName);
+    if (CheckSale()) {
+        url.searchParams.set('sale', "true");
+        console.log("param set to true");
+    }
+    else {
+        url.searchParams.set('sale', "false");
+        console.log("param set to false");
+    }
+    console.log(url);
     window.location.replace(url);
 }
