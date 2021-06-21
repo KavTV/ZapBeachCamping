@@ -9,7 +9,7 @@ namespace ZapLibrary
     public class ReservationAddition
     {
         public int Amount { get => amount; }
-        internal AdditionSeason AdditionSeason { get => additionSeason; }
+        public AdditionSeason AdditionSeason { get => additionSeason; }
 
         private AdditionSeason additionSeason;
         private int amount;
