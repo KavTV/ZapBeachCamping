@@ -65,9 +65,17 @@ namespace ZapLibrary
         {
             return dal.GetReservation(ordernumber);
         }
+        public List<CampingSite> GetCampingSite(string campingId, string typename, DateTime startDate, DateTime endDate)
+        {
+            return dal.GetCampingSite(campingId, typename, startDate, endDate);
+        }
+        public bool IsCustomerCreated(string email)
+        {
+            return dal.IsCustomerCreated(email);
+        }
         public List<CampingType> GetCampingTypes()
         {
             return dal.GetCampingTypes();
         }
-        }
+    }
 }

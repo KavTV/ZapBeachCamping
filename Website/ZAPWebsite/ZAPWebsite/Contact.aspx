@@ -2,6 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <style>
+        /* Sets white background color*/
         body{
             background-color: #ffffff;
         }
@@ -17,15 +18,19 @@
             height: 450px;
         }
 
+        /* Sets content to right side*/
         .floatRight{
             float:right;
             margin-left:20px;
         }
-
     </style>
+
+    <!--Content-->
     <div class="container-fluid text-center">
         <div class="row content">
+            <!--Sidebar left-->
             <div class="col-sm-4 sidenav" style="margin-right: 20px;">
+                <!--Sidebar content-->
                 <div>
                     <h4>Kontakt:</h4>
                 </div>
@@ -35,6 +40,8 @@
                     <p>Tlf: (45+) 88 88 88 88</p>
                 </div>
             </div>
+
+            <!--Google map-->
             <div class="col-lg 2">
                 <div>
                     <iframe class="floatRight" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22708.432923448323!2d9.382185525976613!3d56.1802408599327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464b8b31851a884f%3A0x301ff15a89742d9!2s8600%20Silkeborg!5e0!3m2!1sda!2sdk!4v1624006369514!5m2!1sda!2sdk" width="600" height="450" style="border:0;"></iframe>

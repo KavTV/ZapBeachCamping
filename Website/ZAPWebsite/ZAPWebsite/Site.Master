@@ -28,7 +28,7 @@
         }
         body
         {
-            background-color:#f2f2f2;
+            background-color:#ffffff;
             font-family: 'RobotoDraft', 'Roboto', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
@@ -56,23 +56,29 @@
             </Scripts>
         </asp:ScriptManager>
 
+        <!--Navbar-->
         <nav class="navbar navbar-expand-sm navbar navbar-inverse">
+            <!--Content-->
             <div class="container">
                 <a class="navbar-brand" runat="server" href="~/" style="color:grey">ZAP Camping</a>
                 <div class="navbar-collapse collapse">
+                    <!--Menu tab-->
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Hjem</a></li>
                         <li><a runat="server" href="~/About">Om os</a></li>
                         <li><a runat="server" href="~/Contact">Kontakt</a></li>
                     </ul>
+                    <!--Order button-->
                     <a class="btn btn-danger navbar-btn" href="Booking">Booking</a>
                 </div>
             </div>
         </nav>
 
+        <!--Content from pages-->
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
+
             <hr/>
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - Designed by ZAPCamping</p>

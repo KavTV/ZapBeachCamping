@@ -86,7 +86,7 @@ namespace ZapLibrary
             }
 
             SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand("DECLARE @ID INT;EXECUTE dbo.CreateReservation @email, @campingid, @typename, @startdate, @enddate, @additionsandamount, @ReservationID = @ID OUTPUT;SELECT @ID as ordernumber",con);
+            SqlCommand cmd = new SqlCommand("DECLARE @ID INT;EXECUTE dbo.CreateReservation @email, @campingid, @typename, @startdate, @enddate, @additionsandamount, @ReservationID = @ID OUTPUT;SELECT @ID as ordernumber", con);
             cmd.Parameters.AddWithValue("email", reservation.Customer.Email);
             cmd.Parameters.AddWithValue("campingid", reservation.CampingSite.Id);
             cmd.Parameters.AddWithValue("typename", reservation.TypeName);
@@ -112,6 +112,24 @@ namespace ZapLibrary
 
             return ExecuteNonQuery(cmd);
         }
+        public bool IsCustomerCreated(string email)
+        {
+            //SQL command and params
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("DECLARE @result BIT EXECUTE @result = dbo.IsCustomerCreated @email SELECT @result", con);
+            cmd.Parameters.AddWithValue("email", email);
+
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            //Add the name to the list
+            reader.Read();
+            bool isCreated = reader.GetBoolean(0);
+
+
+            con.Close();
+            return isCreated;
+        }
         #endregion
 
         #region FUNCTIONS
@@ -128,7 +146,7 @@ namespace ZapLibrary
 
 
             SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetAvaliableSites](@startdate,@enddate,@typename)", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetAvaliableSites](@startdate,@enddate,@typename) ORDER BY LEN(id), id", con);
             cmd.Parameters.Add("startdate", SqlDbType.Date).Value = startDate;
             cmd.Parameters.Add("enddate", SqlDbType.Date).Value = endDate;
             cmd.Parameters.AddWithValue("typename", typename);
@@ -141,16 +159,7 @@ namespace ZapLibrary
             // Reads table
             while (reader.Read())
             {
-                List<CampingAddition> additions = new List<CampingAddition>();
-                string campingAdditions = reader[2].ToString();
-                if (campingAdditions != "")
-                {
-                    string[] campingAdditionSplit = campingAdditions.Split(',');
-                    foreach (var name in campingAdditionSplit)
-                    {
-                        additions.Add(new CampingAddition(name));
-                    }
-                }
+                List<CampingAddition> additions = GetAdditionsFromString(reader[2].ToString());
                 CampingSite camp = new CampingSite(reader.GetString(0), true, ((double)reader.GetDecimal(1)), new List<string>(), additions);
 
                 campingSites.Add(camp);
@@ -168,6 +177,7 @@ namespace ZapLibrary
         /// <returns></returns>
         public List<AdditionSeason> GetAdditions(DateTime startDate, DateTime endDate)
         {
+            //Objects
             List<AdditionSeason> additionSeasons = new List<AdditionSeason>();
 
 
@@ -239,6 +249,7 @@ namespace ZapLibrary
             //Create list with campingtypes
             List<CampingType> campingTypes = new List<CampingType>();
 
+            //SQL command and params
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.GetCampingTypes() ORDER BY [name] ASC", con);
 
@@ -251,11 +262,69 @@ namespace ZapLibrary
                 campingTypes.Add(new CampingType(reader.GetString(0)));
             }
 
+            con.Close();
+
             return campingTypes;
         }
+        public List<CampingSite> GetCampingSite(string campingId, string typename, DateTime startDate, DateTime endDate)
+        {
+            //Objects
+            List<CampingSite> campingSites = new List<CampingSite>();
+
+            //SQL command and params
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetCampingSite](@CampingID,@typename,@StartDate, @EndDate)", con);
+            cmd.Parameters.AddWithValue("CampingID", campingId);
+            cmd.Parameters.AddWithValue("typename", typename);
+            cmd.Parameters.Add("startdate", SqlDbType.Date).Value = startDate;
+            cmd.Parameters.Add("enddate", SqlDbType.Date).Value = endDate;
+
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            //Reads table
+            while (reader.Read())
+            {
+                //Split the string into addition objects
+                List<CampingAddition> additions = GetAdditionsFromString(reader[3].ToString());
+                CampingSite camp = new CampingSite(reader.GetString(0), true, ((double)reader.GetDecimal(2)), new List<string>() { reader.GetString(1) }, additions);
+
+                campingSites.Add(camp);
+            }
+
+            con.Close();
+            return campingSites;
+        }
+        
+
         #endregion
 
-        
+        /// <summary>
+        /// This is used for splitting a string with campingadditions
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
+        private static List<CampingAddition> GetAdditionsFromString(string reader)
+        {
+            List<CampingAddition> additions = new List<CampingAddition>();
+            string campingAdditions = reader;
+            if (campingAdditions != "")
+            {
+                string[] campingAdditionSplit = campingAdditions.Split(',');
+                foreach (var name in campingAdditionSplit)
+                {
+                    additions.Add(new CampingAddition(name));
+                }
+            }
+
+            return additions;
+        }
+
+        /// <summary>
+        /// This executes a command that does not return anything
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
         private bool ExecuteNonQuery(SqlCommand cmd)
         {
             // Creates connection

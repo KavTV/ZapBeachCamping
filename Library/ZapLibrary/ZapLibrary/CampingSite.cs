@@ -13,6 +13,30 @@ namespace ZapLibrary
         public double Price { get => price; }
         public List<string> Typename { get => typename; }
         public List<CampingAddition> CampingAdditions { get => campingAdditions; }
+        public string GetCampingAdditions
+        {
+            get
+            {
+                //Because we cant use the list with items in the CampingAdditions,
+                //Im making this property that puts all additions into one string.
+                string list = "";
+                foreach (var item in CampingAdditions)
+                {
+                    list += item.Name;
+                    list += ", ";
+                }
+                return list;
+            } }
+        public string GetTypename { get
+            {
+                string list = "";
+                foreach (var item in typename)
+                {
+                    list += item;
+                    list += ", ";
+                }
+                return list;
+            } }
 
         private string id;
         private bool clean;
