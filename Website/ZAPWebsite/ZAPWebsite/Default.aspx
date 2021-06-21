@@ -19,6 +19,7 @@
         }
     </style>
 
+    <!--Sidebar left-->
     <div class="container-fluid text-center">    
         <div class="row content">
              <div class="col-sm-2 sidenav text-left">
@@ -31,10 +32,11 @@
                  <p><a href="#">Diverse</a></p>
              </div>
 
+            <!--Image slide show-->
             <div class="col-sm-8">
                 <div id="campingSlide" class="carousel slide" data-ride="carousel" style="position:relative;">
 
-                    <!-- Indicators -->
+                    <!--Indicators-->
                     <ol class="carousel-indicators" style="z-index:1 !important">
                         <li data-target="#campingSlide" data-slide-to="0" class="active"></li>
                         <li data-target="#campingSlide" data-slide-to="1"></li>
@@ -83,17 +85,20 @@
                 </div>
             </div>
 
+            <!--Sidebar right-->
             <div class="col-sm-2 sidenav">
                 <div>
-                    <h4>Bestil nu:</h4>
+                    <h4>Den perfekte campingtur!</h4>
                     
-                    <div class="">
-                        <p>Camping i telt</p>
-                        <p>Camping i vogn</p>
-                        <p>Camping i hytte</p>
+                    <div>
+                        <p>
+                            En perle ikke langt fra Lalandia, Givskud Zoo og ikke mindst Legoland.
+                            Derover har pladsen direkte adgang til en å med gode fiskemuligheder samt mulighed for udlejning af kajakker og kanoer.
+                        </p>
                     </div>
                     
-                    <a class="btn btn-danger" href="Booking">Booking</a>
+                    <!--Order button-->
+                    <a class="btn btn-danger" href="Booking">Bestil nu!</a>
                 </div>
             </div>
         </div>

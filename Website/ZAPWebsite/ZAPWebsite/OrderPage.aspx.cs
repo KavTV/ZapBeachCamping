@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ZapLibrary;
 using System.Diagnostics;
-using System.Linq;
 
 namespace ZAPWebsite
 {

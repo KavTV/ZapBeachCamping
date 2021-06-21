@@ -2,10 +2,12 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <style>
+
+        /* White background color*/
         body{
             background-color: #ffffff;
         }
-        /* Set white background color and 100% height */
+        /* Sets grey background color and 100% height */
         .sidenav {
             padding-top: 20px;
             background-color: #eaeaea;
@@ -17,19 +19,24 @@
             height: 200px
         }
 
+        /* Sets content to right side */
         .floatRight{
             float:right;
         }
 
+        /* Image height */
         img{
             height: 450px;
         }
 
     </style>
 
+    <!--Content-->
     <div class="container-fluid text-center">    
         <div class="row content">
+            <!--Sidebar left-->
              <div class="col-lg-4 sidenav">
+                <!--Sidebar content-->
                 <div>
                     <h4>Om os:</h4>
                 </div>
@@ -40,6 +47,7 @@
                     </p>
                 </div>
             </div>
+            <!--Image right-->
             <div class="col-lg-8 floatRight">
                 <div>
                     <img src="/Images/Camping/Carlsens.png" alt="BirtheogJoergen">
@@ -48,15 +56,18 @@
         </div>
     </div>
 
+    <!--Content-->
     <div class="container-fluid text-center" style="margin-top:40px;">    
         <div class="row content">
+            <!--Image left-->
             <div class="col-lg-8">
                 <div>
                     <img src="/Images/Camping/ZapCamping.png" alt="CampingFoto">
                 </div>
             </div>
 
-             <div class="col-lg-4 sidenav floatRight">
+            <!--Sidebar right-->
+            <div class="col-lg-4 sidenav floatRight">
                 <div>
                     <h4>Den perfekte campingtur!</h4>
                 </div>
