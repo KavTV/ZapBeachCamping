@@ -80,32 +80,38 @@ function CheckParams() {
 }
 function CheckSale() {
     var sale = urlParams.get("sale");
-    if (sale == "true") {
+    if (sale != null) {
         return true;
-        console.log("true");
+        console.log("truee");
     }
     else {
         return false;
-        console.log("false");
+        console.log("falsee");
     }
 }
 
 
 function AddParams() {
+    //Get the current url
     var startURL = window.location;
+    //Add some parameters to the url
     startURL += "?startDate=1&endDate=2%typeName=none&sale=false";
     console.log(startURL);
+    //Make the string into an object
     var url = new URL(startURL);
 
+    //Find values
     var startDate = new Date(document.getElementById("resStart").value).toDateString();
     var endDate = new Date(document.getElementById("resEnd").value).toDateString();
     var typeName = document.getElementById("MainContent_DropDownTypes").value;
-    console.log(startDate);
+    
+    //Set the parameters into the above url object
     url.searchParams.set('startDate', startDate);
     url.searchParams.set('endDate', endDate);
     url.searchParams.set('typeName', typeName);
+    //If there is a sale parameter, then send it to the order page
     if (CheckSale()) {
-        url.searchParams.set('sale', "true");
+        url.searchParams.set('sale', url.searchParams.get("sale"));
         console.log("param set to true");
     }
     else {
@@ -113,5 +119,6 @@ function AddParams() {
         console.log("param set to false");
     }
     console.log(url);
+    //Redirect to the created url
     window.location.replace(url);
 }
