@@ -20,8 +20,10 @@ namespace ZapConsole
             //manager.CreateCustomer(customer);
             //manager.UpdateCustomer("jenshansensemail@gmail.com", customer);
             //Console.WriteLine(manager.CreateReservation(reservation));
-            Console.WriteLine(manager.DeleteReservation("108417"));
-            //var sites = manager.GetAvailableSites(new DateTime(2021, 06, 16), new DateTime(2021, 06, 20), "Lille campingplads");
+            //Console.WriteLine(manager.DeleteReservation("108417"));
+            //var sites = manager.GetAvailableSites(new DateTime(2021, 06, 21), new DateTime(2021, 06, 29), "Lille campingplads");
+            //var j = manager.GetCampingSite("71", "Lille campingplads",new DateTime(2021,06,22), new DateTime(2021, 06, 29));
+            //var h = manager.IsCustomerCreated("jj@hotmail.dk");
             //Console.WriteLine("sejt");
             //foreach (var item in sites)
             //{

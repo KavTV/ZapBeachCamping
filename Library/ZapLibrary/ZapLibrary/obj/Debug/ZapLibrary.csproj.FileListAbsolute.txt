@@ -7,4 +7,3 @@ C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapLibrary
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapLibrary\obj\Debug\ZapLibrary.dll
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapLibrary\obj\Debug\ZapLibrary.pdb
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapLibrary\bin\Debug\ZapLibrary.dll.config
-C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapLibrary\obj\Debug\ZapLibrary.csproj.AssemblyReference.cache
