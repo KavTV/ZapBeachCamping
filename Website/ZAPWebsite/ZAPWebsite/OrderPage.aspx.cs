@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ZapLibrary;
 using System.Diagnostics;
-using System.Linq;
 
 namespace ZAPWebsite
 {
@@ -14,11 +13,15 @@ namespace ZAPWebsite
     {
         protected global::System.Web.UI.WebControls.Button book_button;
 
+        //conection to our library
+        private static ZapManager connection = new ZapManager("");
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            //is it a postback then it should not set new databind
+            //if its not a postback then do...
             if (!IsPostBack)
             {
+                
                 if (string.IsNullOrEmpty(Request.Params["Site"]))
                 {
                     //For testing 
@@ -28,12 +31,20 @@ namespace ZAPWebsite
                     //Response.Redirect("Booking.aspx");
                 }
 
-                //conection to our library
-                ZapManager conection = new ZapManager("");
-                //this line is for testing 
-                additionDatalist.DataSource = conection.GetAdditions(Convert.ToDateTime("2021-06-21"), Convert.ToDateTime("2021-06-28"));
-                additionDatalist.DataSource = conection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
-                additionDatalist.DataBind();
+                //check if the customer want a site for a season
+                if (Request.Params["typeName"] == "Forår" || Request.Params["typeName"] == "Sommer" ||
+                    Request.Params["typeName"] == "Efterår" || Request.Params["typeName"] == "Vinter")
+                {
+                    LeftDiv.Visible = false;
+                }
+                else
+                {
+                    //databound the additions in datalist
+                    //this line is for testing 
+                    additionDatalist.DataSource = connection.GetAdditions(Convert.ToDateTime("2021-06-21"), Convert.ToDateTime("2021-06-28"));
+                    additionDatalist.DataSource = connection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
+                    additionDatalist.DataBind();
+                }
 
                 #region TEST DATA
                 List<CampingSite> mylist = new List<CampingSite>();
@@ -64,6 +75,8 @@ namespace ZAPWebsite
                 }
                 //after bindings then calculate the totalprice 
                 CalculateTotalPrice();
+
+                PrintReservation("");
             }
 
         }
@@ -88,11 +101,20 @@ namespace ZAPWebsite
         {
             if (Page.IsValid)
             {
-                ZapManager conection = new ZapManager("");
-
-                conection.CreateCustomer(new Customer(email_tb.Text, Convert.ToInt32(phone.Text), name.Text, Convert.ToInt32(postal.Text), address.Text));
-
-                book_button.Visible = true;
+                bool iscustomercreated = connection.CreateCustomer(new Customer(email_tb.Text, Convert.ToInt32(phone.Text), name.Text, Convert.ToInt32(postal.Text), address.Text));
+                //if customer not created then show error and do not continue
+                if (!iscustomercreated)
+                {
+                    CustomerError_la.Visible = true;
+                }
+                else
+                {
+                    //hidde error label, and create customer div. show book button and make email_textbox readonly
+                    CustomerError_la.Visible = false;
+                    book_button.Visible = true;
+                    create_cust_div.Visible = false;
+                    email_tb.ReadOnly = true;
+                }
             }
         }
 
@@ -111,8 +133,7 @@ namespace ZAPWebsite
                 }
             }
             //make connection to our library and execute create reservation method
-            ZapManager conection = new ZapManager("");
-            int reservationid = conection.CreateReservation(
+            int reservationid = connection.CreateReservation(
                 new Reservation(email_tb.Text, Request.QueryString["Site"], Request.QueryString["typeName"],
                     Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]), resAdditions));
 
@@ -144,6 +165,30 @@ namespace ZAPWebsite
                 }
             }
             totalprice_la.Text = totalprice.ToString();
+        }
+        private void PrintReservation(string ordernumber)
+        {
+            //Hide everything else
+            CenterDiv.Visible = false;
+            LeftDiv.Visible = false;
+            RightDiv.Visible = false;
+            //Create the returning reservation as object
+            Reservation reservation = connection.GetReservation("105174");
+
+            //Set all labels text to the reservation fields
+            OrderNumber.Text = reservation.Ordernumber.ToString();
+            res_email.Text = reservation.Customer.Email;
+            res_campingid.Text = reservation.CampingSite.Id;
+            res_typename.Text = reservation.TypeName;
+            res_startdate.Text = reservation.StartDate.ToString();
+            res_enddate.Text = reservation.EndDate.ToString();
+            res_TotalPrice.Text = reservation.TotalPrice.ToString();
+
+            //Set all datalist to the reservation fields
+            res_siteadditions.DataSource = reservation.CampingSite.CampingAdditions;
+            res_siteadditions.DataBind();
+            res_additions.DataSource = reservation.ReservationAdditions;
+            res_additions.DataBind();
         }
     }
 }
