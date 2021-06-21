@@ -3,19 +3,16 @@
     padding: 10px;
 }
 
-#LeftDiv {
+#MainContent_LeftDiv {
     width: 25%;
-    float: left;
 }
 
-#RightDiv {
+#MainContent_RightDiv {
     width: 33%;
-    float: left;
 }
 
-#CenterDiv {
+#MainContent_CenterDiv {
     width: 41%;
-    float: left;
 }
 
 .additiongroup {
@@ -70,7 +67,6 @@
 }
 #create_cust_div {
     display: grid;
-
 }
 .OP-h6 {
     margin: 0px;
@@ -103,7 +99,7 @@
 }
 .confirmdatalist_div {
 }
-#MainContent_confirm_div {
+#MainContent_Confirm_div {
     margin-right: auto;
     margin-left: auto;
 }

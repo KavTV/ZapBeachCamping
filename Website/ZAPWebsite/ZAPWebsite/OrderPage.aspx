@@ -108,7 +108,7 @@
             </div>
             <asp:Button ID="book_button" Text="Reserver" runat="server" Visible="false" OnClick="book_button_Click" />
         </div>
-        <div id="confirm_div" runat="server" visible="false">
+        <div id="Confirm_div" runat="server" visible="false">
             <div class="confirmdatalist_div">
                 <div class="res_fieldgroup">
                     <asp:Label Text="Order nummer: " runat="server" CssClass="reservationfieldname_la" />

@@ -204,13 +204,22 @@ namespace ZAPWebsite
         protected global::System.Web.UI.WebControls.Label totalprice_la;
 
         /// <summary>
-        /// confirm_div control.
+        /// book_button control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl confirm_div;
+        protected global::System.Web.UI.WebControls.Button book_button;
+
+        /// <summary>
+        /// Confirm_div control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Confirm_div;
 
         /// <summary>
         /// OrderNumber control.

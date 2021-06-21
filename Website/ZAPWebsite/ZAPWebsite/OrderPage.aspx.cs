@@ -11,11 +11,9 @@ namespace ZAPWebsite
 {
     public partial class OrderPage : System.Web.UI.Page
     {
-        protected global::System.Web.UI.WebControls.Button book_button;
-
         //conection to our library
         private static ZapManager connection = new ZapManager("");
-
+        
         private static string saleparameter = null;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -23,37 +21,36 @@ namespace ZAPWebsite
             //if its not a postback then do...
             if (!IsPostBack)
             {
-                if (!string.IsNullOrEmpty(Request.Params["Sale"]))
-                {
-                    LeftDiv.Visible = false;
-                    saleparameter = Request.Params["Sale"];
-
-                }
+                //if site is not set as parameter then it should return to booking page
                 if (string.IsNullOrEmpty(Request.Params["Site"]))
                 {
                     //For testing 
-                    Response.Redirect("OrderPage.aspx?Site=10&startDate=Mon%20Jun%2021%202021&endDate=Sun%20Jun%2027%202021&typeName=Lille%20campingplads");
+                    Response.Redirect("OrderPage.aspx?Site=70&startDate=Mon%20Jun%2021%202021&endDate=Sun%20Jun%2027%202021&typeName=Lille%20campingplads");
 
                     //redirect to booking if no parameters in url 
                     //Response.Redirect("Booking.aspx");
                 }
 
+                //if its a reservation with a special discount then sale parameter is set 
+                if (!string.IsNullOrEmpty(Request.Params["Sale"]))
+                {
+                    LeftDiv.Visible = false;
+                    saleparameter = Request.Params["Sale"];
+                }
                 //check if the customer want a site for a season
-                if (Request.Params["typeName"] == "Forår" || Request.Params["typeName"] == "Sommer" ||
+                else if (Request.Params["typeName"] == "Forår" || Request.Params["typeName"] == "Sommer" ||
                     Request.Params["typeName"] == "Efterår" || Request.Params["typeName"] == "Vinter")
                 {
                     LeftDiv.Visible = false;
                 }
                 else
                 {
-                    //databound the additions in datalist
-                    additionDatalist.DataSource = connection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
-                    additionDatalist.DataBind();
+                    DataBindAdditions();
                 }
+
                 List<CampingSite> campingSites = connection.GetCampingSite(Request.QueryString["Site"], Request.QueryString["typeName"], Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
                 sitelist.DataSource = campingSites;
                 sitelist.DataBind();
-
                 foreach (DataListItem item in sitelist.Items)
                 {
                     //get the siteid from the datalist of campingsites
@@ -70,18 +67,18 @@ namespace ZAPWebsite
             }
 
         }
+        private void DataBindAdditions()
+        {
+            //databound the additions in datalist
+            additionDatalist.DataSource = connection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
+            additionDatalist.DataBind();
+        }
 
         protected void CreateOrSelectCustomer_Click(object sender, EventArgs e)
         {
             if (connection.IsCustomerCreated(email_tb.Text)) //if email match then show book button
             {
-                //Show book now button
-                book_button.Visible = true;
-                //hidde error label, and create customer div. show book button and make email_textbox readonly
-                CustomerError_la.Visible = false;
-                book_button.Visible = true;
-                create_cust_div.Visible = false;
-                email_tb.ReadOnly = true;
+                ReadyToBook();
             }
             else
             {
@@ -95,21 +92,27 @@ namespace ZAPWebsite
         {
             if (Page.IsValid)
             {
-                bool customercreatedsuccesfuly = connection.CreateCustomer(new Customer(email_tb.Text, Convert.ToInt32(phone.Text), name.Text, Convert.ToInt32(postal.Text), address.Text));
+                //bool customercreatedsuccesfully = connection.CreateCustomer(new Customer(email_tb.Text, Convert.ToInt32(phone.Text), name.Text, Convert.ToInt32(postal.Text), address.Text));
+                bool customercreatedsuccesfully = true;
+                Debug.WriteLine("Create customer");
                 //if customer not created then show error and do not continue
-                if (!customercreatedsuccesfuly)
+                if (!customercreatedsuccesfully)
                 {
                     CustomerError_la.Visible = true;
                 }
                 else
                 {
-                    //hidde error label, and create customer div. show book button and make email_textbox readonly
-                    CustomerError_la.Visible = false;
-                    book_button.Visible = true;
-                    create_cust_div.Visible = false;
-                    email_tb.ReadOnly = true;
+                    ReadyToBook();
                 }
             }
+        }
+        private void ReadyToBook() //function to hidde unnessesary stuff, show book button and set email to readonly
+        {
+            //hidde error label, and create customer div. show book button and make email_textbox readonly
+            CustomerError_la.Visible = false;
+            book_button.Visible = true;
+            create_cust_div.Visible = false;
+            email_tb.ReadOnly = true;
         }
 
         protected void book_button_Click(object sender, EventArgs e)
@@ -128,16 +131,19 @@ namespace ZAPWebsite
                     if (int.TryParse(((TextBox)item.FindControl("additionamount")).Text, out int amount) && amount > 0)
                     {
                         //name of addition 
-                        string name = ((TextBox)item.FindControl("additionname")).Text;
+                        string name = ((Label)item.FindControl("additionname")).Text;
                         resAdditions.Add(new ReservationAddition(new AdditionSeason(name, null, 0), amount));
                     }
                 }
             }
-            
+
             //make connection to our library and execute create reservation method
-            int reservationid = connection.CreateReservation(
-                new Reservation(email_tb.Text, Request.QueryString["Site"], Request.QueryString["typeName"],
-                    Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]), resAdditions));
+            //int reservationid = connection.CreateReservation(new 
+            //    Reservation(email_tb.Text, Request.QueryString["Site"], Request.QueryString["typeName"],
+            //    Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]), resAdditions));
+            int reservationid = 0;
+            Debug.WriteLine("Create reservation");
+
             PrintReservation(reservationid.ToString());
         }
 
@@ -166,6 +172,7 @@ namespace ZAPWebsite
                     totalprice += (additionprice * amount);
                 }
             }
+
             totalprice_la.Text = totalprice.ToString();
         }
         private void PrintReservation(string ordernumber)
@@ -174,8 +181,13 @@ namespace ZAPWebsite
             CenterDiv.Visible = false;
             LeftDiv.Visible = false;
             RightDiv.Visible = false;
+
+            //Show confirm div
+            Confirm_div.Visible = true;
+
             //Create the returning reservation as object
-            Reservation reservation = connection.GetReservation(ordernumber);
+            //Reservation reservation = connection.GetReservation(ordernumber);
+            Reservation reservation = connection.GetReservation("108210");
 
             //Set all labels text to the reservation fields
             OrderNumber.Text = reservation.Ordernumber.ToString();
