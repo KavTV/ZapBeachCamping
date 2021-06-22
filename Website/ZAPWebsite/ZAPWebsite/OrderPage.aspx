@@ -15,6 +15,7 @@
                 <ItemTemplate>
                     <div class="additiongroup">
                         <asp:TextBox ID="additionamount" runat="server" TextMode="Number" CssClass="additioninput" OnTextChanged="additionamount_TextChanged" AutoPostBack="True" CausesValidation="true" ValidationGroup="additionvalidation"></asp:TextBox>
+                        <asp:CheckBox ID="additioncheck" CssClass="additioninput" runat="server" Visible="false"/>
                         <asp:Label ID="additionname" runat="server" CssClass="addition-name" Text='<%# Eval("Name") %>'></asp:Label>
                         <asp:CompareValidator ErrorMessage="Ugyldigt tal" ControlToValidate="additionamount" Operator="GreaterThanEqual" ValueToCompare="0" runat="server" ValidationGroup="additionvalidation" CssClass="additionvalidation" />
                         <div class="addition-price">

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ZapLibrary;
 using System.Diagnostics;
+using System.Data.SqlClient;
 
 namespace ZAPWebsite
 {
@@ -18,6 +19,7 @@ namespace ZAPWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            saleparameter = null;
             //if its not a postback then do...
             if (!IsPostBack)
             {
@@ -73,15 +75,27 @@ namespace ZAPWebsite
             //If something happend then catch it and show alert box
             try
             {
-
+                List<AdditionSeason> additionsList = connection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
                 //databound the additions in datalist
-                additionDatalist.DataSource = connection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
+                additionDatalist.DataSource = additionsList;
                 additionDatalist.DataBind();
+
+                foreach (DataListItem addition in additionDatalist.Items)
+                {
+                    string addition_name = ((Label)addition.FindControl("additionname")).Text;
+                    //If the paytype is Onetime the it should be a checkbox instead of input box
+                    if (additionsList.Exists(a => a.Paytype == "OneTime" && a.Name == addition_name))
+                    {
+                        ((CheckBox)addition.FindControl("additioncheck")).Visible = true;
+                        ((TextBox)addition.FindControl("additionamount")).Visible = false;
+
+                    }
+                }
             }
             catch (Exception error)
             {
                 Debug.WriteLine(error);
-                ExecuteAlertPopup();
+                ExecuteAlertPopup("");
             }
         }
 
@@ -137,13 +151,22 @@ namespace ZAPWebsite
             {
                 foreach (DataListItem item in additionDatalist.Items)
                 {
-                    //only add to list if amount is bigger then 0 and the input amount is parse 
-                    if (int.TryParse(((TextBox)item.FindControl("additionamount")).Text, out int amount) && amount > 0)
+                    //name of addition 
+                    string name = ((Label)item.FindControl("additionname")).Text;
+                    //if the additionamount is not visible then check if checkboc checked if its true then add it to addition with amount 1
+                    if (!((TextBox)item.FindControl("additionamount")).Visible)
                     {
-                        //name of addition 
-                        string name = ((Label)item.FindControl("additionname")).Text;
+                        if (!((CheckBox)item.FindControl("additioncheck")).Checked)
+                        {
+                            resAdditions.Add(new ReservationAddition(new AdditionSeason(name, null, 0), 1));
+                        }
+                    }
+                    //only add to list if amount is bigger then 0 and the input amount is parse 
+                    else if (int.TryParse(((TextBox)item.FindControl("additionamount")).Text, out int amount) && amount > 0)
+                    {
                         resAdditions.Add(new ReservationAddition(new AdditionSeason(name, null, 0), amount));
                     }
+
                 }
             }
 
@@ -158,10 +181,15 @@ namespace ZAPWebsite
                 PrintReservation(reservationid.ToString());
 
             }
+            catch (SqlException sqlerr)
+            {
+                Debug.WriteLine(sqlerr);
+                ExecuteAlertPopup(sqlerr.Message.ToString().Split('/')[0]);
+            }
             catch (Exception error)
             {
                 Debug.WriteLine(error);
-                ExecuteAlertPopup();
+                ExecuteAlertPopup("");
             }
 
 
@@ -235,9 +263,11 @@ namespace ZAPWebsite
             res_additions.DataSource = reservation.ReservationAdditions;
             res_additions.DataBind();
         }
-        private void ExecuteAlertPopup()
+        private void ExecuteAlertPopup(string input)
         {
-            Response.Write($"<script language=javascript>alert('UNDSKYLD! Der gik noget galt, prøv igen eller kontakt os :) Du lander på  siden igen');window.location.href = \"Default.aspx\"</script>");
+            Debug.WriteLine("Message: "+input);
+            input = "";
+            Response.Write($"<script language=javascript>alert('UNDSKYLD! Der gik noget galt, prøv igen eller kontakt os :) Du lander på hjem siden igen            {input}');window.location.href = \"Default.aspx\"</script>");
         }
     }
 }
