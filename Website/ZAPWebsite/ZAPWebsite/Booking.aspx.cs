@@ -18,7 +18,7 @@ namespace ZAPWebsite
                 //Find campingtypes 
                 UpdateCampingTypes();
             }
-
+            SpecialSale();
             //Check if user has selected dates and type
             GetUrlParams();
         }
@@ -61,6 +61,26 @@ namespace ZAPWebsite
                 DataListCamping.DataSource = campingSites;
                 DataListCamping.DataBind();
                 DataListCamping.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// This is where all the sales get checked and applied
+        /// </summary>
+        void SpecialSale()
+        {
+            if (Request.QueryString["sale"] == "1 uges plads inkl 4 personer 6 x morgenmad og billetter til badeland hele ugen")
+            {
+                //Hide enddate, auto calc the enddate
+                resEnd.Disabled = true;
+                SeasonPlaceCheck.Visible = false;
+                if (!string.IsNullOrWhiteSpace(resStart.Value))
+                {
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "BookingPage", "document.getElementById('MainContent_resStart').onchange = onResStartChanged()", true);
+                    //Get the start date and apply + 7 days for this special to the end date.
+                    DateTime date = DateTime.Parse(resStart.Value);
+                    resEnd.Value = date.AddDays(7).ToString("yyyy-MM-dd");
+                }
             }
         }
 
