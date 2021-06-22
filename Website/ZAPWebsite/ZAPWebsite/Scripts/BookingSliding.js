@@ -68,8 +68,8 @@ $(document).ready(function () {
 
 });
 function CheckParams() {
-    var startDate = urlParams.get("MainContent_startDate");
-    var endDate = urlParams.get("MainContent_endDate");
+    var startDate = urlParams.get("startDate");
+    var endDate = urlParams.get("endDate");
     var typeName = urlParams.get("typeName");
     if (startDate != "Invalid" && endDate != "Invalid" && typeName != null) {
         return true;
