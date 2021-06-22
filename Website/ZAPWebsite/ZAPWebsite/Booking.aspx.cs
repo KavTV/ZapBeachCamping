@@ -13,8 +13,11 @@ namespace ZAPWebsite
         ZapManager sqlmanager = new ZapManager();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Find campingtypes 
-            UpdateCampingTypes();
+            if (!IsPostBack)
+            {
+                //Find campingtypes 
+                UpdateCampingTypes();
+            }
 
             //Check if user has selected dates and type
             GetUrlParams();
@@ -71,10 +74,21 @@ namespace ZAPWebsite
             DropDownTypes.DataSource = sqlmanager.GetCampingTypes(SeasonPlaceCheck.Checked);
             DropDownTypes.DataValueField = "Name";
             DropDownTypes.DataBind();
+            if (SeasonPlaceCheck.Checked)
+            {
+                UpdateDates();
+            }
         }
         private void UpdateDates()
         {
+            CampingType campingType = sqlmanager.GetSeasonDates(DropDownTypes.SelectedValue);
+            resStart.Value = campingType.StartDate.ToString("yyyy-MM-dd");
+            resEnd.Value = campingType.EndDate.ToString("yyyy-MM-dd");
+        }
 
+        protected void DropDownTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateDates();
         }
     }
 }
