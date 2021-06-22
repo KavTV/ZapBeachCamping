@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace ZapLibrary
 {
     public class ZapManager
     {
         internal Dal Dal { get => dal; set => dal = value; }
+        Email mail = new Email("zapcamping123@gmail.com", "Passw0rd123!"); //You would ofc not put your password in like this
 
 
         private Dal dal;
@@ -42,13 +44,19 @@ namespace ZapLibrary
             return dal.UpdateCustomer(oldemail, customer);
         }
         /// <summary>
-        /// Creates a reservation
+        /// Creates a reservation, and sends an email with ordernumber
         /// </summary>
         /// <param name="reservation"></param>
         /// <returns>Ordernumber of the created reservation</returns>
         public int CreateReservation(Reservation reservation)
         {
-            return dal.CreateReservation(reservation);
+            int ordernumber = dal.CreateReservation(reservation);
+            Thread emailThread = new Thread(() => mail.SendEmail(reservation.Customer.Email, 
+                "Din bestilling er bekræftiget",
+                "Dit ordrenummer er: " + ordernumber));
+            emailThread.Start();
+
+            return ordernumber;
         }
 
         public bool DeleteReservation(string ordernumber)
