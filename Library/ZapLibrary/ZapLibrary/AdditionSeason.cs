@@ -20,5 +20,12 @@ namespace ZapLibrary
             this.seasonname = seasonname;
             this.price = price;
         }
+        public AdditionSeason(string name, string seasonname, double price, string paytype)
+        {
+            this.Name = name;
+            this.seasonname = seasonname;
+            this.price = price;
+            this.Paytype = paytype;
+        }
     }
 }

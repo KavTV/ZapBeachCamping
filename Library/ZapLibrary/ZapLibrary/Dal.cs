@@ -192,7 +192,8 @@ namespace ZapLibrary
             // Reads table
             while (reader.Read())
             {
-                additionSeasons.Add(new AdditionSeason(reader.GetString(0), reader.GetString(1), (double)reader.GetDecimal(2)));
+                additionSeasons.Add(new AdditionSeason(reader.GetString(0), reader.GetString(1), 
+                    (double)reader.GetDecimal(2),reader.GetString(3)));
 
             }
 

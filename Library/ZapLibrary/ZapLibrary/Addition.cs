@@ -9,8 +9,10 @@ namespace ZapLibrary
     public class Addition
     {
         public string Name { get => name; set => name = value; }
+        public string Paytype { get => paytype; set => paytype = value; }
 
         private string name;
+        private string paytype;
 
     }
 }
