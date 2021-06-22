@@ -16,6 +16,7 @@
             background-color: #eaeaea;
             width: 21%;
             border-radius: 75px;
+            resize: none;
         }
 
         input[type=date], select, textarea {
@@ -64,12 +65,12 @@
                     <!--Date boxes-->
                     <div class="input-date-box col-xs-1 col-xs-offset-3">
                         <span class="details">Start dato:</span>
-                        <input type="date" id="resStart" runat="server" />
+                        <input type="date" id="resStart" runat="server" style="resize: none" />
                     </div>
 
                     <div class="input-date-box col-xs-1 col-xs-offset-1">
                         <span class="details">Slut dato:</span>
-                        <input type="date" id="resEnd" runat="server" />
+                        <input type="date" id="resEnd" runat="server" style="resize: none" />
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 ﻿const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-
+var resStart = document.getElementById("MainContent_resStart");
+var resEnd = document.getElementById("MainContent_resEnd");
 //Hide or show the divs hidden in the slider.
 if (CheckParams()) {
     $('div.l1').hide();
@@ -45,7 +46,7 @@ $(document).ready(function () {
         currentPageI = index;
 
     }
-    // show default page if params exists then show the second page
+    // show default page, but if params exists then show the second page
     if (CheckParams()) {
         showPage(2)
     }
@@ -90,6 +91,14 @@ function CheckSale() {
     else {
         return false;
         console.log("falsee");
+    }
+}
+function SpecialSale() {
+    if (CheckSale()) {
+        var sale = urlParams.get("sale");
+        if (sale = "1 uges plads inkl 4 personer 6 x morgenmad og billetter til badeland hele ugen") {
+
+        }
     }
 }
 
