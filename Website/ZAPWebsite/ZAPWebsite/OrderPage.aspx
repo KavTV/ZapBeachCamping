@@ -8,7 +8,7 @@
                 <asp:Label Text="Antal" runat="server" CssClass="additioninput" />
                 <asp:Label Text="Navn" runat="server" CssClass="addition-name" />
                 <div class="addition-price">
-                    <asp:Label Text="Pris pr.dag" runat="server" CssClass="addition-price" />
+                    <asp:Label Text="Pris pr.dag" runat="server" />
                 </div>
             </div>
             <asp:DataList ID="additionDatalist" runat="server" RepeatDirection="Vertical" CellSpacing="2" RepeatColumns="1" Visible="true">
@@ -18,7 +18,7 @@
                         <asp:Label ID="additionname" runat="server" CssClass="addition-name" Text='<%# Eval("Name") %>'></asp:Label>
                         <asp:CompareValidator ErrorMessage="Ugyldigt tal" ControlToValidate="additionamount" Operator="GreaterThanEqual" ValueToCompare="0" runat="server" ValidationGroup="additionvalidation" CssClass="additionvalidation" />
                         <div class="addition-price">
-                            <asp:Label ID="additionprice" CssClass="addition-price" runat="server" Text='<%# Eval("Price") %>' />
+                            <asp:Label ID="additionprice" runat="server" Text='<%# Eval("Price") %>' />
                             <asp:Label class="addition-price" runat="server"> Kr</asp:Label>
                         </div>
                     </div>
@@ -117,6 +117,7 @@
             </div>
             <asp:Button ID="book_button" Text="Reserver" runat="server" Visible="false" OnClick="book_button_Click" />
         </div>
+        <%-- Confim div a summary of the reservation --%>
         <div id="Confirm_div" runat="server" visible="false">
             <div class="confirmdatalist_div">
                 <div class="res_fieldgroup">
@@ -169,7 +170,7 @@
                     <asp:Label Text="Totalpris: " runat="server" CssClass="reservationfieldname_la" />
                     <asp:Label ID="res_TotalPrice" Text="Text" runat="server" CssClass="reservation_la" />
                     <br />
-                    <asp:Label Visible="false" ID="pricecomment_la" Text="for camping pladser og telte får man hver 4 dag, pladsgebyret gratis" runat="server" />
+                    <asp:Label Visible="false" ID="pricecomment_la" Text="fFor camping pladser og telte får man hver 4 dag, pladsgebyret gratis" runat="server" />
                 </div>
             </div>
         </div>
