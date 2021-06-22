@@ -4,14 +4,23 @@
     <div id="OP_content">
         <div id="LeftDiv" class="OPgridview" runat="server">
             <%-- the additions and amount--%>
+            <div class="additiongroup">
+                <asp:Label Text="Antal" runat="server" CssClass="additioninput" />
+                <asp:Label Text="Navn" runat="server" CssClass="addition-name" />
+                <div class="addition-price">
+                    <asp:Label Text="Pris pr.dag" runat="server" CssClass="addition-price" />
+                </div>
+            </div>
             <asp:DataList ID="additionDatalist" runat="server" RepeatDirection="Vertical" CellSpacing="2" RepeatColumns="1" Visible="true">
                 <ItemTemplate>
                     <div class="additiongroup">
                         <asp:TextBox ID="additionamount" runat="server" TextMode="Number" CssClass="additioninput" OnTextChanged="additionamount_TextChanged" AutoPostBack="True" CausesValidation="true" ValidationGroup="additionvalidation"></asp:TextBox>
                         <asp:Label ID="additionname" runat="server" CssClass="addition-name" Text='<%# Eval("Name") %>'></asp:Label>
                         <asp:CompareValidator ErrorMessage="Ugyldigt tal" ControlToValidate="additionamount" Operator="GreaterThanEqual" ValueToCompare="0" runat="server" ValidationGroup="additionvalidation" CssClass="additionvalidation" />
-                        <asp:Label class="addition-price" runat="server"> Kr</asp:Label>
-                        <asp:Label ID="additionprice" CssClass="addition-price" runat="server" Text='<%# Eval("Price") %>' />
+                        <div class="addition-price">
+                            <asp:Label ID="additionprice" CssClass="addition-price" runat="server" Text='<%# Eval("Price") %>' />
+                            <asp:Label class="addition-price" runat="server"> Kr</asp:Label>
+                        </div>
                     </div>
                 </ItemTemplate>
             </asp:DataList>
@@ -152,7 +161,7 @@
                             <div id="res_addition_div" runat="server">
                                 <asp:Label ID="res_addition_amount" Text='<%# Eval("Amount") %>' runat="server" CssClass="reservation_la" />
                                 <asp:Label ID="res_addition_name" Text='<%# Eval("AdditionSeason.Name") %>' runat="server" CssClass="reservation_la" />
-                            </div>  
+                            </div>
                         </ItemTemplate>
                     </asp:DataList>
                 </div>
@@ -160,7 +169,7 @@
                     <asp:Label Text="Totalpris: " runat="server" CssClass="reservationfieldname_la" />
                     <asp:Label ID="res_TotalPrice" Text="Text" runat="server" CssClass="reservation_la" />
                     <br />
-                    <asp:Label Visible="false" id="pricecomment_la" Text="for camping pladser og telte får man hver 4 dag, pladsgebyret gratis" runat="server" />
+                    <asp:Label Visible="false" ID="pricecomment_la" Text="for camping pladser og telte får man hver 4 dag, pladsgebyret gratis" runat="server" />
                 </div>
             </div>
         </div>

@@ -4,11 +4,11 @@
 }
 
 #MainContent_LeftDiv {
-    width: 25%;
+    width: 33%;
 }
 
 #MainContent_RightDiv {
-    width: 33%;
+    width: 26%;
 }
 
 #MainContent_CenterDiv {
@@ -16,14 +16,14 @@
 }
 
 .additiongroup {
-    display: table;
+    display: flex;
     margin: 5px;
-    width: 80%;
+    width: 95%;
 }
 .additioninput {
+    text-align: left;
     width: 18%;
     margin-right: 10px;
-    vertical-align: text-top;
 }
 .additionvalidation {
     position: absolute;
@@ -41,8 +41,12 @@
     margin-right: 5px;
 }
 .addition-price {
-    float:right;
-    padding:1px;
+    /*float: right;*/
+     text-align: right; 
+    padding: 1px;
+    /* position: relative; */
+    /* left: 0; */
+    width: 20%;
 }
 
 #OP_content {

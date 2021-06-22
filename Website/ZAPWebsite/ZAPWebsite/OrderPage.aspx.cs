@@ -25,10 +25,10 @@ namespace ZAPWebsite
                 if (string.IsNullOrEmpty(Request.Params["Site"]))
                 {
                     //For testing 
-                    //Response.Redirect("OrderPage.aspx?Site=70&startDate=Mon%20Jun%2021%202021&endDate=Sun%20Jun%2027%202021&typeName=Lille%20campingplads");
+                    Response.Redirect("OrderPage.aspx?Site=70&startDate=Mon%20Jun%2021%202021&endDate=Sun%20Jun%2027%202021&typeName=Lille%20campingplads");
 
                     //redirect to booking if no parameters in url 
-                    Response.Redirect("Booking.aspx");
+                    //Response.Redirect("Booking.aspx");
                 }
 
                 //if its a reservation with a special discount then sale parameter is set 
