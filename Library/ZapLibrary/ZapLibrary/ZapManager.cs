@@ -89,5 +89,9 @@ namespace ZapLibrary
         {
             return dal.GetCampingTypes(IsSeasonType);
         }
+        public CampingType GetSeasonDates(string typename)
+        {
+            return dal.GetSeasonDates(typename);
+        }
     }
 }
