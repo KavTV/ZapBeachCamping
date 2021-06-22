@@ -170,7 +170,7 @@
                     <asp:Label Text="Totalpris: " runat="server" CssClass="reservationfieldname_la" />
                     <asp:Label ID="res_TotalPrice" Text="Text" runat="server" CssClass="reservation_la" />
                     <br />
-                    <asp:Label Visible="false" ID="pricecomment_la" Text="fFor camping pladser og telte får man hver 4 dag, pladsgebyret gratis" runat="server" />
+                    <asp:Label Visible="false" ID="pricecomment_la" Text="For camping pladser og telte får man hver 4 dag, pladsgebyret gratis" runat="server" />
                 </div>
             </div>
         </div>

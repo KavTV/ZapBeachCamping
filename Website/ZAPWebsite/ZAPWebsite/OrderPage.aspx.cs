@@ -78,9 +78,9 @@ namespace ZAPWebsite
                 additionDatalist.DataSource = connection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
                 additionDatalist.DataBind();
             }
-            catch (Exception)
+            catch (Exception error)
             {
-
+                Debug.WriteLine(error);
                 ExecuteAlertPopup();
             }
         }
@@ -158,9 +158,9 @@ namespace ZAPWebsite
                 PrintReservation(reservationid.ToString());
 
             }
-            catch (Exception)
+            catch (Exception error)
             {
-
+                Debug.WriteLine(error);
                 ExecuteAlertPopup();
             }
 
