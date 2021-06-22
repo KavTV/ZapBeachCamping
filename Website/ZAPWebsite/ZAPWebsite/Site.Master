@@ -24,7 +24,7 @@
         /* Removes navbar default rounded borders */
         .navbar 
         {
-        border-radius: 0;
+            border-radius: 0;
         }
         body
         {
