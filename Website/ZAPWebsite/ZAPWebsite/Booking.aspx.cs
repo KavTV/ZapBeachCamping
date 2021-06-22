@@ -10,7 +10,7 @@ namespace ZAPWebsite
 {
     public partial class Booking : System.Web.UI.Page
     {
-        ZapManager sqlmanager = new ZapManager("");
+        ZapManager sqlmanager = new ZapManager();
         protected void Page_Load(object sender, EventArgs e)
         {
             //Find campingtypes 
