@@ -12,7 +12,7 @@ namespace ZAPWebsite
     public partial class OrderPage : System.Web.UI.Page
     {
         //conection to our library
-        private static ZapManager connection = new ZapManager("");
+        private static ZapManager connection = new ZapManager();
         
         private static string saleparameter = null;
 
@@ -21,6 +21,7 @@ namespace ZAPWebsite
             //if its not a postback then do...
             if (!IsPostBack)
             {
+                
                 //if site is not set as parameter then it should return to booking page
                 if (string.IsNullOrEmpty(Request.Params["Site"]))
                 {
@@ -64,6 +65,7 @@ namespace ZAPWebsite
                 //after bindings then calculate the totalprice 
                 CalculateTotalPrice();
 
+                PrintReservation("");
             }
 
         }
@@ -184,8 +186,8 @@ namespace ZAPWebsite
             Confirm_div.Visible = true;
 
             //Create the returning reservation as object
-            Reservation reservation = connection.GetReservation(ordernumber);
-            //Reservation reservation = connection.GetReservation("108210");
+            //Reservation reservation = connection.GetReservation(ordernumber);
+            Reservation reservation = connection.GetReservation("107934");
 
             //Set all labels text to the reservation fields
             OrderNumber.Text = reservation.Ordernumber.ToString();
