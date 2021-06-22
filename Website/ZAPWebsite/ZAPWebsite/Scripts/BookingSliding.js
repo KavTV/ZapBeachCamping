@@ -52,10 +52,12 @@ $(document).ready(function () {
     else {
         showPage(0);
     }
+    //Binds the <a> to showPage function
     $('a.l1').click(showPage.bind(null, 0));
     $('a.l2').click(showPage.bind(null, 1));
     $('a.l3').click(showPage.bind(null, 2));
 
+    //animates the sliding
     $('.left-right').mouseover(function () {
         $('.slider').stop().animate({
             right: 0
@@ -67,6 +69,7 @@ $(document).ready(function () {
     });
 
 });
+
 function CheckParams() {
     var startDate = urlParams.get("startDate");
     var endDate = urlParams.get("endDate");
@@ -93,7 +96,8 @@ function CheckSale() {
 
 function AddParams() {
     //Get the current url
-    var startURL = window.location;
+    var startURL = window.location.origin + window.location.pathname;
+    console.log(startURL);
     //Add some parameters to the url
     startURL += "?startDate=1&endDate=2%typeName=none&sale=false";
     console.log(startURL);
@@ -109,9 +113,11 @@ function AddParams() {
     url.searchParams.set('startDate', startDate);
     url.searchParams.set('endDate', endDate);
     url.searchParams.set('typeName', typeName);
+
     //If there is a sale parameter, then send it to the order page
     if (CheckSale()) {
-        url.searchParams.set('sale', url.searchParams.get("sale"));
+        var currentURL = new URL(window.location.href);
+        url.searchParams.set('sale', currentURL.searchParams.get("sale"));
         console.log("param set to true");
     }
     else {

@@ -71,6 +71,7 @@ namespace ZAPWebsite
 
         private void UpdateCampingTypes()
         {
+            //Change the campingtypes depending on if it is a seasontype or not
             DropDownTypes.DataSource = sqlmanager.GetCampingTypes(SeasonPlaceCheck.Checked);
             DropDownTypes.DataValueField = "Name";
             DropDownTypes.DataBind();
