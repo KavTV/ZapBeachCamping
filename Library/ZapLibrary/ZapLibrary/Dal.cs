@@ -243,15 +243,16 @@ namespace ZapLibrary
         /// Returns all campingTypes
         /// </summary>
         /// <returns></returns>
-        public List<CampingType> GetCampingTypes(bool IsSeasonType)
+        public List<CampingType> GetCampingTypes(bool IsSeasonType, bool IsSale)
         {
             //Create list with campingtypes
             List<CampingType> campingTypes = new List<CampingType>();
 
             //SQL command and params
             SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.GetCampingTypes(@IsSeasonType) ORDER BY [name] ASC", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.GetCampingTypes(@IsSeasonType, @IsSale) ORDER BY [name] ASC", con);
             cmd.Parameters.Add("IsSeasonType", SqlDbType.Bit).Value = IsSeasonType;
+            cmd.Parameters.Add("IsSale", SqlDbType.Bit).Value = IsSale;
 
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();

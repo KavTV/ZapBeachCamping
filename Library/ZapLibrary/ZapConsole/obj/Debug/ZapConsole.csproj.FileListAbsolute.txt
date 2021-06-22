@@ -9,3 +9,14 @@ C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapConsole
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapConsole\obj\Debug\ZapConsole.exe
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapConsole\obj\Debug\ZapConsole.pdb
 C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Library\ZapLibrary\ZapConsole\bin\Debug\ZapLibrary.dll.config
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapConsole\bin\Debug\ZapConsole.exe.config
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapConsole\bin\Debug\ZapConsole.exe
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapConsole\bin\Debug\ZapConsole.pdb
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapConsole\bin\Debug\ZapLibrary.dll
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapConsole\bin\Debug\ZapLibrary.pdb
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapConsole\bin\Debug\ZapLibrary.dll.config
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapConsole\obj\Debug\ZapConsole.csproj.AssemblyReference.cache
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapConsole\obj\Debug\ZapConsole.csproj.CoreCompileInputs.cache
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapConsole\obj\Debug\ZapConsole.csproj.CopyComplete
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapConsole\obj\Debug\ZapConsole.exe
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapConsole\obj\Debug\ZapConsole.pdb

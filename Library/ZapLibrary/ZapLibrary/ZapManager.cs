@@ -85,9 +85,9 @@ namespace ZapLibrary
         {
             return dal.IsCustomerCreated(email);
         }
-        public List<CampingType> GetCampingTypes(bool IsSeasonType)
+        public List<CampingType> GetCampingTypes(bool IsSeasonType, bool IsSale)
         {
-            return dal.GetCampingTypes(IsSeasonType);
+            return dal.GetCampingTypes(IsSeasonType, IsSale);
         }
         public CampingType GetSeasonDates(string typename)
         {
