@@ -13,7 +13,7 @@ namespace ZAPWebsite
     {
         //conection to our library
         private static ZapManager connection = new ZapManager();
-        
+
         private static string saleparameter = null;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -21,12 +21,12 @@ namespace ZAPWebsite
             //if its not a postback then do...
             if (!IsPostBack)
             {
-                
+
                 //if site is not set as parameter then it should return to booking page
                 if (string.IsNullOrEmpty(Request.Params["Site"]))
                 {
                     //For testing 
-                    Response.Redirect("OrderPage.aspx?Site=70&startDate=Mon%20Jun%2021%202021&endDate=Sun%20Jun%2027%202021&typeName=Lille%20campingplads");
+                    Response.Redirect("OrderPage.aspx?Site=74&startDate=Mon%20Jun%2021%202021&endDate=Sun%20Jun%2027%202021&typeName=Lille%20campingplads&sale=1%20uges%20plads%20inkl%204%20personer%206%20x%20morgenmad%20og%20billetter%20til%20badeland%20hele%20ugen");
 
                     //redirect to booking if no parameters in url 
                     //Response.Redirect("Booking.aspx");
@@ -65,15 +65,24 @@ namespace ZAPWebsite
                 //after bindings then calculate the totalprice 
                 CalculateTotalPrice();
 
-                PrintReservation("");
             }
 
         }
         private void DataBindAdditions()
         {
-            //databound the additions in datalist
-            additionDatalist.DataSource = connection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
-            additionDatalist.DataBind();
+            //If something happend then catch it and show alert box
+            try
+            {
+
+                //databound the additions in datalist
+                additionDatalist.DataSource = connection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
+                additionDatalist.DataBind();
+            }
+            catch (Exception)
+            {
+
+                ExecuteAlertPopup();
+            }
         }
 
         protected void CreateOrSelectCustomer_Click(object sender, EventArgs e)
@@ -139,12 +148,23 @@ namespace ZAPWebsite
             }
 
             //make connection to our library and execute create reservation method
-            int reservationid = connection.CreateReservation(new
+            try
+            {
+                int reservationid = connection.CreateReservation(new
                 Reservation(email_tb.Text, Request.QueryString["Site"], Request.QueryString["typeName"],
                 Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]), resAdditions));
-            Debug.WriteLine("Create reservation");
+                Debug.WriteLine("Create reservation");
 
-            PrintReservation(reservationid.ToString());
+                PrintReservation(reservationid.ToString());
+
+            }
+            catch (Exception)
+            {
+
+                ExecuteAlertPopup();
+            }
+
+
         }
 
         protected void additionamount_TextChanged(object sender, EventArgs e)
@@ -186,8 +206,8 @@ namespace ZAPWebsite
             Confirm_div.Visible = true;
 
             //Create the returning reservation as object
-            //Reservation reservation = connection.GetReservation(ordernumber);
-            Reservation reservation = connection.GetReservation("107934");
+            Reservation reservation = connection.GetReservation(ordernumber);
+            //Reservation reservation = connection.GetReservation("107934");
 
             //Set all labels text to the reservation fields
             OrderNumber.Text = reservation.Ordernumber.ToString();
@@ -214,6 +234,10 @@ namespace ZAPWebsite
             }
             res_additions.DataSource = reservation.ReservationAdditions;
             res_additions.DataBind();
+        }
+        private void ExecuteAlertPopup()
+        {
+            Response.Write($"<script language=javascript>alert('UNDSKYLD! Der gik noget galt, prøv igen eller kontakt os :) Du lander på  siden igen');window.location.href = \"Default.aspx\"</script>");
         }
     }
 }
