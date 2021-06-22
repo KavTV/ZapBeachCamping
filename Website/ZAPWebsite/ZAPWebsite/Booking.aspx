@@ -66,7 +66,7 @@
 
                     <div class="input-date-box col-xs-1 col-xs-offset-1">
                         <span class="details">Slut dato:</span>
-                        <input type="date" id="resEnd" />
+                        <input type="date" id="resEnd" runat="server"/>
                     </div>
                 </div>
             </div>

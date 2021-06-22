@@ -192,8 +192,8 @@ namespace ZapLibrary
             // Reads table
             while (reader.Read())
             {
-                additionSeasons.Add(new AdditionSeason(reader.GetString(0), reader.GetString(1), 
-                    (double)reader.GetDecimal(2),reader.GetString(3)));
+                additionSeasons.Add(new AdditionSeason(reader.GetString(0), reader.GetString(1),
+                    (double)reader.GetDecimal(2), reader.GetString(3)));
 
             }
 
@@ -236,8 +236,6 @@ namespace ZapLibrary
             new CampingSite(reader.GetString(2)), reader.GetString(3), reader.GetDateTime(4),
             reader.GetDateTime(5), (double)reader.GetDecimal(6), false, false, reservationAdditions);
 
-
-
             con.Close();
             return reservation;
         }
@@ -253,7 +251,7 @@ namespace ZapLibrary
             //SQL command and params
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.GetCampingTypes(@IsSeasonType) ORDER BY [name] ASC", con);
-            cmd.Parameters.Add("IsSeasonType",SqlDbType.Bit).Value = IsSeasonType;
+            cmd.Parameters.Add("IsSeasonType", SqlDbType.Bit).Value = IsSeasonType;
 
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();
@@ -297,7 +295,24 @@ namespace ZapLibrary
             con.Close();
             return campingSites;
         }
-        
+        public CampingType GetSeasonDates(string typename)
+        {
+            //SQL command and params
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetSeasonDates](@typename)", con);
+            cmd.Parameters.AddWithValue("typename", typename);
+
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            //Reads table
+            reader.Read();
+
+            CampingType camp = new CampingType(reader.GetDateTime(0), reader.GetDateTime(1));
+
+            con.Close();
+            return camp;
+        }
 
         #endregion
 

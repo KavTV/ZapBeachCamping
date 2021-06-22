@@ -1,8 +1,6 @@
 ﻿const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-if (isPostBack) {
-    console.log("POSTBACK WUUHU");
-}
+
 //Hide or show the divs hidden in the slider.
 if (CheckParams()) {
     $('div.l1').hide();
@@ -70,8 +68,8 @@ $(document).ready(function () {
 
 });
 function CheckParams() {
-    var startDate = urlParams.get("startDate");
-    var endDate = urlParams.get("endDate");
+    var startDate = urlParams.get("MainContent_startDate");
+    var endDate = urlParams.get("MainContent_endDate");
     var typeName = urlParams.get("typeName");
     if (startDate != "Invalid" && endDate != "Invalid" && typeName != null) {
         return true;
@@ -103,8 +101,8 @@ function AddParams() {
     var url = new URL(startURL);
 
     //Find values
-    var startDate = new Date(document.getElementById("resStart").value).toDateString();
-    var endDate = new Date(document.getElementById("resEnd").value).toDateString();
+    var startDate = new Date(document.getElementById("MainContent_resStart").value).toDateString();
+    var endDate = new Date(document.getElementById("MainContent_resEnd").value).toDateString();
     var typeName = document.getElementById("MainContent_DropDownTypes").value;
     
     //Set the parameters into the above url object
