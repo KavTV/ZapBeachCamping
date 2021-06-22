@@ -88,7 +88,10 @@ namespace ZAPWebsite
 
         protected void DropDownTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateDates();
+            if (SeasonPlaceCheck.Checked)
+            {
+                UpdateDates();
+            }
         }
     }
 }
