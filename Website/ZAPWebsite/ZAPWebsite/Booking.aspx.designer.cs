@@ -24,6 +24,24 @@ namespace ZAPWebsite
         protected global::System.Web.UI.WebControls.DropDownList DropDownTypes;
 
         /// <summary>
+        /// SeasonPlaceCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox SeasonPlaceCheck;
+
+        /// <summary>
+        /// resStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl resStart;
+
+        /// <summary>
         /// DataListCamping control.
         /// </summary>
         /// <remarks>

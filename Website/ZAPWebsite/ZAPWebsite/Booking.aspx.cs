@@ -14,14 +14,7 @@ namespace ZAPWebsite
         protected void Page_Load(object sender, EventArgs e)
         {
             //Find campingtypes 
-            DropDownTypes.DataSource = sqlmanager.GetCampingTypes();
-            DropDownTypes.DataValueField = "Name";
-            DropDownTypes.DataBind();
-
-            //List<CampingObject> campingtypes = new List<CampingObject>();
-            //campingtypes.Add(new CampingObject("Teltplads"));
-
-            //DataListCamping.DataSource = campingtypes;
+            UpdateCampingTypes();
 
             //Check if user has selected dates and type
             GetUrlParams();
@@ -68,15 +61,20 @@ namespace ZAPWebsite
             }
         }
 
-      
-    }
-    public class CampingObject
-    {
-        public string Name { get; set; }
-
-        public CampingObject(string name)
+        protected void SeasonPlaceCheck_CheckedChanged(object sender, EventArgs e)
         {
-            this.Name = name;
+            UpdateCampingTypes();
+        }
+
+        private void UpdateCampingTypes()
+        {
+            DropDownTypes.DataSource = sqlmanager.GetCampingTypes(SeasonPlaceCheck.Checked);
+            DropDownTypes.DataValueField = "Name";
+            DropDownTypes.DataBind();
+        }
+        private void UpdateDates()
+        {
+
         }
     }
 }

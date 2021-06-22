@@ -30,6 +30,10 @@
             background-color: #D9534f;
             color: white;
         }
+        .verticalAlign{
+            vertical-align: sub;
+            transform:scale(1.2);
+        }
 
     </style>
 
@@ -46,6 +50,9 @@
                             <asp:ListItem>
                             </asp:ListItem>
                         </asp:DropDownList>
+                        <span class="details">SæsonPlads:
+                        <asp:CheckBox runat="server" AutoPostBack="true" OnCheckedChanged="SeasonPlaceCheck_CheckedChanged" ID="SeasonPlaceCheck" CssClass="verticalAlign"/>
+                            </span>
                     </div>
                 </div>
 
@@ -54,7 +61,7 @@
                     <!--Date boxes-->
                     <div class="input-date-box col-xs-1 col-xs-offset-3">
                         <span class="details">Start dato:</span>
-                        <input type="date" id="resStart" />
+                        <input type="date" id="resStart" runat="server"/>
                     </div>
 
                     <div class="input-date-box col-xs-1 col-xs-offset-1">
@@ -90,7 +97,11 @@
                                     <label>Pris: <%# Eval("Price") %></label>
                                     <label>Pris: <%# Eval("GetCampingAdditions") %></label>
                             </div>
-                            <a href="OrderPage.aspx?Site=<%#Eval("Id") %>&startDate=<%Response.Write(Request.QueryString["startDate"].ToString());%>&endDate=<%Response.Write(Request.QueryString["endDate"].ToString()); %>&typeName=<%Response.Write(Request.QueryString["typeName"].ToString()); %>&sale=<%Response.Write(Request.QueryString["sale"].ToString()); %>">
+                            <a href="OrderPage.aspx?Site=<%#Eval("Id") %>&startDate=
+                                <%Response.Write(Request.QueryString["startDate"].ToString());%>&endDate=
+                                <%Response.Write(Request.QueryString["endDate"].ToString()); %>&typeName=
+                                <%Response.Write(Request.QueryString["typeName"].ToString()); %>&sale=
+                                <%Response.Write(Request.QueryString["sale"].ToString()); %>">
                                 <div class="property-bottom">
                                     <p>Vælg</p>
                                 </div>
@@ -103,4 +114,5 @@
     </div>
 
     <script src="Scripts/BookingSliding.js"></script>
+    <script src="Scripts/BookingPage.js"></script>
 </asp:Content>

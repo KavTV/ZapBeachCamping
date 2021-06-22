@@ -1,6 +1,8 @@
 ﻿const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-
+if (isPostBack) {
+    console.log("POSTBACK WUUHU");
+}
 //Hide or show the divs hidden in the slider.
 if (CheckParams()) {
     $('div.l1').hide();
