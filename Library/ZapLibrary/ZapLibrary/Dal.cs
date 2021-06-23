@@ -105,6 +105,11 @@ namespace ZapLibrary
 
             return order;
         }
+        /// <summary>
+        /// Deletes a reservation
+        /// </summary>
+        /// <param name="ordernumber"></param>
+        /// <returns>true if succeded</returns>
         public bool DeleteReservation(string ordernumber)
         {
             SqlCommand cmd = new SqlCommand("EXEC [dbo].[DeleteReservation] @ordernumber");
@@ -112,6 +117,11 @@ namespace ZapLibrary
 
             return ExecuteNonQuery(cmd);
         }
+        /// <summary>
+        /// Returns a true if customer is created
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>true if customer is created</returns>
         public bool IsCustomerCreated(string email)
         {
             //SQL command and params
@@ -123,6 +133,7 @@ namespace ZapLibrary
             SqlDataReader reader = cmd.ExecuteReader();
 
             //Add the name to the list
+            //Only have to read once since only 1 row will be returned.
             reader.Read();
             bool isCreated = reader.GetBoolean(0);
 
@@ -142,9 +153,10 @@ namespace ZapLibrary
         /// <returns>List of campingSites</returns>
         public List<CampingSite> GetAvailableSites(DateTime startDate, DateTime endDate, string typename)
         {
+            //Objects
             List<CampingSite> campingSites = new List<CampingSite>();
 
-
+            //Commands and parameters
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetAvaliableSites](@startdate,@enddate,@typename) ORDER BY LEN(id), id", con);
             cmd.Parameters.Add("startdate", SqlDbType.Date).Value = startDate;
@@ -154,12 +166,12 @@ namespace ZapLibrary
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();
 
-
-
             // Reads table
             while (reader.Read())
             {
+                //Runs a method that splits the string and makes into objects to go inside this list
                 List<CampingAddition> additions = GetAdditionsFromString(reader[2].ToString());
+                //Then create object and add the additions list.
                 CampingSite camp = new CampingSite(reader.GetString(0), true, ((double)reader.GetDecimal(1)), new List<string>(), additions);
 
                 campingSites.Add(camp);
@@ -175,16 +187,17 @@ namespace ZapLibrary
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public List<AdditionSeason> GetAdditions(DateTime startDate, DateTime endDate)
+        public List<AdditionSeason> GetAdditions(DateTime startDate, DateTime endDate, string typeName)
         {
             //Objects
             List<AdditionSeason> additionSeasons = new List<AdditionSeason>();
 
 
             SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetAdditions] (@startdate,@enddate)", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetAdditions] (@startdate,@enddate @typename)", con);
             cmd.Parameters.Add("startdate", SqlDbType.Date).Value = startDate;
             cmd.Parameters.Add("enddate", SqlDbType.Date).Value = endDate;
+            cmd.Parameters.AddWithValue("typename", typeName);
 
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();

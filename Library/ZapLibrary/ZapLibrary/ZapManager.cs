@@ -24,6 +24,7 @@ namespace ZapLibrary
             dal = new Dal(connectionstring);
         }
 
+        #region PROCEDURES
         /// <summary>
         /// Creates a customer in the database
         /// </summary>
@@ -51,6 +52,7 @@ namespace ZapLibrary
         public int CreateReservation(Reservation reservation)
         {
             int ordernumber = dal.CreateReservation(reservation);
+            //Creates a thread that sends an email. Will terminate itself when done.
             Thread emailThread = new Thread(() => mail.SendEmail(reservation.Customer.Email, 
                 "Din bestilling er bekræftiget",
                 "Dit ordrenummer er: " + ordernumber));
@@ -58,20 +60,47 @@ namespace ZapLibrary
 
             return ordernumber;
         }
-
+        /// <summary>
+        /// Deletes a reservation
+        /// </summary>
+        /// <param name="ordernumber"></param>
+        /// <returns>true if succeded</returns>
         public bool DeleteReservation(string ordernumber)
         {
             return dal.DeleteReservation(ordernumber);
         }
-
+        /// <summary>
+        /// Returns a true if customer is created
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>true if customer is created</returns>
+        public bool IsCustomerCreated(string email)
+        {
+            return dal.IsCustomerCreated(email);
+        }
+        #endregion
+        #region FUNCTIONS
+        /// <summary>
+        /// Returns all available sites for the specified period and campingtype.
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="typename"></param>
+        /// <returns>List of campingSites</returns>
         public List<CampingSite> GetAvailableSites(DateTime startDate, DateTime endDate, string typename)
         {
             return dal.GetAvailableSites(startDate, endDate, typename);
         }
 
-        public List<AdditionSeason> GetAdditions(DateTime startDate, DateTime endDate)
+        /// <summary>
+        /// Gets the additions for this season
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public List<AdditionSeason> GetAdditions(DateTime startDate, DateTime endDate, string typeName)
         {
-            return dal.GetAdditions(startDate, endDate);
+            return dal.GetAdditions(startDate, endDate, typeName);
         }
         public Reservation GetReservation(string ordernumber)
         {
@@ -81,10 +110,7 @@ namespace ZapLibrary
         {
             return dal.GetCampingSite(campingId, typename, startDate, endDate);
         }
-        public bool IsCustomerCreated(string email)
-        {
-            return dal.IsCustomerCreated(email);
-        }
+        
         public List<CampingType> GetCampingTypes(bool IsSeasonType, bool IsSale)
         {
             return dal.GetCampingTypes(IsSeasonType, IsSale);
@@ -93,5 +119,6 @@ namespace ZapLibrary
         {
             return dal.GetSeasonDates(typename);
         }
+        #endregion
     }
 }

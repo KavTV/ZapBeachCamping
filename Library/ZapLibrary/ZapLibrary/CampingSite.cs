@@ -9,7 +9,7 @@ namespace ZapLibrary
     public class CampingSite
     {
         public string Id { get => id; }
-        public bool Clean { get => clean;  }
+        public bool Clean { get => clean; }
         public double Price { get => price; }
         public List<string> Typename { get => typename; }
         public List<CampingAddition> CampingAdditions { get => campingAdditions; }
@@ -20,23 +20,37 @@ namespace ZapLibrary
                 //Because we cant use the list with items in the CampingAdditions,
                 //Im making this property that puts all additions into one string.
                 string list = "";
-                foreach (var item in CampingAdditions)
+                for (int i = 0; i < CampingAdditions.Count; i++)
                 {
-                    list += item.Name;
-                    list += ", ";
+                    list += campingAdditions[i].Name;
+                    
+                    //If it is the last item in the list, then dont add the ,
+                    if (i + 1 != campingAdditions.Count)
+                    {
+                        list += ", ";
+                    }
                 }
                 return list;
-            } }
-        public string GetTypename { get
+            }
+        }
+        public string GetTypename
+        {
+            get
             {
                 string list = "";
-                foreach (var item in typename)
+                for (int i = 0; i < Typename.Count; i++)
                 {
-                    list += item;
-                    list += ", ";
+                    list += typename[i];
+
+                    //If it is the last item in the list, then dont add the ,
+                    if (i + 1 != typename.Count)
+                    {
+                        list += ", ";
+                    }
                 }
                 return list;
-            } }
+            }
+        }
 
         private string id;
         private bool clean;
@@ -45,7 +59,7 @@ namespace ZapLibrary
         private List<CampingAddition> campingAdditions;
 
         public CampingSite() { }
-        public CampingSite(string id, bool clean,double price, List<string> typename, List<CampingAddition> campingAdditions)
+        public CampingSite(string id, bool clean, double price, List<string> typename, List<CampingAddition> campingAdditions)
         {
             this.id = id;
             this.clean = clean;
