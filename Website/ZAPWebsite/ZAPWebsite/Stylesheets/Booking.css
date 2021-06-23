@@ -31,11 +31,6 @@ a:hover {
     opacity: 1
 }
 
-.webForm {
-    height: auto;
-    background-color: #f1f1f1;
-}
-
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -52,7 +47,6 @@ p {
 }
 
 .center {
-    height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -60,7 +54,6 @@ p {
 }
 
 /* End Non-Essential  */
-
 .property-card {
     height: 18em;
     width: 14em;
@@ -84,7 +77,6 @@ p {
 /* ^-- The margin bottom is necessary for the drop shadow otherwise it gets clipped in certain cases. */
 
 /* Top Half of card, image. */
-
 .property-image {
     height: 6em;
     width: 14em;
@@ -100,7 +92,6 @@ p {
 }
 
 /* Bottom Card Section */
-
 .property-description {
     background-color: #FAFAFC;
     height: 12em;
@@ -115,7 +106,6 @@ p {
 }
 
 /* Social Icons */
-
 .property-bottom {
     width: 12em;
     height: 2em;

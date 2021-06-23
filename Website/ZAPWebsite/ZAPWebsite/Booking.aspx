@@ -39,6 +39,32 @@
             vertical-align: sub;
             transform: scale(1.2);
         }
+
+        /* Popover */
+        .popover {
+            -webkit-box-shadow: none;
+        }
+
+        /* Popover Header */
+        .popover-title {
+            background-color: #ffffff; 
+            color: #000000; 
+            font-size: 16px;
+            text-align:center;
+        }
+  
+        /* Popover Body */
+        .popover-content {
+            background-color: #eaeaea;
+            color: #000000;
+            padding: 25px;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #c8c8c8;
+        }
+
     </style>
 
     <div id="leftrightdiv" class="left-right hidescroll">
@@ -54,9 +80,10 @@
                             <asp:ListItem>
                             </asp:ListItem>
                         </asp:DropDownList>
-                        <span class="details">SæsonPlads:
-                        <asp:CheckBox runat="server" AutoPostBack="true" OnCheckedChanged="SeasonPlaceCheck_CheckedChanged" ID="SeasonPlaceCheck" CssClass="verticalAlign" />
-                        </span>
+
+                        <!--Season checkbox-->
+                        <a href="#" title="Seasonpladser:" data-toggle="popover" data-placement="bottom" data-content="Forår: (1. April 🡲 30. Juni) <hr/> Sommer: (15. August 🡲 30. September) <hr/> Efterår: (15. August 🡲 31. Oktober) <hr/> Vinter: (1. Oktober 🡲 31 Marts)" data-html="true">Seasonplads:</a>
+                        <asp:CheckBox runat="server" AutoPostBack="true" OnCheckedChanged="SeasonPlaceCheck_CheckedChanged" ID="SeasonPlaceCheck" CssClass="verticalAlign"/>
                     </div>
                 </div>
 
@@ -112,6 +139,12 @@
             </asp:DataList>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 
     <script src="Scripts/BookingSliding.js"></script>
     <script src="Scripts/BookingPage.js"></script>
