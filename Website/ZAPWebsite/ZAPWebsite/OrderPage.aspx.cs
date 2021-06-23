@@ -84,6 +84,10 @@ namespace ZAPWebsite
                 {
                     string addition_name = ((Label)addition.FindControl("additionname")).Text;
                     //If the paytype is Onetime the it should be a checkbox instead of input box
+                    if (addition_name == "Voksne")
+                    {
+                        ((RequiredFieldValidator)addition.FindControl("additionrequiredvalidator")).Enabled = true;
+                    }
                     if (additionsList.Exists(a => a.Paytype == "OneTime" && a.Name == addition_name))
                     {
                         ((CheckBox)addition.FindControl("additioncheck")).Visible = true;
@@ -101,15 +105,18 @@ namespace ZAPWebsite
 
         protected void CreateOrSelectCustomer_Click(object sender, EventArgs e)
         {
-            if (connection.IsCustomerCreated(email_tb.Text)) //if email match then show book button
+            if (Page.IsValid)
             {
-                ReadyToBook();
-            }
-            else
-            {
-                //hide search or create button and show the create button
-                findCustomer.Visible = false;
-                create_cust_div.Visible = true;
+                if (connection.IsCustomerCreated(email_tb.Text)) //if email match then show book button
+                {
+                    ReadyToBook();
+                }
+                else
+                {
+                    //hide search or create button and show the create button
+                    findCustomer.Visible = false;
+                    create_cust_div.Visible = true;
+                }
             }
         }
 
@@ -133,6 +140,8 @@ namespace ZAPWebsite
         private void ReadyToBook() //function to hidde unnessesary stuff, show book button and set email to readonly
         {
             //hidde error label, and create customer div. show book button and make email_textbox readonly
+            alertdiv.Visible = false;
+
             CustomerError_la.Visible = false;
             book_button.Visible = true;
             create_cust_div.Visible = false;
@@ -169,13 +178,18 @@ namespace ZAPWebsite
 
                 }
             }
+            //This is not needed because we have another validate that Voksne should be more then 0 
+            //if (resAdditions.Count == 0)
+            //{
+            //    //Print error msg
+            //    Debug.WriteLine("Der er blevet break fordi kunden er idiot");
 
-            if (resAdditions.Count == 0)
-            {
-                //Print error msg
-                Debug.WriteLine("Der er blevet break fordi kunden er idiot");
-                return;
-            }
+            //    //hide book button and show alertdiv
+            //    book_button.Visible = false;
+            //    alertdiv.Visible = true;
+            //    Top_ErrorMessage.Text = "Du skal vælge en tilføjelse";
+            //    return;
+            //}
 
             //make connection to our library and execute create reservation method
             try
@@ -188,6 +202,7 @@ namespace ZAPWebsite
                 PrintReservation(reservationid.ToString());
 
             }
+            //Catch sql exeptions
             catch (SqlException sqlerr)
             {
                 Debug.WriteLine(sqlerr);

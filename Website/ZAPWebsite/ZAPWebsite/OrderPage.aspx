@@ -1,7 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OrderPage.aspx.cs" Inherits="ZAPWebsite.OrderPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div id="alertdiv" class="alert alert-danger" runat="server" visible="false">
+        <strong>
+            <asp:Label id="Top_ErrorMessage" Text="text" runat="server" />
+        </strong> 
+    </div>
     <div id="OP_content">
+
         <div id="LeftDiv" class="OPgridview" runat="server">
             <%-- the additions and amount--%>
             <div class="additiongroup">
@@ -14,10 +20,11 @@
             <asp:DataList ID="additionDatalist" runat="server" RepeatDirection="Vertical" CellSpacing="2" RepeatColumns="1" Visible="true">
                 <ItemTemplate>
                     <div class="additiongroup">
-                        <asp:TextBox ID="additionamount" runat="server" TextMode="Number" CssClass="additioninput" OnTextChanged="additionamount_TextChanged" AutoPostBack="True" CausesValidation="true" ValidationGroup="additionvalidation"></asp:TextBox>
-                        <asp:CheckBox ID="additioncheck" CssClass="additioninput" runat="server" Visible="false"/>
+                        <asp:TextBox ID="additionamount" runat="server" TextMode="Number" CssClass="additioninput" OnTextChanged="additionamount_TextChanged"></asp:TextBox>
+                        <asp:CheckBox ID="additioncheck" CssClass="additioninput" runat="server" Visible="false" />
                         <asp:Label ID="additionname" runat="server" CssClass="addition-name" Text='<%# Eval("Name") %>'></asp:Label>
-                        <asp:CompareValidator ErrorMessage="Ugyldigt tal" ControlToValidate="additionamount" Operator="GreaterThanEqual" ValueToCompare="0" runat="server" ValidationGroup="additionvalidation" CssClass="additionvalidation" />
+                        <asp:CompareValidator ErrorMessage="Ugyldigt tal" ControlToValidate="additionamount" Operator="GreaterThanEqual" ValueToCompare="0" runat="server" CssClass="additionvalidation" />
+                        <asp:RequiredFieldValidator id="additionrequiredvalidator" ErrorMessage="Der skal vælges mindst en her" ControlToValidate="additionamount" runat="server" CssClass="additionvalidation" Enabled="false"/>
                         <div class="addition-price">
                             <asp:Label ID="additionprice" runat="server" Text='<%# Eval("Price") %>' />
                             <asp:Label class="addition-price" runat="server"> Kr</asp:Label>
@@ -33,7 +40,7 @@
                 <asp:TextBox ID="email_tb" runat="server" CssClass="customerinput" TextMode="Email"></asp:TextBox>
                 <asp:RequiredFieldValidator ErrorMessage="Skriv din email!" ControlToValidate="email_tb" runat="server" CssClass="customervalidator" />
             </div>
-            <asp:Button ID="findCustomer" Text="Søg/Opret" runat="server" OnClick="CreateOrSelectCustomer_Click" />
+            <asp:Button ID="findCustomer" Text="Søg/Opret" runat="server" OnClick="CreateOrSelectCustomer_Click" CausesValidation ="true" />
             <%-- If customer email not exist then create the customer --%>
             <div id="create_cust_div" runat="server" visible="false">
                 <div class="customergroup">
