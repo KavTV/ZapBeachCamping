@@ -123,10 +123,10 @@
                             </a>
                             <div class="property-description">
                                 <h5>
-                                    <label>Rum: <%# Eval("Id") %></label>
+                                    <label>Plads: <%# Eval("Id") %></label>
                                 </h5>
                                 <label>Pris: <%# Eval("Price") %></label>
-                                <label>Pris: <%# Eval("GetCampingAdditions") %></label>
+                                <label>Tillæg: <%# Eval("GetCampingAdditions") %></label>
                             </div>
                             <a href="OrderPage.aspx?Site=<%#Eval("Id") %>&startDate=<%Response.Write(Request.QueryString["startDate"].ToString());%>&endDate=<%Response.Write(Request.QueryString["endDate"].ToString()); %>&typeName=<%Response.Write(Request.QueryString["typeName"].ToString()); %>&sale=<%Response.Write(Request.QueryString["sale"].ToString()); %>">
                                 <div class="property-bottom">
