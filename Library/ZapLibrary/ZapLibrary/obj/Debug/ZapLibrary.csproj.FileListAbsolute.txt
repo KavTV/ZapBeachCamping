@@ -17,4 +17,3 @@ C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapLibrary\bi
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapLibrary\bin\Debug\System.Data.SqlClient.dll
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapLibrary\bin\Debug\System.Data.SqlClient.xml
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapLibrary\obj\Debug\ZapLibrary.csproj.CopyComplete
-C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Library\ZapLibrary\ZapLibrary\obj\Debug\ZapLibrary.csproj.AssemblyReference.cache
