@@ -50,14 +50,13 @@
 
                     <div class="carousel-inner" role="listbox">
 
-                        <div class="item">
-                            <img src="/Images/DefaultSlideShow/Pic1.jpg" alt="Pic1" style="width:100%; height:450px">
+                        <div class="item active">
+                            <img src="Images/DefaultSlideShow/Pic1.jpg" alt="Pic1" style="width:100%; height:450px">
                         </div>
-
                         <div class="item">
-                            <img src="/Images/DefaultSlideShow/Pic2.jpg" alt="Pic2" style="width:100%; height:450px">
+                            <img src="Images/DefaultSlideShow/Pic2.jpg" alt="Pic2" style="width:100%; height:450px">
                         </div>
-
+                        
                         <div class="item">
                             <img src="/Images/DefaultSlideShow/Pic3.jpg" alt="Pic3" style="width:100%; height:450px">
                         </div>
