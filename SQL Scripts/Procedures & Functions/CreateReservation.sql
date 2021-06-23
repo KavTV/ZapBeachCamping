@@ -58,12 +58,15 @@ BEGIN
 		VALUES(@email, @campingid, @typename, @startdate, @enddate)
 		SET @ordernumber  = SCOPE_IDENTITY()
 		--Insert additions to table 
-		INSERT INTO ReservationAddition(ordernumber,additionname,amount)
-		SELECT @ordernumber
-			, PARSENAME(a.value, 2) AS additionname
-			, PARSENAME(a.value, 1) AS amount
-		FROM STRING_SPLIT(@additionsandamount, ',') a
-		SET @ReservationID = @ordernumber
+		IF(@typename IN ('Forår', 'Efterår', 'Vinter', 'Sommer') AND @additionsandamount IS NOT NULL) --Skip this if it a seasontype and the addition is empty
+			BEGIN
+				INSERT INTO ReservationAddition(ordernumber,additionname,amount)
+				SELECT @ordernumber
+					, PARSENAME(a.value, 2) AS additionname
+					, PARSENAME(a.value, 1) AS amount
+				FROM STRING_SPLIT(@additionsandamount, ',') a
+				SET @ReservationID = @ordernumber
+			END
 	COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
