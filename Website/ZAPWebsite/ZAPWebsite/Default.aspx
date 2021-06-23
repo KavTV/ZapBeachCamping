@@ -49,9 +49,6 @@
                     </ol>
 
                     <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="/Images/DefaultSlideShow/Pic0.png" alt="Pic0" style="width:100%; height:450px">
-                        </div>
 
                         <div class="item">
                             <img src="/Images/DefaultSlideShow/Pic1.jpg" alt="Pic1" style="width:100%; height:450px">
@@ -101,6 +98,12 @@
                     
                     <!--Order button-->
                     <a class="btn btn-danger" href="Booking">Bestil nu!</a>
+                </div>
+                <div>
+                    <h4>Sæsonplads</h4>
+                    <p>Med vores fantastiske sæsonpladser, kan du få en plads i en hel season til en attraktiv pris!
+                        kan vælges på booking siden.
+                    </p>
                 </div>
             </div>
         </div>
