@@ -1,0 +1,150 @@
+﻿.OPgridview {
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+#MainContent_LeftDiv {
+    width: 33%;
+}
+
+#MainContent_RightDiv {
+    width: 26%;
+}
+
+#MainContent_CenterDiv {
+    width: 41%;
+}
+
+.additiongroup {
+    display: flex;
+    margin: 5px;
+    width: 95%;
+}
+
+.additioninput {
+    text-align: left;
+    width: 18%;
+    margin-right: 10px;
+}
+
+.additioninput input {
+    margin-right: auto;
+    display: grid;
+    margin-left: auto;
+}
+
+.additionvalidation {
+    position: absolute;
+    left: 9.5%;
+    z-index: 1;
+    background-color: white;
+    padding: 2px;
+    border: 2px solid red;
+    border-radius: 7px;
+}
+
+.addition-name {
+    width: 58%;
+    display: inline-block;
+    text-align: left;
+    margin-right: 5px;
+}
+
+.addition-price {
+    /*float: right;*/
+    text-align: right;
+    padding: 1px;
+    /* position: relative; */
+    /* left: 0; */
+    width: 20%;
+}
+
+#OP_content {
+    display: flex;
+}
+
+.customergroup {
+    display: table;
+    width: 95%
+}
+
+.customerlabel {
+    display: inline-block;
+    width: 16%;
+    text-align: right;
+    margin-right: 5px;
+}
+
+.customerinput {
+    margin: 5px;
+}
+
+.customervalidator {
+    font-size: 12px;
+    color: red;
+}
+
+#create_cust_div {
+    display: grid;
+}
+
+.OP-h6 {
+    margin: 0px;
+    font-size: 1.2em;
+    font-weight: 600;
+    text-align: start;
+}
+
+.OP-addition-la {
+    font-weight: 100;
+}
+
+.periode {
+    font-size: 1.2em;
+}
+
+.TotalPriceText {
+    font-weight: 700;
+    font-size: x-large;
+}
+
+#totalpricediv {
+    margin-top: 11px;
+}
+
+.CustomerErrorMsg {
+    color: red;
+    font-size: 0.9em;
+}
+
+.reservation_la {
+    font-size: 125%;
+}
+
+.reservationfieldname_la {
+    font-size: 175%;
+}
+
+.confirmdatalist_div {
+}
+
+#MainContent_Confirm_div {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.res_fieldgroup {
+    margin-bottom: 2%
+}
+
+.res_datefieldgroup {
+}
+
+#pricecomment_la {
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

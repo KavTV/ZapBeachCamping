@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\Package\PackageTmp" />
-  <setAcl path="C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="C:\Users\kasp609g\Documents\Github\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+  <IisApp path="C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\Package\PackageTmp" />
+  <setAcl path="C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
 </sitemanifest>
