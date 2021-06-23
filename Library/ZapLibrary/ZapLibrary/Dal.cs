@@ -194,7 +194,7 @@ namespace ZapLibrary
 
 
             SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetAdditions] (@startdate,@enddate @typename)", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetAdditions] (@startdate,@enddate, @typename)", con);
             cmd.Parameters.Add("startdate", SqlDbType.Date).Value = startDate;
             cmd.Parameters.Add("enddate", SqlDbType.Date).Value = endDate;
             cmd.Parameters.AddWithValue("typename", typeName);
