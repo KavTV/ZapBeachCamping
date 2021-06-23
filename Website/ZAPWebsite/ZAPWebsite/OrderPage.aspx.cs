@@ -19,10 +19,10 @@ namespace ZAPWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            saleparameter = null;
             //if its not a postback then do...
             if (!IsPostBack)
             {
+                saleparameter = null;
 
                 //if site is not set as parameter then it should return to booking page
                 if (string.IsNullOrEmpty(Request.Params["Site"]))
@@ -168,6 +168,13 @@ namespace ZAPWebsite
                     }
 
                 }
+            }
+
+            if (resAdditions == null)
+            {
+                //Print error msg
+                Debug.WriteLine("Der er blevet break fordi kunden er idiot");
+                break;
             }
 
             //make connection to our library and execute create reservation method
