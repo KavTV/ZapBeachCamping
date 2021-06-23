@@ -96,6 +96,7 @@ namespace ZAPWebsite
             catch (Exception error)
             {
                 Debug.WriteLine(error);
+                Response.Write($"<script language=javascript>console.log({error})</script>");
                 ExecuteAlertPopup("");
             }
         }
@@ -191,6 +192,9 @@ namespace ZAPWebsite
             //make connection to our library and execute create reservation method
             try
             {
+                Reservation testres = new
+                Reservation(email_tb.Text, Request.QueryString["Site"], Request.QueryString["typeName"],
+                Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]), resAdditions);
                 int reservationid = connection.CreateReservation(new
                 Reservation(email_tb.Text, Request.QueryString["Site"], Request.QueryString["typeName"],
                 Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]), resAdditions));
@@ -203,11 +207,13 @@ namespace ZAPWebsite
             catch (SqlException sqlerr)
             {
                 Debug.WriteLine(sqlerr);
+                //Response.Write("<script>console.log('" + sqlerr.Message + "');</script>");
                 ExecuteAlertPopup(sqlerr.Message.ToString().Split('/')[0]);
             }
             catch (Exception error)
             {
                 Debug.WriteLine(error);
+                Response.Write($"<script language=javascript>console.log({error})</script>");
                 ExecuteAlertPopup("");
             }
 
