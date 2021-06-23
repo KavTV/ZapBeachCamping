@@ -156,7 +156,7 @@ namespace ZAPWebsite
                     //if the additionamount is not visible then check if checkboc checked if its true then add it to addition with amount 1
                     if (!((TextBox)item.FindControl("additionamount")).Visible)
                     {
-                        if (!((CheckBox)item.FindControl("additioncheck")).Checked)
+                        if (((CheckBox)item.FindControl("additioncheck")).Checked)
                         {
                             resAdditions.Add(new ReservationAddition(new AdditionSeason(name, null, 0), 1));
                         }
@@ -170,11 +170,11 @@ namespace ZAPWebsite
                 }
             }
 
-            if (resAdditions == null)
+            if (resAdditions.Count == 0)
             {
                 //Print error msg
                 Debug.WriteLine("Der er blevet break fordi kunden er idiot");
-                break;
+                return;
             }
 
             //make connection to our library and execute create reservation method
@@ -219,6 +219,8 @@ namespace ZAPWebsite
             //add addition price to totalprice
             foreach (DataListItem additionitem in additionDatalist.Items)
             {
+                //TODO:Should add onetime additions 
+
                 //only calculate price for addition who have more then one amount
                 if (int.TryParse(((TextBox)additionitem.FindControl("additionamount")).Text, out int amount) && amount > 0)
                 {

@@ -113,7 +113,7 @@
                 </asp:DataList>
             </div>
             <div id="totalpricediv">
-                <asp:Label ID="totalpricetext" CssClass="TotalPriceText" Text="Total pris: " runat="server" />
+                <asp:Label ID="totalpricetext" CssClass="TotalPriceText" Text="Pris pr. dag: " runat="server" />
                 <asp:Label ID="totalprice_la" CssClass="TotalPriceText" Text="999" runat="server" />
             </div>
             <asp:Button ID="book_button" Text="Reserver" runat="server" Visible="false" OnClick="book_button_Click" />
