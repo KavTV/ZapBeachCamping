@@ -221,7 +221,7 @@ namespace ZapLibrary
         /// <returns></returns>
         public Reservation GetReservation(string ordernumber)
         {
-
+            //Command and parameters
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[GetReservation](@ordernumber)", con);
             cmd.Parameters.AddWithValue("ordernumber", ordernumber);
@@ -229,22 +229,26 @@ namespace ZapLibrary
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();
 
-            // Reads table
+            // Reads table once
             reader.Read();
 
+            //Make a list with the additions
             List<ReservationAddition> reservationAdditions = new List<ReservationAddition>();
+            //Get the string that needs to be split.
             string additions = reader[7].ToString();
+            //Make sure there actually is somehting
             if (additions != "")
             {
                 string[] additionSplit = additions.Split(',');
                 foreach (var addition in additionSplit)
                 {
+                    //cultureinfo is because of the format of the double having a . not a ,
                     string[] additionNameSplit = addition.Split(':');
                     reservationAdditions.Add(new ReservationAddition(new AdditionSeason(additionNameSplit[1],
                         "", double.Parse(additionNameSplit[2], CultureInfo.InvariantCulture)), int.Parse(additionNameSplit[0])));
                 }
             }
-
+            //Add the values from the row to the object
             Reservation reservation = new Reservation(reader.GetInt32(0), new Customer(reader.GetString(1)),
             new CampingSite(reader.GetString(2)), reader.GetString(3), reader.GetDateTime(4),
             reader.GetDateTime(5), (double)reader.GetDecimal(6), false, false, reservationAdditions);
@@ -280,6 +284,15 @@ namespace ZapLibrary
 
             return campingTypes;
         }
+        /// <summary>
+        /// Gets a specific campingsite information for a specific period.
+        /// Should have been a single object, but makes it easier for implementation in website.
+        /// </summary>
+        /// <param name="campingId"></param>
+        /// <param name="typename"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
         public List<CampingSite> GetCampingSite(string campingId, string typename, DateTime startDate, DateTime endDate)
         {
             //Objects
@@ -309,6 +322,11 @@ namespace ZapLibrary
             con.Close();
             return campingSites;
         }
+        /// <summary>
+        /// Gets the date for the specific season
+        /// </summary>
+        /// <param name="typename"></param>
+        /// <returns></returns>
         public CampingType GetSeasonDates(string typename)
         {
             //SQL command and params
