@@ -32,7 +32,7 @@ RETURN
 		ON ct.[name] = ts.typename
 	WHERE (@IsSeasonType = 0 AND @IsSale = 0 AND ts.seasonname IN ('Højsæson', 'Lavsæson'))
 		OR (@IsSeasonType = 1 AND ts.seasonname NOT IN ('Højsæson', 'Lavsæson'))
-		OR (@IsSeasonType = 0 AND @IsSale = 1 AND ct.[name] NOT LIKE '%hytte%' AND ts.seasonname IN ('Højsæson', 'Lavsæson'))
+		OR (@IsSeasonType = 0 AND @IsSale = 1 AND ct.[name] IN ('Teltplads', 'Lille campingplads') AND ts.seasonname IN ('Højsæson', 'Lavsæson'))
 
 )
 GO
