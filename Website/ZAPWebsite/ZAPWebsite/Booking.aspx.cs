@@ -11,14 +11,15 @@ namespace ZAPWebsite
     public partial class Booking : System.Web.UI.Page
     {
         ZapManager sqlmanager = new ZapManager();
+        bool IsSale = false;
         protected void Page_Load(object sender, EventArgs e)
         {
+            SpecialSale();
             if (!IsPostBack)
             {
                 //Find campingtypes 
                 UpdateCampingTypes();
             }
-            SpecialSale();
             //Check if user has selected dates and type
             GetUrlParams();
         }
@@ -74,13 +75,12 @@ namespace ZAPWebsite
                 //Hide enddate, auto calc the enddate
                 resEnd.Disabled = true;
                 SeasonPlaceCheck.Visible = false;
-                if (!string.IsNullOrWhiteSpace(resStart.Value))
-                {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "BookingPage", "document.getElementById('MainContent_resStart').onchange = onResStartChanged()", true);
-                    //Get the start date and apply + 7 days for this special to the end date.
-                    DateTime date = DateTime.Parse(resStart.Value);
-                    resEnd.Value = date.AddDays(7).ToString("yyyy-MM-dd");
-                }
+                //Set the startdate to onchange event that adds 7 days to the end date input
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "BookingPage", "document.getElementById('MainContent_resStart').setAttribute('onchange','onResStartChanged();');", true);
+                //Set the issale to true.
+                IsSale = true;
+
+
             }
         }
 
@@ -92,7 +92,7 @@ namespace ZAPWebsite
         private void UpdateCampingTypes()
         {
             //Change the campingtypes depending on if it is a seasontype or not
-            DropDownTypes.DataSource = sqlmanager.GetCampingTypes(SeasonPlaceCheck.Checked, false);
+            DropDownTypes.DataSource = sqlmanager.GetCampingTypes(SeasonPlaceCheck.Checked, IsSale);
             DropDownTypes.DataValueField = "Name";
             DropDownTypes.DataBind();
             if (SeasonPlaceCheck.Checked)
