@@ -75,7 +75,7 @@ namespace ZAPWebsite
             //If something happend then catch it and show alert box
             try
             {
-                List<AdditionSeason> additionsList = connection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]));
+                List<AdditionSeason> additionsList = connection.GetAdditions(Convert.ToDateTime(Request.QueryString["startDate"]), Convert.ToDateTime(Request.QueryString["endDate"]), Request.QueryString["typeName"]);
                 //databound the additions in datalist
                 additionDatalist.DataSource = additionsList;
                 additionDatalist.DataBind();
