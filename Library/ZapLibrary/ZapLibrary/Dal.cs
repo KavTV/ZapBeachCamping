@@ -77,9 +77,13 @@ namespace ZapLibrary
                     {
                         additionAndAmount += item.AdditionSeason.Name + "." + item.Amount;
                     }
-                    else
+                    else if(count < reservation.ReservationAdditions.Count)
                     {
                         additionAndAmount += item.AdditionSeason.Name + "." + item.Amount + ",";
+                    }
+                    else
+                    {
+                        additionAndAmount = "";
                     }
                     count++;
                 }
