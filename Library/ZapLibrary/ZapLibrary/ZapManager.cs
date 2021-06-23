@@ -102,19 +102,41 @@ namespace ZapLibrary
         {
             return dal.GetAdditions(startDate, endDate, typeName);
         }
+        /// <summary>
+        /// Finds the specific reservation
+        /// </summary>
+        /// <param name="ordernumber"></param>
+        /// <returns></returns>
         public Reservation GetReservation(string ordernumber)
         {
             return dal.GetReservation(ordernumber);
         }
+        /// <summary>
+        /// Gets a specific campingsite information for a specific period.
+        /// Should have been a single object, but makes it easier for implementation in website.
+        /// </summary>
+        /// <param name="campingId"></param>
+        /// <param name="typename"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
         public List<CampingSite> GetCampingSite(string campingId, string typename, DateTime startDate, DateTime endDate)
         {
             return dal.GetCampingSite(campingId, typename, startDate, endDate);
         }
-        
+        /// <summary>
+        /// Returns all campingTypes
+        /// </summary>
+        /// <returns></returns>
         public List<CampingType> GetCampingTypes(bool IsSeasonType, bool IsSale)
         {
             return dal.GetCampingTypes(IsSeasonType, IsSale);
         }
+        /// <summary>
+        /// Gets the date for the specific season
+        /// </summary>
+        /// <param name="typename"></param>
+        /// <returns></returns>
         public CampingType GetSeasonDates(string typename)
         {
             return dal.GetSeasonDates(typename);
