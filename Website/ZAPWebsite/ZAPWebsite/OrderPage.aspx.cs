@@ -27,11 +27,8 @@ namespace ZAPWebsite
                 //if site is not set as parameter then it should return to booking page
                 if (string.IsNullOrEmpty(Request.Params["Site"]))
                 {
-                    //For testing 
-                    Response.Redirect("OrderPage.aspx?Site=74&startDate=Mon%20Jun%2021%202021&endDate=Sun%20Jun%2027%202021&typeName=Lille%20campingplads&sale=1%20uges%20plads%20inkl%204%20personer%206%20x%20morgenmad%20og%20billetter%20til%20badeland%20hele%20ugen");
-
                     //redirect to booking if no parameters in url 
-                    //Response.Redirect("Booking.aspx");
+                    Response.Redirect("Booking.aspx");
                 }
 
                 //if its a reservation with a special discount then sale parameter is set 
@@ -290,8 +287,7 @@ namespace ZAPWebsite
         private void ExecuteAlertPopup(string input)
         {
             Debug.WriteLine("Message: "+input);
-            input = "";
-            Response.Write($"<script language=javascript>alert('UNDSKYLD! Der gik noget galt, prøv igen eller kontakt os :) Du lander på hjem siden igen            {input}');window.location.href = \"Default.aspx\"</script>");
+            Response.Write($"<script language=javascript>alert('UNDSKYLD! Der gik noget galt, prøv igen eller kontakt os :) Du lander på hjem siden igen');window.location.href = \"Default.aspx\"</script>");
         }
     }
 }
