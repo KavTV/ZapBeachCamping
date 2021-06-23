@@ -14,6 +14,7 @@ namespace ZAPWebsite
         bool IsSale = false;
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Check is there is a special sale
             SpecialSale();
             if (!IsPostBack)
             {
