@@ -295,7 +295,6 @@ C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bi
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\ZapLibrary.pdb
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\ZapLibrary.dll.config
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\ZAPWebsite.csproj.AssemblyReference.cache
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\ZAPWebsite.csproj.CoreCompileInputs.cache
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\ZAPWebsite.csproj.CopyComplete
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\ZAPWebsite.dll

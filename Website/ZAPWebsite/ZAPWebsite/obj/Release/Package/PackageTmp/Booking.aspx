@@ -92,12 +92,12 @@
                     <!--Date boxes-->
                     <div class="input-date-box col-xs-1 col-xs-offset-3">
                         <span class="details">Start dato:</span>
-                        <input type="date" id="resStart" runat="server" style="resize: none" />
+                        <input type="date" id="resStart" runat="server" style="resize: none" min="2021-06-23" />
                     </div>
 
                     <div class="input-date-box col-xs-1 col-xs-offset-1">
                         <span class="details">Slut dato:</span>
-                        <input type="date" id="resEnd" runat="server" style="resize: none" />
+                        <input type="date" id="resEnd" runat="server" style="resize: none" min="2021-06-23" />
                     </div>
                 </div>
             </div>

@@ -1,10 +1,26 @@
-﻿var checkbox = document.getElementById("MainContent_SeasonPlaceCheck");
+﻿var seasonCheckbox = document.getElementById("MainContent_SeasonPlaceCheck");
 var resStart = document.getElementById("MainContent_resStart");
 var resEnd = document.getElementById("MainContent_resEnd");
 
-if (checkbox != null) {
+//Make sure they cant select dates older than today
+//Get todays date
+var startMin = new Date();
+var endMin = new Date();
+//Add a day, because we dont want people to reserve at the same day
+startMin.setDate(startMin.getDate() + 1);
+//End date should not be same day as reservation
+endMin.setDate(endMin.getDate() + 2);
+//Split it into yyyy-mm-dd
+startMin = startMin.toISOString().split('T')[0];
+endMin = endMin.toISOString().split('T')[0];
+//Set the minimum date
+resStart.setAttribute('min', startMin);
+resEnd.setAttribute('min', endMin);
 
-    if (checkbox.checked) {
+//If season is selected, then 
+if (seasonCheckbox != null) {
+
+    if (seasonCheckbox.checked) {
         resStart.disabled = true;
         resEnd.disabled = true;
     }
