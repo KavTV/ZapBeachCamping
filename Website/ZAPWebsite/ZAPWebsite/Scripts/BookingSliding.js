@@ -1,9 +1,11 @@
-﻿//Get the parameters
+﻿//Get the parameters from url
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 //The input dates
 var resStart = document.getElementById("MainContent_resStart");
 var resEnd = document.getElementById("MainContent_resEnd");
+
+
 
 //Hide or show the divs hidden in the slider.
 if (CheckParams()) {
@@ -18,60 +20,64 @@ else {
 }
 console.log(CheckParams());
 
+//When page loaded
 $(document).ready(function () {
-    var currentPageI = -1;
-    var pages = [
-        $('div.l1'),
-        $('div.l2'),
-        $('div.l3'),
-    ];
-    //Get the width of the div and save
-    var viewsWidth = document.getElementById("leftrightdiv").offsetWidth
-    console.log(document.getElementById("leftrightdiv").offsetWidth);
-    var showPage = function (index) {
-        if (index === currentPageI) { return; }
-        var currentPage = pages[currentPageI];
-        if (currentPage) {
-            currentPage.stop().animate({ left: -viewsWidth }, function () {
-                // will be called when the element finishes fading out
-                // if selector matches multiple elements it will be called once for each
-                currentPage.hide();
-            });
+    if (!isPostBack) {
 
+        var currentPageI = -1;
+        var pages = [
+            $('div.l1'),
+            $('div.l2'),
+            $('div.l3'),
+        ];
+        //Get the width of the div and save
+        var viewsWidth = document.getElementById("leftrightdiv").offsetWidth
+        console.log(document.getElementById("leftrightdiv").offsetWidth);
+
+        var showPage = function (index) {
+            if (index === currentPageI) { return; }
+            var currentPage = pages[currentPageI];
+            if (currentPage) {
+                currentPage.stop().animate({ left: -viewsWidth }, function () {
+                    // will be called when the element finishes fading out
+                    // if selector matches multiple elements it will be called once for each
+                    currentPage.hide();
+                });
+
+
+            }
+            var nextPage = pages[index];
+            nextPage.show();
+            nextPage
+                .stop()
+                .css({ left: viewsWidth })
+                .animate({ left: 0 })
+            currentPageI = index;
 
         }
-        var nextPage = pages[index];
-        nextPage.show();
-        nextPage
-            .stop()
-            .css({ left: viewsWidth })
-            .animate({ left: 0 })
-        currentPageI = index;
+        // show default page, but if params exists then show the second page
+        if (CheckParams()) {
+            showPage(2)
+        }
+        else {
+            showPage(0);
+        }
+        //Binds the <a> to showPage function
+        $('a.l1').click(showPage.bind(null, 0));
+        $('a.l2').click(showPage.bind(null, 1));
+        $('a.l3').click(showPage.bind(null, 2));
 
+        //animates the sliding
+        $('.left-right').mouseover(function () {
+            $('.slider').stop().animate({
+                right: 0
+            }, 400);
+        }).mouseout(function () {
+            $('.slider').stop().animate({
+                right: '-200px'
+            }, 400);
+        });
     }
-    // show default page, but if params exists then show the second page
-    if (CheckParams()) {
-        showPage(2)
-    }
-    else {
-        showPage(0);
-    }
-    //Binds the <a> to showPage function
-    $('a.l1').click(showPage.bind(null, 0));
-    $('a.l2').click(showPage.bind(null, 1));
-    $('a.l3').click(showPage.bind(null, 2));
-
-    //animates the sliding
-    $('.left-right').mouseover(function () {
-        $('.slider').stop().animate({
-            right: 0
-        }, 400);
-    }).mouseout(function () {
-        $('.slider').stop().animate({
-            right: '-200px'
-        }, 400);
-    });
-
 });
 
 function CheckParams() {
@@ -120,7 +126,7 @@ function AddParams() {
     var startDate = new Date(document.getElementById("MainContent_resStart").value).toDateString();
     var endDate = new Date(document.getElementById("MainContent_resEnd").value).toDateString();
     var typeName = document.getElementById("MainContent_DropDownTypes").value;
-    
+
     //Set the parameters into the above url object
     url.searchParams.set('startDate', startDate);
     url.searchParams.set('endDate', endDate);

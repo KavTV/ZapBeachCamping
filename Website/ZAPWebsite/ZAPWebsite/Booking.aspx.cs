@@ -16,11 +16,22 @@ namespace ZAPWebsite
         {
             //Check is there is a special sale
             SpecialSale();
+
+
             if (!IsPostBack)
             {
+                //Make a variable for javascript to tell it is not a postback
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "BookingSliding", "var isPostBack = false;", true);
+
                 //Find campingtypes 
                 UpdateCampingTypes();
             }
+            else
+            {
+                //Make a variable for javascript to tell it is not a postback
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "BookingSliding", "var isPostBack = true;", true);
+            }
+
             //Check if user has selected dates and type
             GetUrlParams();
         }
@@ -71,6 +82,7 @@ namespace ZAPWebsite
         /// </summary>
         void SpecialSale()
         {
+            //Check for sale
             if (Request.QueryString["sale"] == "1 uges plads inkl 4 personer 6 x morgenmad og billetter til badeland hele ugen")
             {
                 //Hide enddate, auto calc the enddate
