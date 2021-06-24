@@ -97,12 +97,13 @@
                         <div class="">
                             <div class="property-card">
                                 <div class="property-image">
+                                    
+                                </div>
+                                <div class="property-description">
                                     <h3>
                                         <asp:Label ID="siteheader" Text='<%# Request.QueryString["typename"]%>' runat="server" />
 
                                     </h3>
-                                </div>
-                                <div class="property-description">
                                     <h5>
                                         <asp:Label ID="siteId" runat="server" Text='<%# Eval("Id") %>' />
                                     </h5>
