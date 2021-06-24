@@ -84,6 +84,8 @@ namespace ZAPWebsite
                     if (addition_name == "Voksne")
                     {
                         ((RequiredFieldValidator)addition.FindControl("additionrequiredvalidator")).Enabled = true;
+                        ((RequiredFieldValidator)addition.FindControl("additionrequiredvalidator")).Display = ValidatorDisplay.Static;
+
                     }
                     if (additionsList.Exists(a => a.Paytype == "OneTime" && a.Name == addition_name))
                     {
@@ -207,7 +209,6 @@ namespace ZAPWebsite
             catch (SqlException sqlerr)
             {
                 Debug.WriteLine(sqlerr);
-                //Response.Write("<script>console.log('" + sqlerr.Message + "');</script>");
                 ExecuteAlertPopup(sqlerr.Message.ToString().Split('/')[0]);
             }
             catch (Exception error)

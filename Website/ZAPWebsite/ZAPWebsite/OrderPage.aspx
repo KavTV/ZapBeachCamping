@@ -1,15 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OrderPage.aspx.cs" Inherits="ZAPWebsite.OrderPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-               <script type="text/javascript">
-                   function WriteErrorToConsole(msg) {
-                       console.log(msg);
-                   }
-               </script>
     <div id="alertdiv" class="alert alert-danger" runat="server" visible="false">
         <strong>
-            <asp:Label id="Top_ErrorMessage" Text="text" runat="server" />
-        </strong> 
+            <asp:Label ID="Top_ErrorMessage" Text="text" runat="server" />
+        </strong>
     </div>
     <div id="OP_content">
 
@@ -24,17 +19,17 @@
             </div>
             <asp:DataList ID="additionDatalist" runat="server" RepeatDirection="Vertical" CellSpacing="2" RepeatColumns="1" Visible="true">
                 <ItemTemplate>
+                    <asp:RequiredFieldValidator ID="additionrequiredvalidator" ErrorMessage="&darr; Der skal vælges mindst en" ControlToValidate="additionamount" runat="server" CssClass="additionvalidation" Enabled="false" Display="None" />
+                    <asp:CompareValidator ErrorMessage="Ugyldigt tal" ControlToValidate="additionamount" Operator="GreaterThanEqual" ValueToCompare="0" runat="server" CssClass="additionvalidation" />
                     <div class="additiongroup">
                         <asp:TextBox ID="additionamount" runat="server" TextMode="Number" CssClass="additioninput" OnTextChanged="additionamount_TextChanged"></asp:TextBox>
                         <asp:CheckBox ID="additioncheck" CssClass="additioninput" runat="server" Visible="false" />
                         <asp:Label ID="additionname" runat="server" CssClass="addition-name" Text='<%# Eval("Name") %>'></asp:Label>
-                        <asp:CompareValidator ErrorMessage="Ugyldigt tal" ControlToValidate="additionamount" Operator="GreaterThanEqual" ValueToCompare="0" runat="server" CssClass="additionvalidation" />
                         <div class="addition-price">
                             <asp:Label ID="additionprice" runat="server" Text='<%# Eval("Price") %>' />
                             <asp:Label class="addition-price" runat="server"> Kr</asp:Label>
                         </div>
                     </div>
-                        <asp:RequiredFieldValidator id="additionrequiredvalidator" ErrorMessage="Der skal vælges mindst en her" ControlToValidate="additionamount" runat="server" CssClass="additionvalidation" Enabled="false"/>
                 </ItemTemplate>
             </asp:DataList>
         </div>
@@ -45,7 +40,9 @@
                 <asp:TextBox ID="email_tb" runat="server" CssClass="customerinput" TextMode="Email"></asp:TextBox>
                 <asp:RequiredFieldValidator ErrorMessage="Skriv din email!" ControlToValidate="email_tb" runat="server" CssClass="customervalidator" />
             </div>
-            <asp:Button ID="findCustomer" Text="Søg/Opret" runat="server" OnClick="CreateOrSelectCustomer_Click" CausesValidation ="true" />
+            <div>
+                <asp:Button ID="findCustomer" Text="Søg/Opret" runat="server" OnClick="CreateOrSelectCustomer_Click" CausesValidation="true" CssClass="customerButton" />
+            </div>
             <%-- If customer email not exist then create the customer --%>
             <div id="create_cust_div" runat="server" visible="false">
                 <div class="customergroup">
@@ -68,7 +65,7 @@
                     <asp:TextBox ID="address" runat="server" CssClass="customerinput"></asp:TextBox>
                     <asp:RequiredFieldValidator ErrorMessage="Skriv din adresse!" ControlToValidate="address" runat="server" CssClass="customervalidator" />
                 </div>
-                <asp:Button ID="createcustomer" Text="Opret" runat="server" OnClick="Createcustomer_Click" />
+                <asp:Button ID="createcustomer" Text="Opret" runat="server" OnClick="Createcustomer_Click" CssClass="customerButton"/>
                 <br />
                 <asp:Label ID="CustomerError_la" CssClass="CustomerErrorMsg" runat="server" Visible="false">
                     Noget gik galt med at oprette dig som bruger
