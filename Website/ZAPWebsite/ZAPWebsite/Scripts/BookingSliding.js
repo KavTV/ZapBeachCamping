@@ -1,7 +1,10 @@
-﻿const queryString = window.location.search;
+﻿//Get the parameters
+const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
+//The input dates
 var resStart = document.getElementById("MainContent_resStart");
 var resEnd = document.getElementById("MainContent_resEnd");
+
 //Hide or show the divs hidden in the slider.
 if (CheckParams()) {
     $('div.l1').hide();

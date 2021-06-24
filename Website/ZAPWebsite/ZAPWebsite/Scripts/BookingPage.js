@@ -1,10 +1,16 @@
-﻿var checkbox = document.getElementById("MainContent_SeasonPlaceCheck");
+﻿var seasonCheckbox = document.getElementById("MainContent_SeasonPlaceCheck");
 var resStart = document.getElementById("MainContent_resStart");
 var resEnd = document.getElementById("MainContent_resEnd");
 
-if (checkbox != null) {
+//Make sure they cant select dates older than today
+var today = new Date().toISOString().split('T')[0];
+resStart.setAttribute('min', today);
+resEnd.setAttribute('min', today);
 
-    if (checkbox.checked) {
+//If season is selected, then 
+if (seasonCheckbox != null) {
+
+    if (seasonCheckbox.checked) {
         resStart.disabled = true;
         resEnd.disabled = true;
     }
