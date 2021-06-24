@@ -19,10 +19,12 @@
             </div>
             <asp:DataList ID="additionDatalist" runat="server" RepeatDirection="Vertical" CellSpacing="2" RepeatColumns="1" Visible="true">
                 <ItemTemplate>
-                    <asp:RequiredFieldValidator ID="additionrequiredvalidator" ErrorMessage="&darr; Der skal vælges mindst en" ControlToValidate="additionamount" runat="server" CssClass="additionvalidation" Enabled="false" Display="None" />
-                    <asp:CompareValidator ErrorMessage="Ugyldigt tal" ControlToValidate="additionamount" Operator="GreaterThanEqual" ValueToCompare="0" runat="server" CssClass="additionvalidation" />
+                    <asp:RequiredFieldValidator ID="additionrequiredvalidator" ErrorMessage="&darr; Der skal vælges mindst en" ControlToValidate="additionamount" runat="server" CssClass="additionvalidation" Enabled="false" Display="Dynamic"  />
+                    <asp:CompareValidator ID="GreaterthenzeroValidator" ErrorMessage="Ugyldigt tal" ControlToValidate="additionamount" Operator="GreaterThanEqual" ValueToCompare="0" runat="server" CssClass="additionvalidation" Display="Dynamic" />
+
+                        
                     <div class="additiongroup">
-                        <asp:TextBox ID="additionamount" runat="server" TextMode="Number" CssClass="additioninput" OnTextChanged="additionamount_TextChanged"></asp:TextBox>
+                        <asp:TextBox ID="additionamount" runat="server" TextMode="Number" CssClass="additioninput" OnTextChanged="additionamount_TextChanged" AutoPostBack="true"></asp:TextBox>
                         <asp:CheckBox ID="additioncheck" CssClass="additioninput" runat="server" Visible="false" />
                         <asp:Label ID="additionname" runat="server" CssClass="addition-name" Text='<%# Eval("Name") %>'></asp:Label>
                         <div class="addition-price">
