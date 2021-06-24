@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OrderPage.aspx.cs" Inherits="ZAPWebsite.OrderPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+               <script type="text/javascript">
+                   function WriteErrorToConsole(msg) {
+                       console.log(msg);
+                   }
+               </script>
     <div id="alertdiv" class="alert alert-danger" runat="server" visible="false">
         <strong>
             <asp:Label id="Top_ErrorMessage" Text="text" runat="server" />
@@ -24,12 +29,12 @@
                         <asp:CheckBox ID="additioncheck" CssClass="additioninput" runat="server" Visible="false" />
                         <asp:Label ID="additionname" runat="server" CssClass="addition-name" Text='<%# Eval("Name") %>'></asp:Label>
                         <asp:CompareValidator ErrorMessage="Ugyldigt tal" ControlToValidate="additionamount" Operator="GreaterThanEqual" ValueToCompare="0" runat="server" CssClass="additionvalidation" />
-                        <asp:RequiredFieldValidator id="additionrequiredvalidator" ErrorMessage="Der skal vælges mindst en her" ControlToValidate="additionamount" runat="server" CssClass="additionvalidation" Enabled="false"/>
                         <div class="addition-price">
                             <asp:Label ID="additionprice" runat="server" Text='<%# Eval("Price") %>' />
                             <asp:Label class="addition-price" runat="server"> Kr</asp:Label>
                         </div>
                     </div>
+                        <asp:RequiredFieldValidator id="additionrequiredvalidator" ErrorMessage="Der skal vælges mindst en her" ControlToValidate="additionamount" runat="server" CssClass="additionvalidation" Enabled="false"/>
                 </ItemTemplate>
             </asp:DataList>
         </div>
@@ -183,4 +188,5 @@
             </div>
         </div>
     </div>
+
 </asp:Content>
