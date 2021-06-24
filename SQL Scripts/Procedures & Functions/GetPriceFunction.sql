@@ -32,12 +32,15 @@ BEGIN
 	--Implement isnull on every place where it set @Totalprice
 	-- Calculate the days the customer should pay for
 	DECLARE @DaysToPayForPlace INT
-	SET @DaysToPayForPlace = DATEDIFF(DAY, @startdate, @enddate) - ROUND((DATEDIFF(DAY, @startdate, @enddate) / 4), 0, 0) -- Actual days minus the free days, ever 4 day is free, Always ROUND DOWN 
-	
+	-- Actual days minus the free days, ever 4 day is free, Always ROUND DOWN 
+	--Round is not needed Datediff always ROUND DOWN the output
+	SET @DaysToPayForPlace = DATEDIFF(DAY, @startdate, @enddate) - ROUND((DATEDIFF(DAY, @startdate, @enddate) / 4), 0, 0) 
+	--Round(the number, how many decimals, above 0 the function truncate)
 	-- Declare the return variable here
 	DECLARE @TotalPrice NUMERIC(8,2)
 
 	--First get Site addition price
+	--ISNULL is needed så the output not return NULL
 	SELECT @TotalPrice = ISNULL(SUM(ca.price * DATEDIFF(DAY, @startdate, @enddate)), 0)
 	FROM CampingSiteAdditions csa
 	JOIN CampingAddition ca
@@ -73,8 +76,6 @@ BEGIN
 			THEN ISNULL(SUM(ads.price * ra.amount), 0)
 		WHEN 'Daily'
 			THEN (ISNULL(SUM(ads.price * ra.amount), 0) * DATEDIFF(DAY, @startdate, @enddate))
-		WHEN 'Daily-1'
-			THEN (ISNULL(SUM(ads.price * ra.amount), 0) * (DATEDIFF(DAY, @startdate, @enddate)-1))
 		END AS price
 	FROM AdditionsSeason ads
 	JOIN Additions a
