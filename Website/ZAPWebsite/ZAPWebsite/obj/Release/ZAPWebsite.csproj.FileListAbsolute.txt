@@ -299,3 +299,4 @@ C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\ob
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\ZAPWebsite.csproj.CopyComplete
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\ZAPWebsite.dll
 C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\ZAPWebsite.pdb
+C:\Users\phil3607\Documents\GIT\ZapBeachCamping\Website\ZAPWebsite\ZAPWebsite\obj\Release\ZAPWebsite.csproj.AssemblyReference.cache
