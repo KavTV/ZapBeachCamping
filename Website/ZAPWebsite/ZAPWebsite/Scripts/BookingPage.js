@@ -17,7 +17,7 @@ endMin = endMin.toISOString().split('T')[0];
 resStart.setAttribute('min', startMin);
 resEnd.setAttribute('min', endMin);
 
-//If season is selected, then 
+//If season is selected, then disable 
 if (seasonCheckbox != null) {
 
     if (seasonCheckbox.checked) {
@@ -27,6 +27,17 @@ if (seasonCheckbox != null) {
     else {
         resStart.disabled = false;
         resEnd.disabled = false;
+    }
+}
+function enddateHigher() {
+    var startDate = new Date(resEnd.value);
+    var endDate = new Date(resStart.value);
+
+    if (endDate > startDate) {
+        console.log(endDate);
+        console.log(startDate);
+        endDate.setDate(endDate.getDate() + 1);
+        resEnd.value = endDate.toISOString().split('T')[0];
     }
 }
 
