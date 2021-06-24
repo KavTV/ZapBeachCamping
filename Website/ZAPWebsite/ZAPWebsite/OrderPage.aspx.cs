@@ -84,7 +84,7 @@ namespace ZAPWebsite
                     if (addition_name == "Voksne")
                     {
                         ((RequiredFieldValidator)addition.FindControl("additionrequiredvalidator")).Enabled = true;
-                        ((RequiredFieldValidator)addition.FindControl("additionrequiredvalidator")).Display = ValidatorDisplay.Static;
+                        ((RequiredFieldValidator)addition.FindControl("additionrequiredvalidator")).Display = ValidatorDisplay.Dynamic;
 
                     }
                     if (additionsList.Exists(a => a.Paytype == "OneTime" && a.Name == addition_name))

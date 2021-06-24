@@ -1,0 +1,8 @@
+C:\Users\phil3607\source\repos\ZapEmbeddedWinService\ZapEmbeddedWinService\bin\Debug\ZapEmbeddedWinService.exe.config
+C:\Users\phil3607\source\repos\ZapEmbeddedWinService\ZapEmbeddedWinService\bin\Debug\ZapEmbeddedWinService.exe
+C:\Users\phil3607\source\repos\ZapEmbeddedWinService\ZapEmbeddedWinService\bin\Debug\ZapEmbeddedWinService.pdb
+C:\Users\phil3607\source\repos\ZapEmbeddedWinService\ZapEmbeddedWinService\obj\Debug\ZapEmbeddedWinService.ProjectInstaller.resources
+C:\Users\phil3607\source\repos\ZapEmbeddedWinService\ZapEmbeddedWinService\obj\Debug\ZapEmbeddedWinService.csproj.GenerateResource.cache
+C:\Users\phil3607\source\repos\ZapEmbeddedWinService\ZapEmbeddedWinService\obj\Debug\ZapEmbeddedWinService.csproj.CoreCompileInputs.cache
+C:\Users\phil3607\source\repos\ZapEmbeddedWinService\ZapEmbeddedWinService\obj\Debug\ZapEmbeddedWinService.exe
+C:\Users\phil3607\source\repos\ZapEmbeddedWinService\ZapEmbeddedWinService\obj\Debug\ZapEmbeddedWinService.pdb
